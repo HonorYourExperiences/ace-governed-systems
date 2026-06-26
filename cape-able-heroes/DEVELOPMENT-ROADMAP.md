@@ -1,5 +1,33 @@
 # Cape-Able Heroes – Development Roadmap
 
+## Current Next Actions (Phase 0 – Foundation)
+
+**These are the immediate next tasks to focus on:**
+
+1. **Finalize the Cape-Able Heroes WonderLab format** (60–75 min session)
+   - Define full session flow
+   - Design themeable challenge activities
+   - Create session outline/script
+
+2. **Design Printable Challenge Cards**
+   - Universal template + themeable examples
+   - Include reflection questions
+   - Make them usable both in-session and as take-home
+
+3. **Develop simple Observation Tools**
+   - Create lightweight tools to track participation, language use, and observed shifts
+   - Keep them practical and non-clinical
+
+4. **Define Take-Home Hero Kit contents**
+   - Decide what goes into the basic kit
+   - Align with WonderLab experience
+
+**Status:** Phase 0 tasks are ready to begin. Start with tasks 1 and 2.
+
+---
+
+## Overview
+
 This document serves as the living development loop for Cape-Able Heroes. It follows the SAGA model (Sense → Analyze → Generate → Act) so progress can continue in a governed, trackable way.
 
 ## Current Phase: Phase 0 – Foundation (June 2026)
@@ -37,7 +65,7 @@ This document serves as the living development loop for Cape-Able Heroes. It fol
 | # | Task | Description | Owner | Status | Notes |
 |---|------|-------------|-------|--------|-------|
 | 1 | Develop Take-Home Hero Kit | Finalize contents, design, and pricing for the entry-level product | Rian | Not Started | $25–$45 range |
-| 2 | Create Educator / Facilitator Toolkit | Package the WonderLab experience so others can run it (lesson plans, materials list, language guide) | Rian | Not Started | Key to scaling without founder in every room |
+| 2 | Create Educator / Facilitator Toolkit | Package the WonderLab experience so others can run it (lesson plans, materials list, language guide) | Rian | Not Started | Key to scaling without founder presence in every room |
 | 3 | Define Pricing & Packaging | Finalize pricing tiers for kits, events, and toolkits | Rian | Not Started | Based on early testing |
 | 4 | Document Delivery Standards | Create basic quality and safety guidelines for future facilitators | Rian | Not Started | Important for schools and camps |
 

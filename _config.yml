@@ -1,0 +1,17 @@
+title: BYDT Audit Dashboard
+
+description: Visual dashboard for governed system audit logs and self-improvement metrics.
+
+# Use Architect theme
+ theme: pages-themes/architect
+ version: ~0.2
+
+# GitHub Pages settings
+plugins:
+  - jekyll-remote-theme
+
+# Optional: show downloads button
+show_downloads: false
+
+# Navigation (optional)
+# You can add custom navigation here later

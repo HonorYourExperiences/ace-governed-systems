@@ -75,9 +75,9 @@ jobs:
               const title = `Gap-Closing Proposal from Audit #${{ steps.parse.outputs.number }}`;
               const body = `This proposal was auto-generated from audit Issue #${{ steps.parse.outputs.number }}.
 
-**Reason:** ${{ steps.parse.outputs.reason }}
+            **Reason:** ${{ steps.parse.outputs.reason }}
 
-Please review and convert into a formal SAGA proposal if appropriate.`;
+            Please review and convert into a formal SAGA proposal if appropriate.`;
 
               await github.rest.issues.create({
                 owner: context.repo.owner,

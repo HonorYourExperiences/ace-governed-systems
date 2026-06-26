@@ -5,6 +5,10 @@ on:
     - cron: '0 8 * * 0'   # Every Sunday at 08:00 UTC
   workflow_dispatch:
 
+permissions:
+  actions: write     # Required to delete artifacts and workflow runs
+  contents: read     # Required to checkout the repository
+
 jobs:
   cleanup-artifacts:
     runs-on: ubuntu-latest

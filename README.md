@@ -16,12 +16,22 @@ The system is built around five immutable core axioms:
 
 These axioms are protected. Everything else in the system is designed to evolve safely around them.
 
-## How It Works (Architecture Overview)
+## Architecture Overview
 
-The system follows a protected self-improvement loop:
+The system follows a protected self-improvement loop with verification and feedback:
 
-```
-Sense → Analyze → Generate → Act (with verification)
+```mermaid
+graph TD
+    A[Constitution<br/>Immutable Core Axioms] -->|Protects| B[SAGA Loop<br/>Sense → Analyze → Generate → Act]
+    B --> C[Runtime Monitor<br/>Enforces Rules at Runtime]
+    C -->|Action Approved| D[System / BYDT Operations]
+    C -->|Refused / Issue| E[Audit System<br/>GitHub Issues + Logging]
+    E --> F[Dashboard & Analytics]
+    E -->|Patterns & Gaps| B
+    F -->|Insights| B
+
+    classDef core fill:#BFA16B,stroke:#0A162F,stroke-width:2px,color:#0A162F;
+    class A core;
 ```
 
 ### Key Components
@@ -42,7 +52,7 @@ Sense → Analyze → Generate → Act (with verification)
 2. Significant events are logged as structured **GitHub Issues** (labeled `audit`).
 3. The **Audit Processor** workflow processes new issues and can auto-generate gap-closing proposals.
 4. The **Dashboard Generator** maintains `AUDIT-DASHBOARD.md` and `dashboard-data.json`.
-5. The visual dashboard at GitHub Pages shows live metrics and trends.
+5. The visual dashboard shows live metrics and trends.
 6. Old data is cleaned up automatically.
 
 ## Live Dashboard

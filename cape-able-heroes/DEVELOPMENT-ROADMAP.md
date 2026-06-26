@@ -1,15 +1,23 @@
 # Cape-Able Heroes – Development Roadmap
 
-## Current Next Actions (Phase 0 – Foundation)
+## Current Next Actions (Phase 1 – Validation) 🟢 ACTIVE
 
-**Phase 0 core documents are complete. The next action is to run the first session.**
+**Phase 0 is complete. Phase 1 is now active. The only remaining work is real-world.**
 
 1. ~~**Finalize the Cape-Able Heroes WonderLab format**~~ — **Done.** See `SESSION-FORMAT.md`
 2. ~~**Design Printable Challenge Cards**~~ — **Done.** See `CHALLENGE-CARDS.md` (5 themes)
 3. ~~**Develop simple Observation Tools**~~ — **Done.** See `OBSERVATION-TOOL.md`
-4. **Define Take-Home Hero Kit contents** — Next task. Decide what goes in the basic kit.
+4. ~~**Create feedback and outreach tools**~~ — **Done.** See `FEEDBACK-FORM.md`, `OUTREACH-TEMPLATES.md`, `SESSION-LOG.md`
 
-**Now:** Book or confirm the first pilot or paid WonderLab session. Everything needed to run it exists.
+**Now — immediate actions:**
+- [ ] Send outreach to 3–5 contacts using `OUTREACH-TEMPLATES.md`
+- [ ] Book the first session (pilot or paid)
+- [ ] Run the session using `SESSION-FORMAT.md` + `CHALLENGE-CARDS.md`
+- [ ] Complete `OBSERVATION-TOOL.md` and `FEEDBACK-FORM.md` during/after
+- [ ] Log the session in `SESSION-LOG.md`
+- [ ] Repeat until 3 sessions are done, then run the Phase 1 Evidence Review
+
+**Phase 1 is complete when:** 3+ sessions run, 10+ parent feedback forms collected, 1+ paid session done, evidence review filed.
 
 ---
 
@@ -30,18 +38,25 @@ This document serves as the living development loop for Cape-Able Heroes. It fol
 | 3 | Create Observation Tools | Simple, non-clinical tools to capture participation, language use, and observed shifts during sessions | Rian | **Complete** | See `OBSERVATION-TOOL.md` |
 | 4 | Define Take-Home Kit Contents | Decide what goes into the basic Hero Kit (badge, certificate, mission card, parent guide) | Rian | Not Started | Supports at-home continuation |
 
-## Phase 1 – Validation (Target: Next 4–8 weeks)
+## Phase 1 – Validation 🟢 ACTIVE (Target: Next 4–8 weeks)
 
 **Goal:** Run real sessions and gather evidence.
+
+### Supporting Documents
+
+- `FEEDBACK-FORM.md` — Parent + facilitator post-session forms
+- `OUTREACH-TEMPLATES.md` — Ready-to-send messages for all buyer types
+- `SESSION-LOG.md` — Running tracker for all sessions (primary audit artifact)
 
 ### Priority Tasks
 
 | # | Task | Description | Owner | Status | Notes |
 |---|------|-------------|-------|--------|-------|
-| 1 | Run 3–5 Pilot/Paid WonderLab Sessions | Test the format with real children (mix of paid and pilot) | Rian | Not Started | Primary source of validation |
-| 2 | Capture Field Evidence | Use observation tools to track participation, language, and shifts | Rian | Not Started | Feeds into positioning and future materials |
-| 3 | Collect Parent & Facilitator Feedback | Simple post-session feedback (what worked, what didn’t, what felt meaningful) | Rian | Not Started | Improves offer quality |
-| 4 | Refine WonderLab Format | Update session based on real-world testing | Rian | Not Started | Continuous improvement loop |
+| 1 | Send Outreach | Use `OUTREACH-TEMPLATES.md` to contact 3–5 venues or families | Rian | Not Started | Start here |
+| 2 | Run 3–5 Pilot/Paid WonderLab Sessions | Test the format with real children (mix of paid and pilot) | Rian | Not Started | Primary source of validation |
+| 3 | Capture Field Evidence | Use `OBSERVATION-TOOL.md` during sessions; log in `SESSION-LOG.md` | Rian | Not Started | Feeds into positioning and future materials |
+| 4 | Collect Parent & Facilitator Feedback | Use `FEEDBACK-FORM.md` after each session | Rian | Not Started | Improves offer quality |
+| 5 | Run Phase 1 Evidence Review | Complete the review section in `SESSION-LOG.md` after 3 sessions | Rian | Not Started | SAGA Analyze trigger |
 
 ## Phase 2 – Productization (Target: Following 4–6 weeks)
 

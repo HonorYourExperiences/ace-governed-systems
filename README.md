@@ -1,30 +1,72 @@
 # ace-governed-systems
 
-Axiomatic Context Engineering — Governed self-improving agent and brand systems.
+**Axiomatic Context Engineering** — Building governed, self-improving systems that stay aligned with their founding principles over time.
 
-This repository contains the core artifacts for building and operating axiomatically governed, self-improving systems, including:
+This repository contains the core artifacts, workflows, and documentation for a complete governed self-improvement system, originally developed for the BYDT (Build Your Dreaming Things) brand and projects.
 
-- TLA+ specifications with safety invariants, liveness properties, strong fairness, and scheduling constraints
-- SAGA loop implementation details
-- Anti-pattern catalog
-- BYDT Brand Governor constitution and operating procedures
-- Automated audit logging and visualization
+## Core Philosophy
 
-## Audit Dashboard
+The system is built around five immutable core axioms:
 
-Live visual dashboard for the audit trail:
+- **Inherent Sufficiency** — Value exists before performance
+- **Way Through** — Focus on capability, discernment, and imaginative power rather than rescue or outsourcing
+- **Witnessing & Mature Presence** — Prioritize presence and relational maturity
+- **Evidence & Capability** — Favor real capability over aspiration theater
+- **Audit Integrity** — Maintain full lineage and accountability
+
+These axioms are protected. Everything else in the system is designed to evolve safely around them.
+
+## How It Works (Architecture Overview)
+
+The system follows a protected self-improvement loop:
+
+```
+Sense → Analyze → Generate → Act (with verification)
+```
+
+### Key Components
+
+| Component                    | Purpose                                                                 | Key Files / Workflows                          |
+|-----------------------------|-------------------------------------------------------------------------|------------------------------------------------|
+| **Constitution**            | Defines immutable core axioms and mutable operational layer            | `IMMUTABLE_VS_MUTABLE_LAYERS.md`              |
+| **SAGA Loop**               | The self-improvement engine (Sense, Analyze, Generate, Act)            | `governed_systems_SOP_PFMEA_DFMEA.md`         |
+| **Runtime Monitor**         | Enforces rules at execution time                                        | `RUNTIME-MONITOR-WIRING.md`                   |
+| **Audit System**            | Logs all significant actions and refusals                               | GitHub Issues + `audit-processor.yml`         |
+| **Dashboard**               | Visual overview of system health and refusal patterns                   | `docs/index.html` + `generate-audit-dashboard.yml` |
+| **Cleanup Automation**      | Automatically removes old artifacts and workflow runs                   | `cleanup-old-artifacts-and-runs.yml`          |
+| **Formal Verification**     | Mathematical proofs that certain failures are impossible                | TLA+ specs (earlier work)                     |
+
+### Data Flow
+
+1. The **Runtime Monitor** checks actions against the constitution.
+2. Significant events are logged as structured **GitHub Issues** (labeled `audit`).
+3. The **Audit Processor** workflow processes new issues and can auto-generate gap-closing proposals.
+4. The **Dashboard Generator** maintains `AUDIT-DASHBOARD.md` and `dashboard-data.json`.
+5. The visual dashboard at GitHub Pages shows live metrics and trends.
+6. Old data is cleaned up automatically.
+
+## Live Dashboard
 
 **https://honoryourexperiences.github.io/ace-governed-systems/**
 
-The dashboard shows refusal rates, top reasons for refusals, and other key metrics. It is automatically updated by GitHub Actions.
+Shows real-time(ish) audit metrics including refusal rates and top reasons.
 
-## Key Components
+## Key Files & Folders
 
-- `proposals/` — Active SAGA gap-closing proposals
-- `.github/workflows/` — Automation for audit processing and dashboard generation
-- `governed_systems_SOP_PFMEA_DFMEA.md` — Living Standard Operating Procedures and Failure Mode analyses
-- `IMMUTABLE_VS_MUTABLE_LAYERS.md` — Defines protected core axioms vs. evolvable operational layer
+- `proposals/` — Active and historical SAGA gap-closing proposals
+- `governed_systems_SOP_PFMEA_DFMEA.md` — Living procedures and risk analyses
+- `IMMUTABLE_VS_MUTABLE_LAYERS.md` — Core governance rules
+- `AUDIT-DASHBOARD.md` — Auto-generated human-readable dashboard
+- `docs/` — GitHub Pages dashboard source
+- `.github/workflows/` — All automation (audit processing, dashboard generation, cleanup)
 
-## Getting Started
+## Status
 
-See the documentation files in the root and `proposals/` directory for implementation guidance.
+The core governance system is functional and includes:
+- Protected core axioms
+- Automated audit logging
+- Self-updating dashboard
+- Scheduled cleanup
+- Formal error handling in workflows
+
+The system is designed to reduce manual oversight while making misalignment visible and actionable.

@@ -102,3 +102,13 @@ jobs:
             docs/dashboard-data.json
           message: 'chore(dashboard): update AUDIT-DASHBOARD.md and data'
           default_author: github_actions
+
+      - name: Upload dashboard as artifact
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-dashboard-${{ github.run_number }}
+          path: |
+            AUDIT-DASHBOARD.md
+            docs/dashboard-data.json
+          retention-days: 365

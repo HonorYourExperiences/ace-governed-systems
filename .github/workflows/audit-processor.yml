@@ -49,15 +49,24 @@ jobs:
       - name: Append to AUDIT-LOG.md
         id: append
         continue-on-error: true
+        env:
+          AUDIT_TITLE: ${{ steps.parse.outputs.title }}
+          AUDIT_NUMBER: ${{ steps.parse.outputs.number }}
+          AUDIT_ACTION: ${{ steps.parse.outputs.action }}
+          AUDIT_ALLOWED: ${{ steps.parse.outputs.allowed }}
+          AUDIT_REASON: ${{ steps.parse.outputs.reason }}
+          AUDIT_SOURCE: ${{ steps.parse.outputs.source }}
         run: |
-          echo "## Audit: ${{ steps.parse.outputs.title }}" >> AUDIT-LOG.md
-          echo "- **Issue:** #${{ steps.parse.outputs.number }}" >> AUDIT-LOG.md
-          echo "- **Action:** ${{ steps.parse.outputs.action }}" >> AUDIT-LOG.md
-          echo "- **Allowed:** ${{ steps.parse.outputs.allowed }}" >> AUDIT-LOG.md
-          echo "- **Reason:** ${{ steps.parse.outputs.reason }}" >> AUDIT-LOG.md
-          echo "- **Source:** ${{ steps.parse.outputs.source }}" >> AUDIT-LOG.md
-          echo "- **Timestamp:** $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> AUDIT-LOG.md
-          echo "" >> AUDIT-LOG.md
+          {
+            echo "## Audit: $AUDIT_TITLE"
+            echo "- **Issue:** #$AUDIT_NUMBER"
+            echo "- **Action:** $AUDIT_ACTION"
+            echo "- **Allowed:** $AUDIT_ALLOWED"
+            echo "- **Reason:** $AUDIT_REASON"
+            echo "- **Source:** $AUDIT_SOURCE"
+            echo "- **Timestamp:** $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+            echo ""
+          } >> AUDIT-LOG.md
 
       - name: Commit audit log update
         if: steps.append.outcome == 'success'
@@ -74,12 +83,12 @@ jobs:
         id: pfmea_append
         if: steps.parse.outputs.allowed == 'false'
         continue-on-error: true
+        env:
+          REASON: ${{ steps.parse.outputs.reason }}
+          ACTION_TYPE: ${{ steps.parse.outputs.action }}
+          ISSUE_NUM: ${{ steps.parse.outputs.number }}
+          ANTIPATTERN: ${{ steps.parse.outputs.antipattern }}
         run: |
-          REASON="${{ steps.parse.outputs.reason }}"
-          ACTION_TYPE="${{ steps.parse.outputs.action }}"
-          ISSUE_NUM="${{ steps.parse.outputs.number }}"
-          ANTIPATTERN="${{ steps.parse.outputs.antipattern }}"
-
           # Derive severity / occurrence / detection from action type
           # Defaults: medium severity, low-medium occurrence, medium detection
           S=6; O=3; D=5
@@ -98,23 +107,17 @@ jobs:
             STEP="Policy Update Pipeline"
           fi
 
-          FAILURE_MODE="Refusal: $REASON"
-          EFFECT="Blocked action; potential governance gap if pattern recurs"
-          CAUSE="$ACTION_TYPE without verified SAGA proposal"
-          CONTROLS="Runtime monitor + audit-processor"
-          RECOMMENDED="Review Issue #${ISSUE_NUM}; close gap via verified SAGA proposal"
-
           python3 scripts/pfmea_append.py \
             --table pfmea \
             --step "$STEP" \
-            --failure-mode "$FAILURE_MODE" \
-            --effect "$EFFECT" \
+            --failure-mode "Refusal: $REASON" \
+            --effect "Blocked action; potential governance gap if pattern recurs" \
             --severity "$S" \
-            --cause "$CAUSE" \
+            --cause "$ACTION_TYPE without verified SAGA proposal" \
             --occurrence "$O" \
-            --controls "$CONTROLS" \
+            --controls "Runtime monitor + audit-processor" \
             --detection "$D" \
-            --action "$RECOMMENDED" \
+            --action "Review Issue #${ISSUE_NUM}; close gap via verified SAGA proposal" \
             --status Open \
             --issue "$ISSUE_NUM"
 

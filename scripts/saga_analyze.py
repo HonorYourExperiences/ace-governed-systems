@@ -70,7 +70,9 @@ def parse_fmea_rpns(path: str) -> list[dict]:
         content = fh.read()
 
     rows = []
-    # Match markdown table rows that contain a numeric RPN column (9th column)
+    # Match markdown table rows that contain a numeric RPN column (9th column).
+    # Column order: step_or_element | failure_mode | effect | S | cause | O | controls | D | RPN | action | status
+    # Regex captures groups: (1) step_or_element, (2) failure_mode, (3) RPN (9th col), (4) status (11th col)
     pattern = re.compile(
         r"^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|[^|]*\|[^|]*\|[^|]*\|[^|]*\|[^|]*\|[^|]*\|\s*(\d+)\s*\|[^|]*\|\s*([^|]+?)\s*\|",
         re.MULTILINE,
@@ -158,6 +160,7 @@ def identify_deltas(audit: dict, fmea_rows: list[dict]) -> list[dict]:
 
 def render_proposal_body(audit: dict, fmea_rows: list[dict], deltas: list[dict]) -> str:
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    nl = "\n"  # Assigned to variable so it can be used inside f-string expressions
 
     # Current State section
     current_state_lines = [
@@ -206,6 +209,10 @@ def render_proposal_body(audit: dict, fmea_rows: list[dict], deltas: list[dict])
             f"assign owner, update status, and verify closure within 2 cycles."
         )
 
+    current_state_block = nl.join(current_state_lines)
+    delta_block = nl.join(delta_lines) if delta_lines else "_No significant deltas found above threshold._"
+    proposal_block = nl.join(proposal_lines) if proposal_lines else "_No gap-closing proposals required at this time._"
+
     body = f"""# SAGA Analyze — Auto-Generated Gap-Closing Proposal ({now})
 
 **Proposal ID:** saga-{now}-auto
@@ -216,7 +223,7 @@ def render_proposal_body(audit: dict, fmea_rows: list[dict], deltas: list[dict])
 
 ## A. Current State Assessment
 
-{chr(10).join(current_state_lines)}
+{current_state_block}
 
 ---
 
@@ -230,13 +237,13 @@ Anchored in the five immutable core axioms (Inherent Sufficiency, Way Through, W
 
 ## C. Delta Identification & Measurement
 
-{chr(10).join(delta_lines) if delta_lines else "_No significant deltas found above threshold._"}
+{delta_block}
 
 ---
 
 ## D. Gap-Closing Proposals
 
-{chr(10).join(proposal_lines) if proposal_lines else "_No gap-closing proposals required at this time._"}
+{proposal_block}
 
 ---
 

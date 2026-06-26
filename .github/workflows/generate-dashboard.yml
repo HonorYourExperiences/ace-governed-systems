@@ -1,0 +1,60 @@
+name: Generate Audit Dashboard Data
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Daily at 06:00 UTC
+  workflow_dispatch:  # Allow manual trigger
+  issues:
+    types: [opened, labeled, closed]
+
+jobs:
+  generate-dashboard:
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.labels.*.name, 'audit') || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Parse AUDIT-LOG.md and generate dashboard data
+        id: generate
+        run: |
+          # Simple parser for AUDIT-LOG.md (can be improved later)
+          python3 << 'EOF'
+          import re
+          import json
+          from datetime import datetime
+
+          with open('AUDIT-LOG.md', 'r') as f:
+              content = f.read()
+
+          # Extract basic stats
+          total = len(re.findall(r'^## Audit:', content, re.MULTILINE))
+          refused = len(re.findall(r'Allowed: false', content))
+          approved = len(re.findall(r'Allowed: true', content))
+
+          # Top reasons (simple extraction)
+          reasons = re.findall(r'Reason: (.+)', content)
+          from collections import Counter
+          top_reasons = Counter(reasons).most_common(5)
+
+          data = {
+              "last_updated": datetime.utcnow().isoformat() + "Z",
+              "total_audits": total,
+              "refusals": refused,
+              "approvals": approved,
+              "refusal_rate": round((refused / total * 100) if total > 0 else 0, 1),
+              "top_reasons": [{"reason": r[0], "count": r[1]} for r in top_reasons]
+          }
+
+          with open('docs/dashboard-data.json', 'w') as f:
+              json.dump(data, f, indent=2)
+
+          print("Dashboard data generated successfully")
+          EOF
+
+      - name: Commit dashboard data
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'docs/dashboard-data.json'
+          message: 'chore(dashboard): update audit dashboard data'
+          default_author: github_actions

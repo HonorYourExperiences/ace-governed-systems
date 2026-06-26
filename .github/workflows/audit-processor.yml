@@ -32,6 +32,7 @@ jobs:
               const allowedMatch = body.match(/Allowed: (true|false)/);
               const reasonMatch = body.match(/Reason: (.+)/);
               const sourceMatch = body.match(/Source: (.+)/);
+              const antipatternMatch = body.match(/Anti-Pattern: (.+)/);
 
               core.setOutput('title', title);
               core.setOutput('number', number);
@@ -39,6 +40,7 @@ jobs:
               core.setOutput('allowed', allowedMatch ? allowedMatch[1] : 'false');
               core.setOutput('reason', reasonMatch ? reasonMatch[1].trim() : '');
               core.setOutput('source', sourceMatch ? sourceMatch[1].trim() : 'unknown');
+              core.setOutput('antipattern', antipatternMatch ? antipatternMatch[1].trim() : '');
 
             } catch (error) {
               core.setFailed(`Failed to parse audit issue: ${error.message}`);
@@ -65,26 +67,146 @@ jobs:
           message: 'chore(audit): log new audit event #${{ steps.parse.outputs.number }}'
           default_author: github_actions
 
-      - name: Create gap-closing proposal on refusal
+      # -----------------------------------------------------------------------
+      # Phase 2: Auto-append to PFMEA on refusal or anti-pattern match
+      # -----------------------------------------------------------------------
+      - name: Append PFMEA row on refusal
+        id: pfmea_append
+        if: steps.parse.outputs.allowed == 'false'
+        continue-on-error: true
+        run: |
+          REASON="${{ steps.parse.outputs.reason }}"
+          ACTION_TYPE="${{ steps.parse.outputs.action }}"
+          ISSUE_NUM="${{ steps.parse.outputs.number }}"
+          ANTIPATTERN="${{ steps.parse.outputs.antipattern }}"
+
+          # Derive severity / occurrence / detection from action type
+          # Defaults: medium severity, low-medium occurrence, medium detection
+          S=6; O=3; D=5
+
+          if [[ "$ACTION_TYPE" == "update_policy" || "$ACTION_TYPE" == "site_change" ]]; then
+            S=8; O=4; D=5
+          fi
+          if [[ -n "$ANTIPATTERN" ]]; then
+            S=7; O=5; D=5
+          fi
+
+          STEP="Runtime Enforcement"
+          if [[ "$ACTION_TYPE" == "update_content" || "$ACTION_TYPE" == "site_change" ]]; then
+            STEP="Content Update Pipeline"
+          elif [[ "$ACTION_TYPE" == "update_policy" ]]; then
+            STEP="Policy Update Pipeline"
+          fi
+
+          FAILURE_MODE="Refusal: $REASON"
+          EFFECT="Blocked action; potential governance gap if pattern recurs"
+          CAUSE="$ACTION_TYPE without verified SAGA proposal"
+          CONTROLS="Runtime monitor + audit-processor"
+          RECOMMENDED="Review Issue #${ISSUE_NUM}; close gap via verified SAGA proposal"
+
+          python3 scripts/pfmea_append.py \
+            --table pfmea \
+            --step "$STEP" \
+            --failure-mode "$FAILURE_MODE" \
+            --effect "$EFFECT" \
+            --severity "$S" \
+            --cause "$CAUSE" \
+            --occurrence "$O" \
+            --controls "$CONTROLS" \
+            --detection "$D" \
+            --action "$RECOMMENDED" \
+            --status Open \
+            --issue "$ISSUE_NUM"
+
+      - name: Commit PFMEA update
+        if: steps.pfmea_append.outcome == 'success'
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'governed_systems_SOP_PFMEA_DFMEA.md'
+          message: 'chore(pfmea): auto-append refusal row from audit #${{ steps.parse.outputs.number }}'
+          default_author: github_actions
+
+      # -----------------------------------------------------------------------
+      # Phase 2: Generate structured SAGA gap-closing proposal on refusal
+      # -----------------------------------------------------------------------
+      - name: Create structured gap-closing proposal on refusal
         if: steps.parse.outputs.allowed == 'false'
         uses: actions/github-script@v7
         with:
           script: |
             const core = require('@actions/core');
             try {
-              const title = `Gap-Closing Proposal from Audit #${{ steps.parse.outputs.number }}`;
-              const body = `This proposal was auto-generated from audit Issue #${{ steps.parse.outputs.number }}.
+              const issueNumber = '${{ steps.parse.outputs.number }}';
+              const reason = '${{ steps.parse.outputs.reason }}';
+              const action = '${{ steps.parse.outputs.action }}';
+              const source = '${{ steps.parse.outputs.source }}';
+              const now = new Date().toISOString().split('T')[0];
 
-            **Reason:** ${{ steps.parse.outputs.reason }}
+              const title = `SAGA Gap-Closing Proposal: Refusal from Audit #${issueNumber} (${now})`;
 
-            Please review and convert into a formal SAGA proposal if appropriate.`;
+              const body = `# SAGA Gap-Closing Proposal — Auto-Generated from Audit #${issueNumber}
+
+**Proposal ID:** saga-${now}-refusal-${issueNumber}
+**Source:** Refusal detected in Audit Issue #${issueNumber}
+**Preserves Core Axioms:** true
+
+---
+
+## A. Current State Assessment
+
+- A refusal was recorded in **Audit #${issueNumber}**.
+- **Action blocked:** \`${action}\`
+- **Reason:** ${reason}
+- **Source:** ${source}
+- A new PFMEA row has been auto-appended for this refusal pattern.
+
+---
+
+## B. Target State Definition
+
+Anchored in the five immutable core axioms:
+- All \`${action}\` actions pass through verified SAGA before execution.
+- No recurring refusal from the same cause without a closed gap-closing proposal.
+- Refusal rate ≤ 10% overall.
+
+---
+
+## C. Delta Identification & Measurement
+
+1. **Blocked ${action} Action**
+   - Current: Action was blocked with reason: "${reason}"
+   - Target: This action type passes through verified SAGA with full audit trail.
+   - Distance: Requires verified proposal → apply → audit closure.
+
+---
+
+## D. Gap-Closing Action
+
+- **Which delta:** The blocked \`${action}\` action (#${issueNumber}).
+- **Proposed action:** Identify the root cause of this refusal, create or update the relevant operational policy, and route the change through verified SAGA.
+- **Preserves all core axioms:** Yes
+- **Success metric:** Next occurrence of this action type passes verification with full audit and no refusal for the same reason.
+
+---
+
+## Verification Checklist
+
+- [ ] Preserves all five core axioms
+- [ ] Does not match any known anti-pattern
+- [ ] Explicit success metrics defined above
+- [ ] Full audit and lineage will be produced on approval
+
+**Add the \`verified\` label once the checklist is confirmed by a human reviewer.**
+
+---
+_Auto-generated by audit-processor from Audit Issue #${issueNumber}._`;
 
               await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 title: title,
                 body: body,
-                labels: ['proposal', 'gap-closing', 'auto-generated', 'audit']
+                labels: ['proposal', 'gap-closing', 'auto-generated', 'needs-verification']
               });
             } catch (error) {
               core.setFailed(`Failed to create gap-closing proposal: ${error.message}`);

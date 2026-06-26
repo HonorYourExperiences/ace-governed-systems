@@ -22,16 +22,40 @@ The system follows a protected self-improvement loop with verification and feedb
 
 ```mermaid
 graph TD
-    A[Constitution<br/>Immutable Core Axioms] -->|Protects| B[SAGA Loop<br/>Sense → Analyze → Generate → Act]
-    B --> C[Runtime Monitor<br/>Enforces Rules at Runtime]
-    C -->|Action Approved| D[System / BYDT Operations]
-    C -->|Refused / Issue| E[Audit System<br/>GitHub Issues + Logging]
-    E --> F[Dashboard & Analytics]
-    E -->|Patterns & Gaps| B
-    F -->|Insights| B
+    subgraph Constitution [Constitution Layer - Immutable]
+        A[Core Axioms<br/>Inherent Sufficiency<br/>Way Through<br/>Witnessing<br/>Evidence & Capability<br/>Audit Integrity]
+    end
+
+    subgraph SAGA [SAGA Self-Improvement Loop]
+        B1[Sense] --> B2[Analyze<br/>Identify Gaps vs Axioms]
+        B2 --> B3[Generate<br/>Gap-Closing Proposal]
+        B3 --> B4[Act / Verify<br/>Runtime Check]
+    end
+
+    subgraph Enforcement [Runtime Enforcement]
+        C[Runtime Monitor<br/>Enforces Constitution]
+    end
+
+    subgraph Audit [Audit & Visibility Layer]
+        E[Audit System<br/>GitHub Issues + Logging]
+        F[Dashboard & Analytics]
+    end
+
+    A -->|Protects| B1
+    B4 -->|Approved| D[BYDT Operations & Content]
+    B4 -->|Refused| E
+    E -->|New Patterns / Gaps| B2
+    F -->|Insights & Trends| B2
 
     classDef core fill:#BFA16B,stroke:#0A162F,stroke-width:2px,color:#0A162F;
+    classDef loop fill:#e0f2fe,stroke:#0369a1;
+    classDef enforce fill:#fef3c7,stroke:#b45309;
+    classDef audit fill:#dcfce7,stroke:#166534;
+
     class A core;
+    class B1,B2,B3,B4 loop;
+    class C enforce;
+    class E,F audit;
 ```
 
 ### Key Components

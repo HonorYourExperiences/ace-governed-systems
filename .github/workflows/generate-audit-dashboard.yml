@@ -15,7 +15,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Cache dashboard outputs
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: |
+            AUDIT-DASHBOARD.md
+            docs/dashboard-data.json
+          key: dashboard-${{ hashFiles('AUDIT-LOG.md') }}
+          restore-keys: |
+            dashboard-
+
       - name: Generate AUDIT-DASHBOARD.md and dashboard-data.json
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           python3 << 'PYEOF'
           import re
@@ -25,20 +37,16 @@ jobs:
           with open('AUDIT-LOG.md', 'r') as f:
               content = f.read()
 
-          # Basic stats
           total = len(re.findall(r'^## Audit:', content, re.MULTILINE))
           refused = content.count('Allowed: false')
           approved = content.count('Allowed: true')
           refusal_rate = round((refused / total * 100), 1) if total > 0 else 0
 
-          # Top reasons
           reasons = re.findall(r'Reason: (.+)', content)
           top_reasons = Counter(reasons).most_common(8)
 
-          # Recent activity (last 10 entries)
           recent = re.findall(r'^## Audit:.*', content, re.MULTILINE)[-10:][::-1]
 
-          # Build dashboard markdown
           dashboard = f"""# Audit Dashboard
 
 **Last Updated:** {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}
@@ -70,7 +78,6 @@ jobs:
           with open('AUDIT-DASHBOARD.md', 'w') as f:
               f.write(dashboard)
 
-          # Also generate JSON for future use
           import json
           data = {
               "last_updated": datetime.utcnow().isoformat() + "Z",
@@ -83,10 +90,11 @@ jobs:
           with open('docs/dashboard-data.json', 'w') as f:
               json.dump(data, f, indent=2)
 
-          print("AUDIT-DASHBOARD.md and dashboard-data.json generated successfully")
+          print("Dashboard files generated successfully")
           PYEOF
 
       - name: Commit updated dashboard files
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: EndBug/add-and-commit@v9
         with:
           add: |

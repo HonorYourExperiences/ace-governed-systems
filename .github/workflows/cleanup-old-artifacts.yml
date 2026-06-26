@@ -1,0 +1,48 @@
+name: Cleanup Old Audit Artifacts
+
+on:
+  schedule:
+    - cron: '0 8 * * 0'   # Every Sunday at 08:00 UTC
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Delete audit artifacts older than 180 days
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const artifactNamePrefix = 'audit-dashboard-';
+            const maxAgeDays = 180;
+            const cutoffDate = new Date();
+            cutoffDate.setDate(cutoffDate.getDate() - maxAgeDays);
+
+            const { data: artifacts } = await github.rest.actions.listArtifactsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100
+            });
+
+            const auditArtifacts = artifacts.artifacts
+              .filter(a => a.name.startsWith(artifactNamePrefix));
+
+            let deletedCount = 0;
+
+            for (const artifact of auditArtifacts) {
+              const createdAt = new Date(artifact.created_at);
+              if (createdAt < cutoffDate) {
+                console.log(`Deleting old artifact: ${artifact.name} (created: ${createdAt.toISOString()})`);
+                await github.rest.actions.deleteArtifact({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  artifact_id: artifact.id
+                });
+                deletedCount++;
+              }
+            }
+
+            console.log(`Cleanup complete. Deleted ${deletedCount} old audit artifacts.`);

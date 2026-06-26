@@ -18,20 +18,37 @@ jobs:
 
       - name: Parse audit issue body
         id: parse
-        run: |
-          BODY="${{ github.event.issue.body }}"
-          echo "title=${{ github.event.issue.title }}" >> $GITHUB_OUTPUT
-          echo "number=${{ github.event.issue.number }}" >> $GITHUB_OUTPUT
-          echo "action=$(echo "$BODY" | grep -oP 'Action: \K[^ ]+' || echo 'unknown')" >> $GITHUB_OUTPUT
-          echo "allowed=$(echo "$BODY" | grep -oP 'Allowed: \K[^ ]+' || echo 'false')" >> $GITHUB_OUTPUT
-          echo "reason=$(echo "$BODY" | grep -oP 'Reason: \K.+' || echo '')" >> $GITHUB_OUTPUT
-          echo "source=$(echo "$BODY" | grep -oP 'Source: \K[^ ]+' || echo 'unknown')" >> $GITHUB_OUTPUT
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const core = require('@actions/core');
+            try {
+              const body = context.payload.issue.body || '';
+              const title = context.payload.issue.title || 'Untitled';
+              const number = context.payload.issue.number;
+
+              // Extract key fields using regex
+              const actionMatch = body.match(/Action Type: (.+)/);
+              const allowedMatch = body.match(/Allowed: (true|false)/);
+              const reasonMatch = body.match(/Reason: (.+)/);
+              const sourceMatch = body.match(/Source: (.+)/);
+
+              core.setOutput('title', title);
+              core.setOutput('number', number);
+              core.setOutput('action', actionMatch ? actionMatch[1].trim() : 'unknown');
+              core.setOutput('allowed', allowedMatch ? allowedMatch[1] : 'false');
+              core.setOutput('reason', reasonMatch ? reasonMatch[1].trim() : '');
+              core.setOutput('source', sourceMatch ? sourceMatch[1].trim() : 'unknown');
+
+            } catch (error) {
+              core.setFailed(`Failed to parse audit issue: ${error.message}`);
+            }
 
       - name: Append to AUDIT-LOG.md
         id: append
         continue-on-error: true
         run: |
-          echo "## ${{ steps.parse.outputs.title }}" >> AUDIT-LOG.md
+          echo "## Audit: ${{ steps.parse.outputs.title }}" >> AUDIT-LOG.md
           echo "- **Issue:** #${{ steps.parse.outputs.number }}" >> AUDIT-LOG.md
           echo "- **Action:** ${{ steps.parse.outputs.action }}" >> AUDIT-LOG.md
           echo "- **Allowed:** ${{ steps.parse.outputs.allowed }}" >> AUDIT-LOG.md

@@ -2,27 +2,14 @@
 
 ## Current Next Actions (Phase 0 – Foundation)
 
-**These are the immediate next tasks to focus on:**
+**Phase 0 core documents are complete. The next action is to run the first session.**
 
-1. **Finalize the Cape-Able Heroes WonderLab format** (60–75 min session)
-   - Define full session flow
-   - Design themeable challenge activities
-   - Create session outline/script
+1. ~~**Finalize the Cape-Able Heroes WonderLab format**~~ — **Done.** See `SESSION-FORMAT.md`
+2. ~~**Design Printable Challenge Cards**~~ — **Done.** See `CHALLENGE-CARDS.md` (5 themes)
+3. ~~**Develop simple Observation Tools**~~ — **Done.** See `OBSERVATION-TOOL.md`
+4. **Define Take-Home Hero Kit contents** — Next task. Decide what goes in the basic kit.
 
-2. **Design Printable Challenge Cards**
-   - Universal template + themeable examples
-   - Include reflection questions
-   - Make them usable both in-session and as take-home
-
-3. **Develop simple Observation Tools**
-   - Create lightweight tools to track participation, language use, and observed shifts
-   - Keep them practical and non-clinical
-
-4. **Define Take-Home Hero Kit contents**
-   - Decide what goes into the basic kit
-   - Align with WonderLab experience
-
-**Status:** Phase 0 tasks are ready to begin. Start with tasks 1 and 2.
+**Now:** Book or confirm the first pilot or paid WonderLab session. Everything needed to run it exists.
 
 ---
 
@@ -38,9 +25,9 @@ This document serves as the living development loop for Cape-Able Heroes. It fol
 
 | # | Task | Description | Owner | Status | Notes |
 |---|------|-------------|-------|--------|-------|
-| 1 | Finalize WonderLab Format | Complete 60–75 minute session outline with themeable challenges | Rian | In Progress | Core deliverable |
-| 2 | Design Printable Challenge Cards | Create clean, printable cards that connect hero identity to action + reflection | Rian | Not Started | Can be used in-session and take-home |
-| 3 | Create Observation Tools | Simple, non-clinical tools to capture participation, language use, and observed shifts during sessions | Rian | Not Started | Critical for early validation |
+| 1 | Finalize WonderLab Format | Complete 60–75 minute session outline with themeable challenges | Rian | **Complete** | See `SESSION-FORMAT.md` |
+| 2 | Design Printable Challenge Cards | Create clean, printable cards that connect hero identity to action + reflection | Rian | **Complete** | See `CHALLENGE-CARDS.md` — 5 themes ready |
+| 3 | Create Observation Tools | Simple, non-clinical tools to capture participation, language use, and observed shifts during sessions | Rian | **Complete** | See `OBSERVATION-TOOL.md` |
 | 4 | Define Take-Home Kit Contents | Decide what goes into the basic Hero Kit (badge, certificate, mission card, parent guide) | Rian | Not Started | Supports at-home continuation |
 
 ## Phase 1 – Validation (Target: Next 4–8 weeks)

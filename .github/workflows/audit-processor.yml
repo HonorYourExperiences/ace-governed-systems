@@ -1,0 +1,65 @@
+name: Audit Processor
+
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  process-audit:
+    runs-on: ubuntu-latest
+    # Only run if the issue has the 'audit' label
+    if: contains(github.event.issue.labels.*.name, 'audit')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Parse audit issue body
+        id: parse
+        run: |
+          BODY="${{ github.event.issue.body }}"
+          echo "title=${{ github.event.issue.title }}" >> $GITHUB_OUTPUT
+          echo "number=${{ github.event.issue.number }}" >> $GITHUB_OUTPUT
+          echo "action=$(echo "$BODY" | grep -oP 'Action: \K[^ ]+' || echo 'unknown')" >> $GITHUB_OUTPUT
+          echo "allowed=$(echo "$BODY" | grep -oP 'Allowed: \K[^ ]+' || echo 'false')" >> $GITHUB_OUTPUT
+          echo "reason=$(echo "$BODY" | grep -oP 'Reason: \K.+' || echo '')" >> $GITHUB_OUTPUT
+          echo "source=$(echo "$BODY" | grep -oP 'Source: \K[^ ]+' || echo 'unknown')" >> $GITHUB_OUTPUT
+
+      - name: Append to AUDIT-LOG.md
+        run: |
+          echo "## ${{ steps.parse.outputs.title }}" >> AUDIT-LOG.md
+          echo "- **Issue:** #${{ steps.parse.outputs.number }}" >> AUDIT-LOG.md
+          echo "- **Action:** ${{ steps.parse.outputs.action }}" >> AUDIT-LOG.md
+          echo "- **Allowed:** ${{ steps.parse.outputs.allowed }}" >> AUDIT-LOG.md
+          echo "- **Reason:** ${{ steps.parse.outputs.reason }}" >> AUDIT-LOG.md
+          echo "- **Source:** ${{ steps.parse.outputs.source }}" >> AUDIT-LOG.md
+          echo "- **Timestamp:** $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> AUDIT-LOG.md
+          echo "" >> AUDIT-LOG.md
+
+      - name: Commit audit log update
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'AUDIT-LOG.md'
+          message: 'chore(audit): log new audit event #${{ steps.parse.outputs.number }}'
+          default_author: github_actions
+
+      - name: Create gap-closing proposal on refusal
+        if: steps.parse.outputs.allowed == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `Gap-Closing Proposal from Audit #${{ steps.parse.outputs.number }}`;
+            const body = `This proposal was auto-generated from audit Issue #${{ steps.parse.outputs.number }}.
+
+**Reason:** ${{ steps.parse.outputs.reason }}
+
+Please review and convert into a formal SAGA proposal if appropriate.`;
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['proposal', 'gap-closing', 'auto-generated', 'audit']
+            });

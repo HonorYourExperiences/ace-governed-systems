@@ -69,6 +69,7 @@ graph TD
 | **Dashboard**               | Visual overview of system health and refusal patterns                   | `docs/index.html` + `generate-audit-dashboard.yml` |
 | **Cleanup Automation**      | Automatically removes old artifacts and workflow runs                   | `cleanup-old-artifacts-and-runs.yml`          |
 | **Formal Verification**     | Mathematical proofs that certain failures are impossible                | TLA+ specs (earlier work)                     |
+| **AGE Engineer Agent**      | Claude Code session agent: triages FMEA rows, designs solutions, manages lifecycle, generates proposals, analyzes PR risks | `CLAUDE.md` + `AGE-WORKBENCH.md` + `scripts/age_engineer.py` + `.github/workflows/age-*.yml` |
 
 ### Data Flow
 

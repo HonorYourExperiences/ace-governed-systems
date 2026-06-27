@@ -1,0 +1,138 @@
+name: AGE Engineer — FMEA Lifecycle Scan
+
+on:
+  schedule:
+    - cron: '0 8 * * 1,4'   # Mon + Thu 08:00 UTC (after saga-analyze at 07:00)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  age-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run AGE scan
+        id: age_scan
+        run: |
+          python3 scripts/age_engineer.py scan
+          echo "scan_exit=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Update AGE Workbench
+        id: age_report
+        run: |
+          python3 scripts/age_engineer.py report
+          echo "report_exit=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Lint all proposals
+        run: |
+          echo "## Proposal Lint Results" >> "$GITHUB_STEP_SUMMARY"
+          FAIL=0
+          for f in proposals/prop-AGE-*.md; do
+            [ -f "$f" ] || continue
+            if python3 scripts/age_engineer.py lint-proposal --file "$f"; then
+              echo "✅ $f" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "❌ $f" >> "$GITHUB_STEP_SUMMARY"
+              FAIL=1
+            fi
+          done
+          exit $FAIL
+        continue-on-error: true
+
+      - name: Commit updated workbench
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'AGE-WORKBENCH.md'
+          message: 'chore(age): bi-weekly workbench update'
+          default_author: github_actions
+          pull: '--rebase'
+
+      - name: Flag overdue Critical rows
+        uses: actions/github-script@v7
+        env:
+          OVERDUE_DAYS: '14'
+        with:
+          script: |
+            const { execSync } = require('child_process');
+            let queueOutput;
+            try {
+              queueOutput = execSync('python3 scripts/age_engineer.py queue --output-json', { encoding: 'utf8' });
+            } catch (e) {
+              console.log('Queue command failed:', e.message);
+              return;
+            }
+
+            let queue;
+            try {
+              queue = JSON.parse(queueOutput);
+            } catch (e) {
+              console.log('Could not parse queue JSON:', e.message);
+              return;
+            }
+
+            const criticalRows = queue.critical || [];
+            for (const row of criticalRows) {
+              if (row.status !== 'Open' && row.status !== 'Triaged') continue;
+
+              const title = `[AGE-OVERDUE] Critical FMEA row: ${row.failure_mode}`;
+
+              // Check if issue already exists
+              const existing = await github.rest.issues.listForRepo({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'open',
+                labels: 'overdue-critical',
+              });
+
+              const alreadyExists = existing.data.some(i => i.title === title);
+              if (alreadyExists) {
+                console.log(`Issue already exists: ${title}`);
+                continue;
+              }
+
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: [
+                  `## AGE Escalation: Overdue Critical FMEA Row`,
+                  ``,
+                  `**Table:** ${row.table?.toUpperCase()}`,
+                  `**Process Step / Design Element:** ${row.step_or_element}`,
+                  `**Failure Mode:** ${row.failure_mode}`,
+                  `**RPN:** ${row.rpn}`,
+                  `**Current Status:** ${row.status}`,
+                  ``,
+                  `This Critical row (RPN ≥ 150) has been Open or Triaged with no active work.`,
+                  `The AGE escalation rule requires human triage before AGE can proceed.`,
+                  ``,
+                  `**Recommended Action:** ${row.action}`,
+                  ``,
+                  `**Next Step:** Review this row in \`governed_systems_SOP_PFMEA_DFMEA.md\` and either:`,
+                  `1. Assign to AGE for solution design (add comment "AGE: proceed")`,
+                  `2. Accept the risk and update status to \`Superseded\` with a rationale`,
+                  `3. Escalate further if this row implicates a core axiom`,
+                ].join('\n'),
+                labels: ['overdue-critical', 'age-escalation'],
+              });
+
+              console.log(`Created overdue-critical issue: ${title}`);
+            }
+
+      - name: Post queue summary
+        run: |
+          echo "## AGE Work Queue" >> "$GITHUB_STEP_SUMMARY"
+          python3 scripts/age_engineer.py queue >> "$GITHUB_STEP_SUMMARY"

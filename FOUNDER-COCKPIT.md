@@ -36,6 +36,27 @@ Most protected window (day + time): ___________________________
 
 ---
 
+## AGE Engineer Status
+
+The AGE (Axiomatic Governance Engineer) is active. Live state is in [`AGE-WORKBENCH.md`](AGE-WORKBENCH.md).
+
+| Priority | Table | RPN | Status | Failure Mode |
+|----------|-------|-----|--------|--------------|
+| CRITICAL | PFMEA | 240 | Open | Rescue modeling in hero / parent copy |
+| CRITICAL | DFMEA | 210 | Open | Proposals missing Current→Target→Delta→Gap-Closing structure |
+| CRITICAL | PFMEA | 175 | Open | Aspiration theater framing |
+| HIGH | DFMEA | 180 | Open | Monitor not wired to all policy/content modification points |
+| HIGH | DFMEA | 160 | Open | No automated gate preventing un-verified proposals |
+| HIGH | DFMEA | 144 | Open | Regex-based audit log parser fragile to format variations |
+| HIGH | PFMEA | 108 | Open | Proposal bypasses verification pipeline |
+| MONITOR | PFMEA | 96 | Open | Incomplete audit trail on refusal |
+| MONITOR | PFMEA | 60 | Open | Core axiom check skipped or mis-keyed |
+
+**3 Critical rows awaiting triage.** AGE session required.  
+See `AGE-WORKBENCH.md` for work queue and session log.
+
+---
+
 ## The One Next Action
 
 > *Only one. Everything else waits.*

@@ -402,41 +402,59 @@ def render_brief(
     pending: list[dict] = []
     running: list[dict] = []
 
-    # --- BLOCKING: escalation issues (AGE is stopped) ---
-    for issue in escalation_issues:
-        blocking.append({
-            "icon": "🚨", "est": "~5 min",
-            "title": issue["title"],
-            "context": (issue.get("body") or "")[:180].replace("\n", " ").strip() + "…",
-            "why": "AGE raised a hard escalation and cannot proceed until you respond.",
-            "consequence": "AGE is paused on the affected row until this is resolved.",
-            "actions": [("Read escalation and respond →", issue["html_url"])],
-            "age": days_since(issue.get("created_at", "")),
-        })
+    # --- BLOCKING: merge overdue-critical and age-escalation into one deduplicated set ---
+    # The auto-created overdue issues carry BOTH labels, so we deduplicate by issue number.
+    # Pure age-escalation issues (axiom conflicts, etc.) are rarer but also blocking.
+    seen_issue_numbers: set[int] = set()
+    all_blocking_issues = overdue_issues + [
+        i for i in escalation_issues if i["number"] not in {x["number"] for x in overdue_issues}
+    ]
 
-    # --- BLOCKING: overdue-critical issues ---
-    for issue in overdue_issues:
-        blocking.append({
-            "icon": "⏰", "est": "~3 min",
-            "title": issue["title"],
-            "context": f"A Critical FMEA row has been open >14 days without triage.",
-            "why": "AGE rule: Critical rows open >14 days require human triage before AGE can design solutions.",
-            "consequence": "AGE cannot design a solution for this row until you triage it.",
-            "actions": [
-                ('Post "AGE: proceed" on the issue to assign it →', issue["html_url"]),
-                ('Post "AGE: accept risk — [reason]" to acknowledge and close →', issue["html_url"]),
-            ],
-            "age": days_since(issue.get("created_at", "")),
-        })
+    for issue in all_blocking_issues:
+        if issue["number"] in seen_issue_numbers:
+            continue
+        seen_issue_numbers.add(issue["number"])
 
-    # --- BLOCKING: Critical rows still Open/Triaged with no overdue issue yet ---
-    overdue_failure_modes = {
-        re.sub(r".*Critical FMEA row:\s*", "", i["title"]).strip()
-        for i in overdue_issues
+        labels = {lbl.get("name", "") for lbl in (issue.get("labels") or [])}
+        is_overdue = "overdue-critical" in labels
+
+        # Extract failure mode cleanly from the title
+        failure_mode = re.sub(r"^\[AGE-OVERDUE\]\s*Critical FMEA row:\s*", "", issue["title"]).strip()
+        if failure_mode == issue["title"]:  # didn't match the overdue pattern
+            failure_mode = issue["title"]
+
+        if is_overdue:
+            blocking.append({
+                "icon": "⏰", "est": "~3 min",
+                "title": f"Critical row open >14 days: {failure_mode}",
+                "context": "This row has been Open or Triaged too long. AGE needs your signal before designing a solution.",
+                "why": "AGE rule: Critical rows (RPN ≥ 150) open >14 days require human triage first.",
+                "consequence": "AGE cannot design a solution for this row until you respond.",
+                "actions": [
+                    ('Post "AGE: proceed" on the issue to assign it →', issue["html_url"]),
+                    ('Post "AGE: accept risk — [reason]" to close the escalation →', issue["html_url"]),
+                ],
+                "age": days_since(issue.get("created_at", "")),
+            })
+        else:
+            blocking.append({
+                "icon": "🚨", "est": "~5 min",
+                "title": issue["title"],
+                "context": "AGE hit a hard governance rule and stopped work on this row.",
+                "why": "AGE raised a hard escalation and cannot proceed until you respond.",
+                "consequence": "AGE is paused on the affected row until this is resolved.",
+                "actions": [("Read escalation and respond →", issue["html_url"])],
+                "age": days_since(issue.get("created_at", "")),
+            })
+
+    # --- BLOCKING: Critical rows still Open/Triaged with no issue yet ---
+    escalated_failure_modes = {
+        re.sub(r"^\[AGE-OVERDUE\]\s*Critical FMEA row:\s*", "", i["title"]).strip()
+        for i in all_blocking_issues
     }
     for row in open_rows:
         if row["tier"] == "CRITICAL" and row["status"] in ("Open", "Triaged"):
-            if row["failure_mode"] not in overdue_failure_modes:
+            if row["failure_mode"] not in escalated_failure_modes:
                 blocking.append({
                     "icon": "🔴", "est": "~2 min",
                     "title": f"Critical row needs triage: {row['failure_mode']}",
@@ -465,13 +483,12 @@ def render_brief(
             continue
         meta = classify_pr(pr)
         note = " *(draft)*" if pr.get("draft") else ""
-        changed = pr.get("changed_files", 0)
-        additions = pr.get("additions", 0)
+        author = (pr.get("user") or {}).get("login", "unknown")
         pending.append({
             "icon": "🔀", "est": meta["est"],
             "title": f"PR #{pr['number']}{note} — {pr['title']}",
             "context": meta["guidance"],
-            "why": f"{additions} line(s) added across {changed} file(s).",
+            "why": f"Opened by `{author}`.",
             "actions": [
                 ("Review →", pr["html_url"]),
                 ("Merge →", pr["html_url"]),

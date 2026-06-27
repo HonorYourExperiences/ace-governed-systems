@@ -2,8 +2,11 @@ import re
 
 
 def generate_dashboard():
-    with open('AUDIT-LOG.md', 'r') as f:
-        content = f.read()
+    try:
+        with open('AUDIT-LOG.md', 'r') as f:
+            content = f.read()
+    except FileNotFoundError:
+        content = ''
 
     # Basic stats
     total = len(re.findall(r'^## Audit:', content, re.MULTILINE))

@@ -26,8 +26,11 @@ jobs:
           import json
           from datetime import datetime
 
-          with open('AUDIT-LOG.md', 'r') as f:
-              content = f.read()
+          try:
+              with open('AUDIT-LOG.md', 'r') as f:
+                  content = f.read()
+          except FileNotFoundError:
+              content = ''
 
           # Extract basic stats
           total = len(re.findall(r'^## Audit:', content, re.MULTILINE))

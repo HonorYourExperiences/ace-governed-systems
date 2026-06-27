@@ -77,39 +77,67 @@ If the document has fewer than 2 clear functional requirements, return an empty 
 
 
 def decompose_functional_requirements(text: str, config: dict) -> dict | None:
-    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
-    if not api_key:
-        return None
-
-    model = config.get("pr_analysis", {}).get("model", "claude-haiku-4-5-20251001")
     truncated = "\n".join(text.splitlines()[:300])
 
-    payload = {
-        "model": model,
-        "max_tokens": 1500,
-        "system": FR_DECOMP_PROMPT,
-        "messages": [{"role": "user", "content": f"Decompose this document:\n\n{truncated}"}],
-    }
+    anthropic_key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if anthropic_key:
+        model = config.get("pr_analysis", {}).get("model", "claude-haiku-4-5-20251001")
+        payload = {
+            "model": model,
+            "max_tokens": 1500,
+            "system": FR_DECOMP_PROMPT,
+            "messages": [{"role": "user", "content": f"Decompose this document:\n\n{truncated}"}],
+        }
+        data = json.dumps(payload).encode("utf-8")
+        req = urllib.request.Request(
+            "https://api.anthropic.com/v1/messages",
+            data=data,
+            headers={
+                "x-api-key": anthropic_key,
+                "anthropic-version": "2023-06-01",
+                "content-type": "application/json",
+            },
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                body = json.loads(resp.read().decode("utf-8"))
+                content = body["content"][0]["text"]
+                match = re.search(r"\{.*\}", content, re.DOTALL)
+                if match:
+                    return json.loads(match.group())
+        except Exception as e:
+            print(f"  FR decomposition (Anthropic) unavailable: {e}", file=sys.stderr)
 
-    data = json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(
-        "https://api.anthropic.com/v1/messages",
-        data=data,
-        headers={
-            "x-api-key": api_key,
-            "anthropic-version": "2023-06-01",
-            "content-type": "application/json",
-        },
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            body = json.loads(resp.read().decode("utf-8"))
-            content = body["content"][0]["text"]
-            match = re.search(r"\{.*\}", content, re.DOTALL)
-            if match:
-                return json.loads(match.group())
-    except Exception as e:
-        print(f"  FR decomposition unavailable: {e}", file=sys.stderr)
+    openai_key = os.environ.get("OPENAI_API_KEY", "")
+    if openai_key:
+        model = config.get("pr_analysis", {}).get("fallback_model", "gpt-4o-mini")
+        payload = {
+            "model": model,
+            "max_tokens": 1500,
+            "messages": [
+                {"role": "system", "content": FR_DECOMP_PROMPT},
+                {"role": "user", "content": f"Decompose this document:\n\n{truncated}"},
+            ],
+        }
+        data = json.dumps(payload).encode("utf-8")
+        req = urllib.request.Request(
+            "https://api.openai.com/v1/chat/completions",
+            data=data,
+            headers={
+                "Authorization": f"Bearer {openai_key}",
+                "content-type": "application/json",
+            },
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                body = json.loads(resp.read().decode("utf-8"))
+                content = body["choices"][0]["message"]["content"]
+                match = re.search(r"\{.*\}", content, re.DOTALL)
+                if match:
+                    return json.loads(match.group())
+        except Exception as e:
+            print(f"  FR decomposition (OpenAI) unavailable: {e}", file=sys.stderr)
+
     return None
 
 

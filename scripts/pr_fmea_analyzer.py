@@ -154,6 +154,53 @@ def call_claude_api(diff_text: str, pr_title: str) -> dict:
     return None
 
 
+def call_openai_api(diff_text: str, pr_title: str) -> dict:
+    try:
+        import urllib.request
+    except ImportError:
+        return None
+
+    api_key = os.environ.get("OPENAI_API_KEY", "")
+    if not api_key:
+        return None
+
+    config = load_config()
+    model = config.get("pr_analysis", {}).get("fallback_model", "gpt-4o-mini")
+
+    user_content = f"PR Title: {pr_title}\n\nDiff:\n{diff_text}"
+
+    payload = {
+        "model": model,
+        "max_tokens": 2000,
+        "messages": [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": user_content},
+        ],
+    }
+
+    data = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        "https://api.openai.com/v1/chat/completions",
+        data=data,
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "content-type": "application/json",
+        },
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            body = json.loads(resp.read().decode("utf-8"))
+            content = body["choices"][0]["message"]["content"]
+            match = re.search(r"\{.*\}", content, re.DOTALL)
+            if match:
+                return json.loads(match.group())
+    except Exception as e:
+        print(f"Warning: OpenAI API fallback failed: {e}", file=sys.stderr)
+
+    return None
+
+
 def fallback_rule_based_analysis(diff_text: str) -> dict:
     """Rule-based analysis when Claude API is unavailable."""
     findings = []
@@ -292,8 +339,10 @@ def main():
 
     critical_warnings = get_critical_system_warnings(diff_text)
 
-    # Try Claude API first, fall back to rule-based
+    # Try Claude API first, then OpenAI fallback, then rule-based
     analysis = call_claude_api(diff_text, args.pr_title)
+    if analysis is None:
+        analysis = call_openai_api(diff_text, args.pr_title)
     if analysis is None:
         analysis = fallback_rule_based_analysis(diff_text)
 

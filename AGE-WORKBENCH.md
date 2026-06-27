@@ -1,5 +1,5 @@
 # AGE Workbench
-**Last Updated:** 2026-06-27T15:59:38Z  
+**Last Updated:** 2026-06-27T16:05:39Z  
 **AGE Status:** Active  
 
 ---
@@ -8,7 +8,7 @@
 
 | Priority | Table | RPN | Status | Process Step / Design Element | Failure Mode |
 |----------|-------|-----|--------|-------------------------------|--------------|
-| [CRITICAL] | PFMEA | 240 | Solution Designed <!-- AG | Content Creation | Rescue modeling in hero / parent copy |
+| [CRITICAL] | PFMEA | 240 | Verified <!-- AGE: 2026-0 | Content Creation | Rescue modeling in hero / parent copy |
 | [CRITICAL] | DFMEA | 210 | Open | SAGA Proposal Structure | Proposals missing explicit Current State → Ta |
 | [CRITICAL] | DFMEA | 180 | Open | Runtime Monitor | Monitor not wired to all policy/content modif |
 | [CRITICAL] | PFMEA | 175 | Open | Content Creation | Aspiration theater framing |
@@ -26,7 +26,7 @@
 
 ### Critical (RPN ≥ 150) — Requires Active Work
 - **RPN 240** [PFMEA] Content Creation / Rescue modeling in hero / parent copy
-  - Status: Solution Designed <!-- AGE: 2026-06-27
+  - Status: Verified <!-- AGE: 2026-06-27
   - Recommended Action: Enforce Way Through checklist before publish; run anti-pattern scan on key pages
 - **RPN 210** [DFMEA] SAGA Proposal Structure / Proposals missing explicit Current State → Target State → Delta → Gap-Closing structure
   - Status: Open
@@ -57,8 +57,7 @@
 
 ## In-Progress Items
 
-- [PFMEA] RPN 240 — Content Creation / Rescue modeling in hero / parent copy
-  - Status: Solution Designed <!-- AGE: 2026-06-27
+*(No rows currently In Progress or Solution Designed)*
 
 ---
 
@@ -68,9 +67,9 @@
 - **Critical unaddressed (Open/Triaged):** 4
 - **Refusal rate (AUDIT-LOG.md):** 0.0%
 - **Last SAGA cycle:** see `saga-analyze.yml` run history
-- **Workbench last updated:** 2026-06-27T15:59:38Z
-- **Git branch:** `copilot/engineer-scope` @ `ee3cce0`
-- **Proposal pipeline:** 1 Solution Designed | 0 In Progress | 0 Triaged
+- **Workbench last updated:** 2026-06-27T16:05:39Z
+- **Git branch:** `copilot/engineer-scope` @ `c8dcb24`
+- **Proposal pipeline:** 0 Solution Designed | 0 In Progress | 0 Triaged
 
 ---
 

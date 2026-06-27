@@ -1,0 +1,89 @@
+name: AGE — PRD SPOF Scanner
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'proposals/**/*.md'
+      - 'cape-able-heroes/**/*.md'
+      - '*.md'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  spof-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Get changed markdown files
+        run: |
+          git diff --name-only HEAD~1 HEAD | grep '\.md$' > /tmp/changed_files.txt || true
+          echo "Changed markdown files:"
+          cat /tmp/changed_files.txt
+
+      - name: Run SPOF scan
+        run: |
+          python3 scripts/prd_spof_scanner.py \
+            --files /tmp/changed_files.txt \
+            --output /tmp/spof_issues.json
+
+      - name: Create SPOF issues
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let issues;
+            try {
+              issues = JSON.parse(fs.readFileSync('/tmp/spof_issues.json', 'utf8'));
+            } catch (e) {
+              console.log('No SPOF issues file or empty result:', e.message);
+              return;
+            }
+
+            if (!Array.isArray(issues) || issues.length === 0) {
+              console.log('No SPOF issues to create.');
+              return;
+            }
+
+            for (const issue of issues) {
+              // Check for existing open issue with the same title
+              const existing = await github.rest.issues.listForRepo({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'open',
+                labels: 'spof',
+              });
+              const alreadyExists = existing.data.some(i => i.title === issue.title);
+              if (alreadyExists) {
+                console.log(`Issue already exists: ${issue.title}`);
+                continue;
+              }
+
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issue.title,
+                body: issue.body,
+                labels: issue.labels,
+              });
+              console.log(`Created SPOF issue: ${issue.title}`);
+            }
+
+      - name: Post scan summary
+        run: |
+          echo "## AGE PRD SPOF Scan" >> "$GITHUB_STEP_SUMMARY"
+          python3 scripts/prd_spof_scanner.py \
+            --files /tmp/changed_files.txt \
+            --output /dev/null 2>&1 >> "$GITHUB_STEP_SUMMARY" || true

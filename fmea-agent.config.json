@@ -1,0 +1,76 @@
+{
+  "project_name": "ace-governed-systems",
+  "project_type": "governance_framework",
+  "compliance_targets": [
+    "Audit_Integrity",
+    "Way_Through_Axiom",
+    "Evidence_Capability_Standard"
+  ],
+  "risk_thresholds": {
+    "block_pull_request_on": "High_Action_Priority",
+    "require_human_signoff_severity": 9,
+    "auto_create_issue_rpn_threshold": 100,
+    "overdue_critical_days": 14,
+    "critical_rpn_floor": 150,
+    "high_rpn_floor": 100,
+    "saga_trigger_refusal_rate": 0.10
+  },
+  "critical_systems": {
+    "constitution":     "IMMUTABLE_VS_MUTABLE_LAYERS.md",
+    "fmea_tables":      "governed_systems_SOP_PFMEA_DFMEA.md",
+    "audit_log":        "AUDIT-LOG.md",
+    "runtime_monitor":  "RUNTIME-MONITOR-WIRING.md",
+    "saga_engine":      "scripts/saga_analyze.py",
+    "cape_able_heroes": "cape-able-heroes/",
+    "proposals":        "proposals/"
+  },
+  "axioms": [
+    "inherent_sufficiency",
+    "way_through",
+    "witnessing_mature_presence",
+    "evidence_capability",
+    "audit_integrity"
+  ],
+  "pr_analysis": {
+    "enabled": true,
+    "model": "claude-haiku-4-5-20251001",
+    "max_diff_lines": 500,
+    "high_severity_threshold": 8,
+    "auto_block_severity": 9
+  },
+  "prd_scan": {
+    "enabled": true,
+    "scan_paths": [
+      "proposals/",
+      "cape-able-heroes/proposals/",
+      "cape-able-heroes/"
+    ],
+    "spof_patterns": [
+      "depends only on",
+      "only.*webhook",
+      "no fallback",
+      "no backup",
+      "required before anything",
+      "single.*point",
+      "must.*complete.*before",
+      "blocks all"
+    ]
+  },
+  "dependency_scan": {
+    "enabled": true,
+    "watch_files": [
+      ".github/workflows/*.yml",
+      "scripts/*.py"
+    ],
+    "constitution_files": [
+      "IMMUTABLE_VS_MUTABLE_LAYERS.md",
+      "governed_systems_SOP_PFMEA_DFMEA.md"
+    ]
+  },
+  "roadmap": {
+    "phase_1": "FMEA Engine — active (this config)",
+    "phase_2": "Brand Automation — .brand/ theme.json, tone-of-voice CI/CD",
+    "phase_3": "Business/Legal Infrastructure — .legal/ compliance checklists, billing scaffolding",
+    "phase_4": "Operations COO — telemetry-driven issues, changelog automation, founder intercept routing"
+  }
+}

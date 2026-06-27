@@ -34,10 +34,10 @@ jobs:
             const title = context.payload.pull_request.title || '';
             const body = context.payload.pull_request.body || '';
 
-            const policyPaths = [
-              'governed_systems_SOP_PFMEA_DFMEA.md',
-              'RUNTIME-MONITOR-WIRING.md',
-              'proposals/'
+            const policyTargets = [
+              { type: 'file', path: 'governed_systems_SOP_PFMEA_DFMEA.md' },
+              { type: 'file', path: 'RUNTIME-MONITOR-WIRING.md' },
+              { type: 'dir', path: 'proposals/' }
             ];
 
             const files = await github.paginate(github.rest.pulls.listFiles, {
@@ -48,7 +48,11 @@ jobs:
             });
 
             const touchesPolicy = files.some(file =>
-              policyPaths.some(path => file.filename === path || file.filename.startsWith(path))
+              policyTargets.some(target =>
+                target.type === 'file'
+                  ? file.filename === target.path
+                  : file.filename.startsWith(target.path)
+              )
             );
 
             if (!touchesPolicy) {
@@ -56,12 +60,12 @@ jobs:
               return;
             }
 
-            const issueMatches = [...`${title}\n${body}`.matchAll(/(?:^|\s)#(\d+)\b/gm)];
+            const issueMatches = [...`${title}\n${body}`.matchAll(/#(\d+)\b/g)];
             const issueRefs = issueMatches.map(match => Number(match[1]));
             const refs = [...new Set(issueRefs)];
             if (refs.length === 0) {
               core.setFailed(
-                'Verification gate failed: policy/proposal changes require at least one linked issue reference (e.g., "Closes #123") so `needs-verification` status can be checked.'
+                'Verification gate failed: policy/proposal changes require at least one linked issue reference (e.g., "Closes #123") so needs-verification status can be checked.'
               );
               return;
             }

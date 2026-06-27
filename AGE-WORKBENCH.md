@@ -1,5 +1,5 @@
 # AGE Workbench
-**Last Updated:** 2026-06-27T15:54:01Z  
+**Last Updated:** 2026-06-27T18:13:00Z  
 **AGE Status:** Active  
 
 ---
@@ -8,7 +8,7 @@
 
 | Priority | Table | RPN | Status | Process Step / Design Element | Failure Mode |
 |----------|-------|-----|--------|-------------------------------|--------------|
-| [CRITICAL] | PFMEA | 240 | Open | Content Creation | Rescue modeling in hero / parent copy |
+| [CRITICAL] | PFMEA | 240 | Triaged | Content Creation | Rescue modeling in hero / parent copy |
 | [CRITICAL] | DFMEA | 210 | Open | SAGA Proposal Structure | Proposals missing explicit Current State → Ta |
 | [CRITICAL] | DFMEA | 180 | Open | Runtime Monitor | Monitor not wired to all policy/content modif |
 | [CRITICAL] | PFMEA | 175 | Open | Content Creation | Aspiration theater framing |
@@ -26,7 +26,7 @@
 
 ### Critical (RPN ≥ 150) — Requires Active Work
 - **RPN 240** [PFMEA] Content Creation / Rescue modeling in hero / parent copy
-  - Status: Open
+  - Status: Triaged
   - Recommended Action: Enforce Way Through checklist before publish; run anti-pattern scan on key pages
 - **RPN 210** [DFMEA] SAGA Proposal Structure / Proposals missing explicit Current State → Target State → Delta → Gap-Closing structure
   - Status: Open
@@ -64,12 +64,12 @@
 ## System Health Pulse
 
 - **Open rows:** 9
-- **Critical unaddressed (Open/Triaged):** 5
+- **Critical unaddressed (Open/Triaged):** 4 Open + 1 Triaged
 - **Refusal rate (AUDIT-LOG.md):** 0.0%
 - **Last SAGA cycle:** see `saga-analyze.yml` run history
-- **Workbench last updated:** 2026-06-27T15:54:01Z
+- **Workbench last updated:** 2026-06-27T18:13:00Z
 - **Git branch:** `main` @ `d4a2574`
-- **Proposal pipeline:** 0 Solution Designed | 0 In Progress | 0 Triaged
+- **Proposal pipeline:** 0 Solution Designed | 0 In Progress | 1 Triaged
 
 ---
 
@@ -77,7 +77,7 @@
 
 | Session | Date | Actions Taken | Rows Moved | Notes |
 |---------|------|---------------|------------|-------|
-| *(Updated by AGE at each session end)* | | | | |
+| AGE-001 | 2026-06-27 | Triaged PFMEA RPN 240 rescue modeling; generated and committed first full 7-section SAGA proposal prop-AGE-2026-06-27-rescue-modeling-outreach.md; updated FMEA status cell and workbench evidence trail | 1 (to Triaged) | First AGE session after Claude usage limit; one-row-at-a-time protocol observed; proposal centers child sovereign enactment per Way Through axiom; creates pre-publish control before first outreach deployment |
 
 ---
 

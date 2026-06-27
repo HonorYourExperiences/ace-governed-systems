@@ -99,6 +99,29 @@ If this sounds interesting, I'd love to send you a one-page overview or schedule
 
 ---
 
+### Source-Backed Variant After Aviation WonderLab
+
+Use this only after confirming the partner permission status logged in `field-evidence/session-2026-06-27-aviation-wonderlab/linkedin-source-card.md`.
+
+**Subject:** Aviation WonderLab for [camp/program name]
+
+---
+
+Hi [Name],
+
+I'm Rian Howard, founder of Build Your Dreaming Things. I recently led an Aviation WonderLab where children learned aviation through a hands-on build-test-learn paper airplane challenge.
+
+The session gave children a simple way to begin: build a plane, test it, observe what happened, adjust, and try again. Dips, turns, stalls, and longer flights became feedback, not failure. That is the core of Cape-Able Heroes: children gather evidence of their own capability through a challenge they can hold in their hands.
+
+I'm now scheduling additional WonderLab sessions for camps and youth programs. Aviation is one available theme, and the format can also adapt to engineering, nature, storytelling, or design challenges.
+
+Would it make sense to send a one-page overview for [camp/program name]?
+
+[Your name]
+[Contact info]
+
+---
+
 ## Template 4 — Libraries, Churches & Community Groups
 
 *Best for: children's librarians, community program coordinators, church family ministry leads, recreation centers.*

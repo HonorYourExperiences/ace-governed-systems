@@ -63,7 +63,26 @@ Add each testimonial below. Include source, permission status, and exact words.
 
 ### Testimonial Entries
 
-*(Begin logging here after Session 1.)*
+---
+**Date collected:** 2026-06-27
+**Session:** Aviation WonderLab / Kidcam Camp Programs and Alabama State Parks context
+**Source name:** TigerWings
+**Source type:** [ ] Parent  [ ] Educator/Facilitator  [x] Camp/Program Leader or partner signal  [ ] Child (direct quote)
+**Permission to quote:** [ ] Yes — full name  [ ] Yes — first name only  [ ] Yes — anonymous  [x] Not yet asked
+
+**Exact quote:**
+
+"Their curiosity was certainly sparked"
+
+**Context (brief):**
+TigerWings publicly reposted the BYDT Aviation WonderLab post and thanked Rian R. Howard for creating a memorable day for children connected to Kidcam Camp Programs at Alabama State Parks.
+
+**Strongest line (for use in materials):**
+Their curiosity was certainly sparked.
+
+**Usage status:** [ ] In use  [ ] Available  [x] Awaiting permission
+**Source card:** `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/linkedin-source-card.md`
+---
 
 ---
 
@@ -173,6 +192,94 @@ _______________________________________________
 [ ] May be used for school/camp partnership outreach  
 [ ] May be submitted with grant or funding applications  
 [ ] Internal use only — not yet ready for external sharing
+
+---
+
+### Draft Case Study: Aviation WonderLab Field Signal
+
+**Date:** 2026-06-27 source capture
+**Session(s) covered:** Aviation WonderLab public LinkedIn source
+**Buyer type:** [ ] Parent/family  [ ] School  [x] Camp  [ ] Community org  [ ] Church/faith-based
+**Theme(s):** Aviation, design thinking, imagination, build-test-learn
+**Total children:** TBD
+**Total sessions in this case study:** 1 source-backed session
+
+---
+
+#### 1. Situation (Before)
+
+BYDT had a field opportunity to lead children through a practical Aviation WonderLab. The source material frames the need as access, recognition, translation, and structure: children may have ability and imagination already present, but need an environment that helps bring it forward.
+
+---
+
+#### 2. What Happened (The Session)
+
+Children learned aviation through a hands-on paper airplane challenge. They built, tested, observed, adjusted, and tried again. Flight outcomes such as dipping, turning, stalling, or flying farther became feedback for the next design attempt.
+
+**Most significant hesitation → engagement moment observed:**
+
+The source notes that some children needed support with the first fold, which is an important design signal: entry points must be built carefully so hesitation is not misread as inability.
+
+**One specific child moment (exact action or words):**
+
+TBD. No direct child quote has been captured yet.
+
+**How the group responded to the Hero Identity Moment:**
+
+TBD. Public source indicates curiosity and participation, but the exact identity moment needs facilitator debrief evidence.
+
+**What the facilitator noticed that they didn't expect:**
+
+The first fold mattered. The smallest entry point can become the gate between participation and hesitation.
+
+---
+
+#### 3. Outcome (After)
+
+**Parent feedback summary:**
+
+| Signal | Result |
+|--------|--------|
+| Would recommend to another parent | TBD |
+| Observed child hesitation → participation moment | Qualitative signal captured |
+| Child spoke positively about experience after | TBD |
+| Notable quote from partner | "Their curiosity was certainly sparked" |
+
+**Facilitator assessment:**
+
+[ ] Session ran as planned
+[x] Session ran with adjustments — details pending facilitator debrief
+[ ] Significant unexpected outcome — describe:
+
+**Strongest testimonial from this buyer:**
+
+> "Their curiosity was certainly sparked"
+> — TigerWings public LinkedIn post; permission pending
+
+---
+
+#### 4. What This Means
+
+This source confirms that Aviation WonderLab has moved from concept to field expression. The strongest evidence is not a broad promise about transformation; it is the visible learning architecture: children had a concrete way to begin, test, observe, adjust, and gather evidence that their own ideas were worth building from.
+
+---
+
+#### 5. Supporting Files
+
+- SESSION-LOG.md entry: Session 1 — 2026-06-27 source capture
+- Source card: `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/linkedin-source-card.md`
+- Observation Tool sheet: pending
+- Feedback forms: pending
+- Testimonials: TigerWings source entry above, permission pending
+
+---
+
+#### 6. Usage
+
+[ ] May be shared publicly (with permissions above)
+[x] May be used for school/camp partnership outreach after permission confirmation
+[ ] May be submitted with grant or funding applications
+[x] Internal use only — not yet ready for external sharing
 
 ---
 

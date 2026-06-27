@@ -10,12 +10,12 @@
 
 | Metric | Target | Current |
 |--------|--------|---------|
-| Sessions completed | 3–5 | 0 |
-| Total children reached | 15–75 | 0 |
+| Sessions completed | 3–5 | 1 public-source logged |
+| Total children reached | 15–75 | TBD |
 | Paid sessions | ≥1 | 0 |
-| Pilot sessions | ≥1 | 0 |
+| Pilot sessions | ≥1 | 1 public-source logged |
 | Feedback forms collected | ≥10 parent + ≥3 facilitator | 0 |
-| Hesitation → engagement moments logged | ≥10 | 0 |
+| Hesitation → engagement moments logged | ≥10 | Qualitative signal captured |
 
 *Update this table after each session.*
 
@@ -78,7 +78,49 @@ Keep all supporting documents (Observation Tool sheet, Feedback Forms) in:
 
 ## Session Entries
 
-*(No sessions yet — log begins after Session 1.)*
+### Session 1 — 2026-06-27 source capture
+
+**Venue / Host:** Kidcam Camp Programs / Alabama State Parks context; TigerWings public repost
+**Type:** [ ] Paid  [x] Pilot  [ ] Internal test
+**Theme:** Aviation WonderLab
+**Number of children:** TBD from host/facilitator follow-up
+**Age range:** TBD
+**Facilitator(s):** Rian R. Howard / Build Your Dreaming Things
+
+**Pricing (if paid):**
+- Rate charged: TBD / not confirmed from source
+- Buyer type: [ ] Parent/family  [ ] School  [x] Camp/program  [ ] Community org
+
+**Session outcome (circle):** Ran as planned / Ran with adjustments / Significant problems
+**Current source-backed status:** Session publicly described as completed; operational details need confirmation.
+
+**Evidence captured:**
+- [ ] Observation Tool sheet completed
+- [ ] Parent feedback forms collected — how many: ___
+- [ ] Facilitator debrief form completed
+- [x] Public LinkedIn source captured
+- [x] Notable moments logged below
+
+**Top 3 observations from this session:**
+
+1. Children practiced aviation through a build-test-learn paper airplane challenge.
+2. The session used design feedback language: flight behavior became information, not failure.
+3. External partner/public repost signals that the session was memorable and visible beyond BYDT.
+
+**Hesitation → engagement moments logged:** Qualitative only. Public post notes that some children needed support with the first fold; exact count not yet recorded.
+
+**One quote from a child or parent (exact words):**
+
+No child or parent quote captured yet. Public partner excerpt is stored in the source card pending permission workflow.
+
+**What to change before the next session:**
+
+- Confirm exact child count, date, venue, and partner permission status.
+- Capture observation sheet data during the next Aviation WonderLab.
+- Add a facilitator debrief within 24 hours of the next session.
+
+**Supporting files location:**
+`cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/`
 
 ---
 

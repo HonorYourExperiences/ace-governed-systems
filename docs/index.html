@@ -216,6 +216,10 @@
             background: #e8e0d0;
             color: var(--color-navy);
         }
+        .btn-upgrade {
+            background: #2a5a3a;
+            color: white;
+        }
         .close {
             color: #666;
             font-size: 28px;
@@ -225,6 +229,16 @@
         }
         .close:hover {
             color: var(--color-navy);
+        }
+        .upgrade-panel {
+            background: white;
+            border: 1px solid var(--color-gold);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .upgrade-step {
+            margin-bottom: 12px;
         }
     </style>
 </head>
@@ -258,7 +272,7 @@
         <h2>Interactive FMEA Explorer</h2>
         <p style="color: #555; max-width: 720px; margin-bottom: 15px;">
             Sortable and filterable view of open critical &amp; high RPN rows. 
-            Click <strong>Draft Proposal</strong> on any row to generate a ready-to-use SAGA proposal.
+            Click <strong>Draft Proposal</strong> to generate a SAGA draft, then <strong>Initiate Upgrade</strong> to hand off to the AGE for execution and effectiveness tracking.
         </p>
 
         <div class="filter-bar">
@@ -278,7 +292,7 @@
                     <th onclick="sortTable(3)">Failure Mode</th>
                     <th onclick="sortTable(4)">Status</th>
                     <th>Recommended Action</th>
-                    <th style="width: 110px;">Action</th>
+                    <th style="width: 140px;">Action</th>
                 </tr>
             </thead>
             <tbody id="fmea-tbody">
@@ -288,7 +302,7 @@
 
         <p class="fmea-note">
             Source: <code>governed_systems_SOP_PFMEA_DFMEA.md</code> + <code>AGE-WORKBENCH.md</code>. 
-            Generated proposals are drafts — review, commit to <code>proposals/</code>, and update the row status through proper SAGA flow.
+            All changes must still flow through SAGA proposals and evidence notes.
             <a href="https://github.com/HonorYourExperiences/ace-governed-systems/blob/main/governed_systems_SOP_PFMEA_DFMEA.md" target="_blank" style="color: var(--color-gold);">View full source →</a>
         </p>
     </div>
@@ -300,13 +314,36 @@
                 <h3 id="modal-title">SAGA Proposal Draft</h3>
                 <span class="close" onclick="closeProposalModal()">&times;</span>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="modal-body">
                 <pre id="proposal-content"></pre>
+                
+                <!-- Upgrade Panel (shown after draft is generated) -->
+                <div id="upgrade-panel" class="upgrade-panel" style="display: none;">
+                    <h4 style="margin-top:0; color: #2a5a3a;">Initiate Governed Upgrade</h4>
+                    <p style="margin-bottom:15px; color:#444;">This hands the proposal off to the AGE for execution, tracking, and effectiveness measurement.</p>
+                    
+                    <div class="upgrade-step">
+                        <strong>1. Commit the proposal</strong><br>
+                        <small>Run in your terminal or GitHub UI:</small><br>
+                        <code id="commit-command" style="background:#f0e9d8; padding:4px 8px; border-radius:4px; display:block; margin-top:6px; font-size:0.85rem;"></code>
+                    </div>
+                    
+                    <div class="upgrade-step">
+                        <strong>2. AGE will pick it up</strong><br>
+                        <small>On next AGE session the engineer agent will:</small>
+                        <ul style="margin:8px 0 0 18px; font-size:0.9rem;">
+                            <li>Triage the new proposal into the FMEA workflow</li>
+                            <li>Execute or guide the gap-closing actions</li>
+                            <li>Track RPN reduction and status change as effectiveness metrics</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" onclick="closeProposalModal()">Close</button>
-                <button class="btn btn-primary" onclick="copyProposalToClipboard()">Copy to Clipboard</button>
+                <button class="btn btn-primary" onclick="copyProposalToClipboard()">Copy Draft</button>
                 <button class="btn btn-primary" onclick="downloadProposal()">Download .md</button>
+                <button class="btn btn-upgrade" id="upgrade-btn" onclick="initiateProposalUpgrade()" style="display:none;">Initiate Upgrade → AGE</button>
             </div>
         </div>
     </div>
@@ -416,7 +453,7 @@
             }
         }
 
-        // === Interactive FMEA Explorer + One-Click Proposal ===
+        // === Interactive FMEA Explorer + One-Click Proposal + Upgrade ===
         const fmeaData = [
             { priority: "CRITICAL", rpn: 240, table: "PFMEA", failure_mode: "Rescue modeling in hero / parent copy", status: "Triaged", action: "Enforce Way Through checklist before publish; run anti-pattern scan on key pages" },
             { priority: "CRITICAL", rpn: 210, table: "DFMEA", failure_mode: "Proposals missing explicit Current State → Target State → Delta → Gap-Closing structure", status: "Open", action: "Update proposal template; validate structure in audit-processor before accepting" },
@@ -431,6 +468,7 @@
         let currentSearch = '';
         let sortDirection = {};
         let currentProposalRow = null;
+        let currentProposalMarkdown = '';
 
         function renderFMEATable(data) {
             const tbody = document.getElementById('fmea-tbody');
@@ -448,7 +486,6 @@
                 const tr = document.createElement('tr');
                 if (row.priority === 'CRITICAL') tr.classList.add('critical');
                 
-                // Find original index for proposal generation
                 const originalIndex = fmeaData.findIndex(r => r.rpn === row.rpn && r.failure_mode === row.failure_mode);
                 
                 tr.innerHTML = `
@@ -527,7 +564,7 @@
             rows.forEach(row => tbody.appendChild(row));
         }
 
-        // One-click SAGA Proposal Generator
+        // Generate the SAGA proposal markdown
         function generateProposalMarkdown(row) {
             const today = new Date().toISOString().split('T')[0];
             const slug = row.failure_mode.toLowerCase()
@@ -541,7 +578,7 @@
 
 **Proposal ID:** ${proposalId}
 **Source:** Interactive FMEA Explorer | ${row.table} RPN ${row.rpn} | Status: ${row.status}
-**Preserves Core Axioms:** true — directly addresses ${row.failure_mode.includes('Rescue') || row.failure_mode.includes('Aspiration') ? 'Way Through and Evidence & Capability' : 'governance integrity and Audit Integrity'}.
+**Preserves Core Axioms:** true — directly addresses the gap threatening the core axioms.
 
 ## 1. Current State Assessment
 ${row.failure_mode} is active in the ${row.table} (RPN ${row.rpn}, Status: ${row.status}).
@@ -586,29 +623,33 @@ Low-risk change scoped to the affected area. Rollback is revert of the specific 
             if (!row) return;
 
             currentProposalRow = row;
-            const markdown = generateProposalMarkdown(row);
+            currentProposalMarkdown = generateProposalMarkdown(row);
 
             document.getElementById('modal-title').textContent = `SAGA Proposal Draft — RPN ${row.rpn} ${row.table}`;
-            document.getElementById('proposal-content').textContent = markdown;
+            document.getElementById('proposal-content').textContent = currentProposalMarkdown;
+            
+            // Show upgrade button and hide upgrade panel initially
+            document.getElementById('upgrade-btn').style.display = 'inline-block';
+            document.getElementById('upgrade-panel').style.display = 'none';
+            
             document.getElementById('proposal-modal').style.display = 'block';
         }
 
         function closeProposalModal() {
             document.getElementById('proposal-modal').style.display = 'none';
             currentProposalRow = null;
+            currentProposalMarkdown = '';
         }
 
         function copyProposalToClipboard() {
             const content = document.getElementById('proposal-content').textContent;
             navigator.clipboard.writeText(content).then(() => {
-                const originalText = event.target ? event.target.textContent : '';
-                // Simple feedback
                 const btns = document.querySelectorAll('.modal-footer .btn');
                 btns.forEach(b => {
                     if (b.textContent.includes('Copy')) {
                         const orig = b.textContent;
                         b.textContent = 'Copied!';
-                        setTimeout(() => { b.textContent = orig; }, 1800);
+                        setTimeout(() => { if (b) b.textContent = orig; }, 1800);
                     }
                 });
             }).catch(() => {
@@ -617,11 +658,10 @@ Low-risk change scoped to the affected area. Rollback is revert of the specific 
         }
 
         function downloadProposal() {
-            if (!currentProposalRow) return;
-            const content = document.getElementById('proposal-content').textContent;
+            if (!currentProposalRow || !currentProposalMarkdown) return;
             const filename = `prop-USER-${new Date().toISOString().split('T')[0]}-${currentProposalRow.failure_mode.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0,30)}.md`;
 
-            const blob = new Blob([content], { type: 'text/markdown' });
+            const blob = new Blob([currentProposalMarkdown], { type: 'text/markdown' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
@@ -630,6 +670,26 @@ Low-risk change scoped to the affected area. Rollback is revert of the specific 
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+        }
+
+        // NEW: Initiate Proposal Upgrade - hands off to AGE
+        function initiateProposalUpgrade() {
+            if (!currentProposalRow || !currentProposalMarkdown) return;
+
+            const today = new Date().toISOString().split('T')[0];
+            const slug = currentProposalRow.failure_mode.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-').substring(0, 30);
+            const filename = `prop-USER-${today}-${slug}.md`;
+
+            // Show the upgrade panel
+            document.getElementById('upgrade-panel').style.display = 'block';
+            document.getElementById('upgrade-btn').style.display = 'none';
+
+            // Set the commit command
+            const commitCmd = `git add proposals/${filename} && git commit -m "feat(proposal): close RPN ${currentProposalRow.rpn} ${currentProposalRow.failure_mode.substring(0,50)} via dashboard"`;
+            document.getElementById('commit-command').textContent = commitCmd;
+
+            // Scroll to the upgrade panel
+            document.getElementById('upgrade-panel').scrollIntoView({ behavior: 'smooth' });
         }
 
         // Click outside modal to close

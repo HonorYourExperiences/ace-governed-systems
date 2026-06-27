@@ -90,3 +90,43 @@ jobs:
           python3 scripts/prd_spof_scanner.py \
             --files /tmp/changed_files.txt \
             --output /dev/null 2>&1 >> "$GITHUB_STEP_SUMMARY" || true
+
+  way-through-scan:
+    runs-on: ubuntu-latest
+    # Only run when cape-able-heroes content or proposals change
+    if: |
+      contains(github.event.head_commit.modified, 'cape-able-heroes/') ||
+      contains(github.event.head_commit.added, 'cape-able-heroes/')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Way Through anti-pattern scan
+        id: wt_scan
+        run: |
+          python3 scripts/scan_content_antipatterns.py \
+            --path cape-able-heroes/ \
+            --output /tmp/wt_scan.json
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Post scan summary
+        if: always()
+        run: |
+          echo "## AGE Way Through Anti-Pattern Scan" >> "$GITHUB_STEP_SUMMARY"
+          python3 scripts/scan_content_antipatterns.py --path cape-able-heroes/ --quiet \
+            >> "$GITHUB_STEP_SUMMARY" 2>&1 || true
+
+      - name: Fail if HIGH-severity rescue-modeling hits found
+        if: steps.wt_scan.outcome == 'failure'
+        run: |
+          echo "❌ HIGH-severity rescue-modeling or aspiration-theater anti-patterns detected."
+          echo "Review scan output above. Resolve all HIGH hits before merging."
+          echo "Reference: cape-able-heroes/WAY-THROUGH-CONTENT-CHECKLIST.md"
+          exit 1
+

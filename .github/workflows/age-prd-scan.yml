@@ -34,6 +34,9 @@ jobs:
           cat /tmp/changed_files.txt
 
       - name: Run SPOF scan
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           python3 scripts/prd_spof_scanner.py \
             --files /tmp/changed_files.txt \

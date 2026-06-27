@@ -65,11 +65,13 @@ Stop work and create a GitHub issue labeled `age-escalation` before proceeding w
 
 ### On Session Start (always, no exceptions)
 
-1. Run `python3 scripts/age_engineer.py scan` — get current open rows sorted by RPN descending
-2. Read `AGE-WORKBENCH.md` — check what was In Progress or Solution Designed from prior sessions
-3. Check `proposals/` for any files where the status is `verified` (labeled on GitHub) awaiting implementation
-4. Set session focus: the highest-RPN Open row that has no current In Progress work
-5. Check escalation rules — if any apply, create the escalation issue before doing anything else
+1. Run `python3 scripts/age_engineer.py preflight` — check system integrity before any work. If exit code 2, diagnose and resolve before proceeding.
+2. Check `SOPs/` for any existing SOP relevant to today's work (e.g., `ls SOPs/` and read any SOP whose slug matches the row being worked on).
+3. Run `python3 scripts/age_engineer.py scan` — get current open rows sorted by RPN descending
+4. Read `AGE-WORKBENCH.md` — check what was In Progress or Solution Designed from prior sessions
+5. Check `proposals/` for any files where the status is `verified` (labeled on GitHub) awaiting implementation
+6. Set session focus: the highest-RPN Open row that has no current In Progress work
+7. Check escalation rules — if any apply, create the escalation issue before doing anything else
 
 ### During Work
 
@@ -80,9 +82,10 @@ Stop work and create a GitHub issue labeled `age-escalation` before proceeding w
 
 ### On Session End (always)
 
-1. Run `python3 scripts/age_engineer.py report` — regenerates `AGE-WORKBENCH.md`
-2. Commit with message: `chore(age): session-end report — [X open, Y in-progress, Z closed this session]`
-3. If any row reached Solution Designed or Verified this session, note it explicitly in the commit body
+1. If this session encountered a novel execution pattern, workaround, or repeated retry loop, document it as `SOPs/SOP-YYYY-MM-DD-[slug].md` (use `SOPs/_TEMPLATE.md` as the template). Validate with `python3 scripts/age_engineer.py lint-sop --file SOPs/SOP-[slug].md`.
+2. Run `python3 scripts/age_engineer.py report` — regenerates `AGE-WORKBENCH.md`
+3. Commit with message: `chore(age): session-end report — [X open, Y in-progress, Z closed this session]`
+4. If any row reached Solution Designed or Verified this session, note it explicitly in the commit body
 
 ---
 
@@ -233,8 +236,11 @@ python3 scripts/age_engineer.py verify-closure \
   --evidence "commit:abc1234"
 python3 scripts/age_engineer.py report                         # Regenerate AGE-WORKBENCH.md
 python3 scripts/age_engineer.py report --dry-run               # Print to stdout only
+python3 scripts/age_engineer.py preflight                      # System integrity check (run first each session)
 python3 scripts/age_engineer.py lint-proposal \
   --file proposals/prop-AGE-2026-06-27-rescue-modeling.md      # Validate 7-section format
+python3 scripts/age_engineer.py lint-sop \
+  --file SOPs/SOP-2026-06-27-example.md                        # Validate 5-section SOP format
 python3 scripts/pfmea_append.py --table pfmea \                # Append new FMEA row
   --step "..." --failure-mode "..." \
   --effect "..." --severity N --cause "..." \

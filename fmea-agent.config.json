@@ -34,6 +34,7 @@
   "pr_analysis": {
     "enabled": true,
     "model": "claude-haiku-4-5-20251001",
+    "fallback_model": "gpt-4o-mini",
     "max_diff_lines": 500,
     "high_severity_threshold": 8,
     "auto_block_severity": 9

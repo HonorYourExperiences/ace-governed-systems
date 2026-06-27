@@ -24,6 +24,13 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Pre-flight assertion check
+        id: preflight
+        run: |
+          python3 scripts/age_engineer.py preflight
+          echo "preflight_exit=$?" >> "$GITHUB_OUTPUT"
+        continue-on-error: true
+
       - name: Run AGE scan
         id: age_scan
         run: |

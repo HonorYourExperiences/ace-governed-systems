@@ -56,7 +56,9 @@ jobs:
               return;
             }
 
-            const refs = [...new Set([...`${title}\n${body}`.matchAll(/#(\d+)/g)].map(m => Number(m[1])))];
+            const issueMatches = [...`${title}\n${body}`.matchAll(/#(\d+)/g)];
+            const issueRefs = issueMatches.map(match => Number(match[1]));
+            const refs = [...new Set(issueRefs)];
             if (refs.length === 0) {
               core.setFailed(
                 'Verification gate failed: policy/proposal changes require at least one linked issue reference (e.g., "Closes #123") so `needs-verification` status can be checked.'
@@ -69,7 +71,9 @@ jobs:
             for (const issueNumber of refs) {
               try {
                 const issue = await github.rest.issues.get({ owner, repo, issue_number: issueNumber });
-                const labels = (issue.data.labels || []).map(l => typeof l === 'string' ? l : l.name);
+                const labels = (issue.data.labels || [])
+                  .map(label => label?.name ?? label)
+                  .filter(Boolean);
                 const hasNeeds = labels.includes('needs-verification');
                 const isVerified = labels.includes('verified');
 
@@ -82,8 +86,9 @@ jobs:
             }
 
             if (needsVerificationOnly.length > 0) {
+              const verb = needsVerificationOnly.length > 1 ? 'are' : 'is';
               core.setFailed(
-                `Verification gate failed: ${needsVerificationOnly.join(', ')} is labeled \`needs-verification\` but not \`verified\`.`
+                `Verification gate failed: ${needsVerificationOnly.join(', ')} ${verb} labeled \`needs-verification\` but not \`verified\`.`
               );
               return;
             }

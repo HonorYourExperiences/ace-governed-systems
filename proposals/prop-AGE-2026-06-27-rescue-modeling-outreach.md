@@ -23,24 +23,35 @@ Every piece of brand-facing copy (outreach, parent materials, session language) 
 | Pre-publish control       | None explicit                                | Way Through Checklist enforced before any send/publish | Checklist artifact + SOP integration       |
 | Scan / audit trail        | Ad hoc or absent                             | Documented anti-pattern scan + evidence log         | Scan report committed as verification      |
 
-## 4. Gap-Closing Proposal
+## 4. Gap-Closing Proposals
 1. Create `SOPs/SOP-2026-06-27-way-through-content-checklist.md` using the existing `_TEMPLATE.md`. The checklist will name the three forbidden patterns above, require replacement language that centers “the child enacts… supported by… witnessed by… recorded in…”, and mandate the “I tried. I kept going. I have proof.” primacy already present in strong sections of the templates.
 2. Revise OUTREACH-TEMPLATES.md: replace the three flagged phrases with axiom-aligned alternatives while preserving all functional and relational value (shared language for parents/teachers, visible evidence, badge-at-start, etc.).
 3. Add a mandatory “Way Through Content Checklist — passed” gate to the content creation section of `governed_systems_SOP_PFMEA_DFMEA.md` and to any future bydt.org content SOP.
 4. Execute the anti-pattern scan against the revised templates and commit the scan log as evidence.
 
-## 5. Verification Criteria
-- Revised OUTREACH-TEMPLATES.md committed with before/after diff.
-- New checklist file present in SOPs/ and referenced from the FMEA row.
-- Anti-pattern scan report committed showing zero remaining instances of the three patterns.
-- FMEA row status updated to Verified with evidence note containing proposal ID and commit SHA.
-- Re-audit of templates by founder or next AGE session confirms alignment.
+## 5. Verification Checklist
+- [ ] Revised OUTREACH-TEMPLATES.md committed with before/after diff.
+- [ ] New checklist file present in SOPs/ and referenced from the FMEA row.
+- [ ] Anti-pattern scan report committed showing zero remaining instances of the three patterns.
+- [ ] FMEA row status updated to Verified with evidence note containing proposal ID and commit SHA.
+- [ ] Re-audit of templates by founder or next AGE session confirms alignment.
+- [ ] Way Through is preserved: language centers child enactment over external rescue.
+- [ ] Evidence & Capability is preserved: every publish requires observable checklist passage and scan artifact.
+- [ ] Audit Integrity is preserved: full lineage from proposal through checklist to revised templates is created and committed.
+- [ ] Inherent Sufficiency and Witnessing & Mature Presence remain untouched and are enacted by the checklist itself.
 
-## 6. Preserves Core Axioms
-- **Way Through**: Language now centers child enactment over external rescue.  
-- **Evidence & Capability**: Every publish requires observable checklist passage and scan artifact.  
-- **Audit Integrity**: Full lineage from this proposal through checklist to revised templates is created and committed.  
-- Inherent Sufficiency and Witnessing & Mature Presence remain untouched and are enacted by the checklist itself.
+## 6. Success Metrics
+| Metric | Current | Target | Measurement Method |
+|--------|---------|--------|--------------------|
+| Flagged rescue-modeling phrases | 3+ phrases in outreach templates | 0 flagged phrases | Anti-pattern scan plus before/after diff |
+| Pre-publish Way Through control | No explicit checklist | Checklist artifact referenced by SOP/FMEA row | File exists and row evidence note cites it |
+| RPN for rescue-modeling row | 240 | Below 100 after verification | Updated S/O/D closure row with evidence |
 
-## 7. Implementation & Rollback Notes
-Change is scoped to one file (templates) plus one new SOP artifact. No constitution files or immutable layers are touched. Rollback is single-file revert of templates + deletion of checklist if verification fails. No production systems or external sends are altered until verification is complete. This proposal itself follows the required structure so it does not trigger the RPN 210 failure mode.
+## 7. Phase Completion Triggers
+- [ ] OUTREACH-TEMPLATES.md or successor content surface is revised without changing the core offer.
+- [ ] Way Through checklist artifact is committed and referenced from the FMEA row.
+- [ ] Anti-pattern scan produces zero remaining instances of the flagged patterns.
+- [ ] Verification evidence is embedded in the FMEA status cell.
+- [ ] Founder or next AGE session confirms the row can move from Verified toward human Closed confirmation.
+
+Change is scoped to one file (templates) plus one new SOP artifact. No constitution files or immutable layers are touched. Rollback is single-file revert of templates plus deletion of checklist if verification fails. No production systems or external sends are altered until verification is complete.

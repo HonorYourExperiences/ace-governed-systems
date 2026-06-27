@@ -87,12 +87,16 @@ Shows real-time(ish) audit metrics including refusal rates and top reasons.
 
 ## Key Files & Folders
 
+- `FOUNDER-COCKPIT.md` — **Start here.** Daily entry point: current status, one next action, time budget.
+- `FOUNDER-WEEKLY-REFLECTION.md` — Weekly SAGA-structured founder self-check (including Way Through self-assessment).
 - `proposals/` — Active and historical SAGA gap-closing proposals
 - `governed_systems_SOP_PFMEA_DFMEA.md` — Living procedures and risk analyses
 - `IMMUTABLE_VS_MUTABLE_LAYERS.md` — Core governance rules
 - `AUDIT-DASHBOARD.md` — Auto-generated human-readable dashboard
 - `docs/` — GitHub Pages dashboard source
 - `.github/workflows/` — All automation (audit processing, dashboard generation, cleanup)
+- `cape-able-heroes/PRE-SESSION-SIGNALS.md` — Tracks the gap between zero and Session 1
+- `cape-able-heroes/DECISION-LOG.md` — Lightweight record of judgment calls made during development
 
 ## Status
 

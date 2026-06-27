@@ -10,7 +10,8 @@
 4. ~~**Create feedback and outreach tools**~~ — **Done.** See `FEEDBACK-FORM.md`, `OUTREACH-TEMPLATES.md`, `SESSION-LOG.md`
 
 **Now — immediate actions:**
-- [ ] Send outreach to 3–5 contacts using `OUTREACH-TEMPLATES.md`
+- [ ] Open `FOUNDER-COCKPIT.md` (repo root) — start here each session
+- [ ] Send outreach to 3–5 contacts using `OUTREACH-TEMPLATES.md` — log each send in `PRE-SESSION-SIGNALS.md`
 - [ ] Book the first session (pilot or paid)
 - [ ] Run the session using `SESSION-FORMAT.md` + `CHALLENGE-CARDS.md`
 - [ ] Complete `OBSERVATION-TOOL.md` and `FEEDBACK-FORM.md` during/after
@@ -120,6 +121,17 @@ This document serves as the living development loop for Cape-Able Heroes. It fol
 ## Governance Note
 
 All major decisions and progress should be documented through SAGA proposals in the `proposals/` folder. This keeps development aligned with the core axioms and maintains audit integrity.
+
+Lightweight judgment calls (pricing, who to contact first, what to defer) go in `DECISION-LOG.md`.
+
+## Supporting Founder Artifacts
+
+These documents support the founder's own governed process — not just the product:
+
+- `FOUNDER-COCKPIT.md` (repo root) — Daily entry point. Tells you the one next action.
+- `FOUNDER-WEEKLY-REFLECTION.md` (repo root) — Weekly SAGA-structured founder self-check, including Way Through self-assessment.
+- `PRE-SESSION-SIGNALS.md` — Tracks the gap between zero activity and Session 1.
+- `DECISION-LOG.md` — One-sentence record of every judgment call made during development.
 
 ## How to Use This Document
 

@@ -56,7 +56,7 @@ jobs:
               return;
             }
 
-            const issueMatches = [...`${title}\n${body}`.matchAll(/#(\d+)/g)];
+            const issueMatches = [...`${title}\n${body}`.matchAll(/(?:^|\s)#(\d+)\b/gm)];
             const issueRefs = issueMatches.map(match => Number(match[1]));
             const refs = [...new Set(issueRefs)];
             if (refs.length === 0) {
@@ -71,9 +71,7 @@ jobs:
             for (const issueNumber of refs) {
               try {
                 const issue = await github.rest.issues.get({ owner, repo, issue_number: issueNumber });
-                const labels = (issue.data.labels || [])
-                  .map(label => label?.name ?? label)
-                  .filter(Boolean);
+                const labels = (issue.data.labels || []).map(label => label.name).filter(Boolean);
                 const hasNeeds = labels.includes('needs-verification');
                 const isVerified = labels.includes('verified');
 
@@ -86,9 +84,8 @@ jobs:
             }
 
             if (needsVerificationOnly.length > 0) {
-              const verb = needsVerificationOnly.length > 1 ? 'are' : 'is';
               core.setFailed(
-                `Verification gate failed: ${needsVerificationOnly.join(', ')} ${verb} labeled \`needs-verification\` but not \`verified\`.`
+                `Verification gate failed: The following linked issues require the \`verified\` label: ${needsVerificationOnly.join(', ')}.`
               );
               return;
             }

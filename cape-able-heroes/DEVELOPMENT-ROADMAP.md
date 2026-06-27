@@ -96,12 +96,26 @@ This document serves as the living development loop for Cape-Able Heroes. It fol
 
 ## Phase 4 – Long-Term Model (Later Stage)
 
-**Goal:** Move toward a scalable, leveraged business.
+**Goal:** Move toward a scalable, leveraged business — one that generates impact and revenue without requiring the founder in every room.
 
-- Launch Licensing & Partner Program
-- Develop digital components (if valuable)
-- Explore sponsorship and larger institutional partnerships
-- Build toward a full product ecosystem (storybooks, digital tools, etc.)
+### Supporting Documents
+
+- `LICENSING-PARTNER-PROGRAM.md` — Tiered licensing structure, certification program, quality standards, and partner onboarding log
+- `DIGITAL-STRATEGY.md` — Evaluation framework and decision log for digital components
+- `INSTITUTIONAL-PARTNERSHIPS.md` — Alignment filter, outreach process, and tracker for sponsorships and large institutional deals
+- `PRODUCT-ECOSYSTEM.md` — Living map of the full product vision, governed by field evidence
+- `proposals/2026-06-27-cape-able-heroes-phase4-long-term-model.md` — SAGA proposal governing this phase
+
+### Priority Tasks
+
+| # | Task | Description | Owner | Status | Notes |
+|---|------|-------------|-------|--------|-------|
+| 1 | Launch Licensing & Partner Program | Design and activate the Tier 1 certification program so external facilitators can deliver WonderLabs independently | Rian | Not Started | Use LICENSING-PARTNER-PROGRAM.md — begin with one known candidate |
+| 2 | Evaluate Digital Components | Run each digital idea through the three-question framework and log decisions | Rian | Not Started | Use DIGITAL-STRATEGY.md — no building before evaluation |
+| 3 | Pursue Institutional Partnerships | Identify and approach foundations, large program networks, or corporate sponsors that align with the governing axioms | Rian | Not Started | Use INSTITUTIONAL-PARTNERSHIPS.md — alignment filter required before any outreach |
+| 4 | Build the Product Ecosystem | Map all products against field evidence and advance those with real demand signals | Rian | Not Started | Use PRODUCT-ECOSYSTEM.md — evidence-to-product pathway governs sequencing |
+
+**Phase 4 foundation is complete when:** ≥1 licensed partner actively delivering WonderLabs, digital decision documented, ≥1 institutional partnership in active conversation, PRODUCT-ECOSYSTEM.md current and governed, and a SAGA Analyze cycle completed against the full Phase 1–4 evidence base.
 
 ## Governance Note
 

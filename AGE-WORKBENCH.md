@@ -1,5 +1,5 @@
 # AGE Workbench
-**Last Updated:** 2026-06-27T19:15:36Z  
+**Last Updated:** 2026-06-27T19:18:58Z  
 **AGE Status:** Active  
 
 ---
@@ -11,7 +11,7 @@
 | [CRITICAL] | PFMEA | 240 | Verified | Content Creation | Rescue modeling in hero / parent copy |
 | [CRITICAL] | DFMEA | 210 | Open | SAGA Proposal Structure | Proposals missing explicit Current State → Ta |
 | [CRITICAL] | DFMEA | 180 | Open | Runtime Monitor | Monitor not wired to all policy/content modif |
-| [CRITICAL] | PFMEA | 175 | Open | Content Creation | Aspiration theater framing |
+| [CRITICAL] | PFMEA | 175 | Solution Designed | Content Creation | Aspiration theater framing |
 | [CRITICAL] | DFMEA | 160 | Solution Designed | Verification Pipeline | No automated gate preventing un-verified prop |
 | [HIGH]     | DFMEA | 144 | Open | Audit Log Parser | Regex-based parser fragile to format variatio |
 | [HIGH]     | PFMEA | 108 | Open | SAGA Loop Operation | Proposal bypasses verification pipeline |
@@ -35,7 +35,7 @@
   - Status: Open
   - Recommended Action: Enforce monitor wiring check in all new workflow PRs
 - **RPN 175** [PFMEA] Content Creation / Aspiration theater framing
-  - Status: Open
+  - Status: Solution Designed
   - Recommended Action: Add evidence-first framing rules to operational policies
 - **RPN 160** [DFMEA] Verification Pipeline / No automated gate preventing un-verified proposals from applying policy changes
   - Status: Solution Designed
@@ -57,6 +57,8 @@
 
 ## In-Progress Items
 
+- [PFMEA] RPN 175 — Content Creation / Aspiration theater framing
+  - Status: Solution Designed <!-- AGE: 2026-06-27 | prop-AGE-2026-06-27-evidence-first-framing committed. Evidence-first framing rules and checklist added to SOP. -->
 - [DFMEA] RPN 160 — Verification Pipeline / No automated gate preventing un-verified proposals from applying policy changes
   - Status: Solution Designed <!-- AGE: 2026-06-27 | PR #12 implements verification gate in age-pr-analysis.yml. Founder triaged via issue #10 comment. Merge PR #12 to verify. -->
 
@@ -65,12 +67,12 @@
 ## System Health Pulse
 
 - **Open rows:** 9
-- **Critical unaddressed (Open/Triaged):** 3
+- **Critical unaddressed (Open/Triaged):** 2
 - **Refusal rate (AUDIT-LOG.md):** 0.0%
 - **Last SAGA cycle:** see `saga-analyze.yml` run history
-- **Workbench last updated:** 2026-06-27T19:15:36Z
-- **Git branch:** `copilot/engineer-scope` @ `2858083`
-- **Proposal pipeline:** 1 Solution Designed | 0 In Progress | 0 Triaged
+- **Workbench last updated:** 2026-06-27T19:18:58Z
+- **Git branch:** `copilot/age-overdue-critical-fmea-row-again` @ `48b7eb8`
+- **Proposal pipeline:** 2 Solution Designed | 0 In Progress | 0 Triaged
 
 ---
 

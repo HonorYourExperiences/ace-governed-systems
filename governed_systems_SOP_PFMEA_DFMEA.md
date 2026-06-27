@@ -64,6 +64,43 @@ This turns SAGA into a deliberate capability-building engine that repeatedly mea
 - Core axioms remain immutable except via explicit human escalation.
 - All updates to SOP, FMEAs, or operational policies must pass verification.
 
+### Evidence-First Framing Rules (Content Creation Policy)
+
+All content produced or published through governed systems must comply with the following evidence-first framing rules. These rules protect the **Evidence & Capability** axiom and prevent aspiration theater (presenting unsubstantiated claims as achieved reality).
+
+**Rules:**
+
+1. **No capability claim without citation.** Every statement asserting a capability, outcome, or result must reference a specific, observable artifact (commit hash, metric, test result, user evidence, or dated observation).
+
+2. **Distance-to-target framing for aspirations.** Aspirational or future-state language must explicitly state the current state, the target state, and the measured distance between them. Example: "Current: 3 of 7 modules covered. Target: 100% coverage within 2 cycles."
+
+3. **No superlatives without evidence.** Words like "best," "complete," "fully," "always," or "never" require a verifiable measurement or bounded claim. If evidence does not support the superlative, reframe as a measured statement.
+
+4. **In-progress outcomes require current measurement.** Any outcome described as in-progress must include what has been measured so far and the method of measurement. "We are building X" requires "Current state: Y completed, Z remaining."
+
+5. **Honest uncertainty labeling.** When evidence is incomplete or unavailable, the content must explicitly label the statement as a hypothesis, estimate, or goal — not present it as established fact.
+
+**Anti-Pattern Examples (Aspiration Theater):**
+
+| Anti-Pattern (DO NOT) | Evidence-First Correction (DO) |
+|---|---|
+| "Our system ensures complete axiom compliance" | "Current compliance: 4 of 5 axioms have automated checks. Gap: Audit Integrity check is manual-only (RPN 96)." |
+| "We deliver the best governance framework" | "This framework covers 9 identified failure modes with automated detection for 3 of them." |
+| "The platform is fully autonomous" | "Autonomy status: 2 of 5 SAGA phases run without human intervention. Remaining 3 require manual trigger." |
+
+**Pre-Publish Evidence-First Checklist:**
+
+Before publishing or committing any content that describes system capabilities, status, or outcomes, verify:
+
+- [ ] Every capability claim has a linked artifact or measurement
+- [ ] Aspirational statements use explicit distance-to-target framing
+- [ ] No unqualified superlatives remain in the content
+- [ ] In-progress items state what has been measured and what remains
+- [ ] Uncertain or incomplete claims are labeled as hypotheses or goals
+- [ ] Content does not model rescue (outsourcing capability) or aspiration theater (claiming unearned outcomes)
+
+**Enforcement:** This checklist applies to all content creation within governed systems. Violations detected post-publish should be appended to the PFMEA via `pfmea_append.py` and addressed in the next SAGA cycle.
+
 ---
 
 ## 2. Process Failure Mode and Effects Analysis (PFMEA)
@@ -75,7 +112,7 @@ This turns SAGA into a deliberate capability-building engine that repeatedly mea
 | Process Step | Failure Mode | Effect of Failure | S | Cause / Mechanism | O | Current Controls | D | RPN | Recommended Action | Status |
 |---|---|---|---|---|---|---|---|---|---|---|
 | Content Creation | Rescue modeling in hero / parent copy | Way Through axiom erosion; models outsourcing over capability | 8 | Implicit framing defaults in copywriting without explicit guidelines | 6 | Way Through content guidelines (Proposal B) | 5 | 240 | Enforce Way Through checklist before publish; run anti-pattern scan on key pages | Verified <!-- AGE: 2026-06-27 | verify-closure PASS commit:2858083; artifacts: cape-able-heroes/WAY-THROUGH-CONTENT-CHECKLIST.md, scripts/scan_content_antipatterns.py, age-prd-scan.yml way-through-scan, 3 high-severity content hits resolved, closure row RPN 48; awaiting human Closed confirmation --> |
-| Content Creation | Aspiration theater framing | Evidence & Capability axiom erosion; builds false confidence | 7 | Lack of explicit evidence-first framing rules | 5 | SAGA proposal review | 5 | 175 | Add evidence-first framing rules to operational policies | Open |
+| Content Creation | Aspiration theater framing | Evidence & Capability axiom erosion; builds false confidence | 7 | Lack of explicit evidence-first framing rules | 5 | SAGA proposal review | 5 | 175 | Add evidence-first framing rules to operational policies | Solution Designed <!-- AGE: 2026-06-27 | prop-AGE-2026-06-27-evidence-first-framing committed. Evidence-first framing rules and checklist added to SOP. --> |
 | SAGA Loop Operation | Proposal bypasses verification pipeline | Unverified change enters production; governance gap | 9 | Missing enforcement gate on proposal application step | 3 | Runtime monitor check (partial) | 4 | 108 | Wire runtime monitor as mandatory first step in all update workflows | Open |
 | Audit System | Incomplete or missing audit trail on refusal | Audit Integrity axiom violation; lineage gap | 8 | Workflow error handling not propagating failure to audit log | 3 | `continue-on-error` + commit step in audit-processor | 4 | 96 | Add explicit error-path audit logging; test refusal path end-to-end | Open |
 | Runtime Monitor | Core axiom check skipped or mis-keyed | Core drift; axiom silently modified | 10 | Monitor not wired to all modification entry points | 2 | Constitution YAML loaded per run | 3 | 60 | Enumerate all entry points; verify monitor is called at each | Open |

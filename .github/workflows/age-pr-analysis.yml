@@ -100,6 +100,7 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
         run: |
           git diff origin/${{ github.base_ref }}...HEAD > /tmp/pr_diff.txt
           python3 scripts/pr_fmea_analyzer.py \

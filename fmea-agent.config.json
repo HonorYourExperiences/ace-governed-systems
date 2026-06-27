@@ -22,7 +22,8 @@
     "runtime_monitor":  "RUNTIME-MONITOR-WIRING.md",
     "saga_engine":      "scripts/saga_analyze.py",
     "cape_able_heroes": "cape-able-heroes/",
-    "proposals":        "proposals/"
+    "proposals":        "proposals/",
+    "agent_config":     "fmea-agent.config.json"
   },
   "axioms": [
     "inherent_sufficiency",
@@ -33,8 +34,10 @@
   ],
   "pr_analysis": {
     "enabled": true,
+    "primary_model": "grok-3",
     "model": "claude-haiku-4-5-20251001",
     "fallback_model": "gpt-4o-mini",
+    "grok_model": "grok-3",
     "max_diff_lines": 500,
     "high_severity_threshold": 8,
     "auto_block_severity": 9

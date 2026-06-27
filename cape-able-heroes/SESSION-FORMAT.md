@@ -37,7 +37,7 @@ The child does not need to feel ready. The child does not need to prove anything
 - Use language that signals this is a different kind of experience:
   > *"This is the WonderLab. In here, we build Cape-Able Heroes. That means people who try things — even when it feels hard."*
 - Set the one rule of the WonderLab:
-  > *"The only rule here is: you don't have to be perfect. You just have to try. That's all a Cape-Able Hero does."*
+  > *"The only rule here is: try. Perfection was never the point — it was never even required. That's all a Cape-Able Hero does."*
 - Briefly introduce the theme (aviation, nature, building, etc.) with one image or prop to anchor the world
 
 **Notes:**

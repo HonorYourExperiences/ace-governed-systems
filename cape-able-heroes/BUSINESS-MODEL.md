@@ -25,7 +25,7 @@ So I gave them a phrase:
 
 What began as a family philosophy became a brand, an identity, and a promise.
 
-At BYDT, we help children feel capable, recognized, and brave enough to step forward.
+At BYDT, children discover they are already capable — already recognized, already brave enough to step forward.
 
 We create experiences that turn imagination into action, dreams into practice, and self-belief into evidence.
 
@@ -35,7 +35,7 @@ And every parent deserves to witness their child becoming more of who they truly
 
 ## Business Thesis
 
-Parents, schools, camps, and community organizations will pay for structured, story-based experiences that help children develop courage, confidence, and participation — especially when those experiences are joyful, tangible, and easy to deliver.
+Parents, schools, camps, and community organizations will pay for structured, story-based experiences that create conditions for children to practice courage, build their own confidence, and participate on their own terms — especially when those experiences are joyful, tangible, and easy to deliver.
 
 ## Core Axiomatic Advantage
 

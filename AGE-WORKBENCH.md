@@ -1,5 +1,5 @@
 # AGE Workbench
-**Last Updated:** 2026-06-27T19:18:58Z  
+**Last Updated:** 2026-06-27T19:55:44Z  
 **AGE Status:** Active  
 
 ---
@@ -70,8 +70,8 @@
 - **Critical unaddressed (Open/Triaged):** 2
 - **Refusal rate (AUDIT-LOG.md):** 0.0%
 - **Last SAGA cycle:** see `saga-analyze.yml` run history
-- **Workbench last updated:** 2026-06-27T19:18:58Z
-- **Git branch:** `copilot/age-overdue-critical-fmea-row-again` @ `48b7eb8`
+- **Workbench last updated:** 2026-06-27T19:55:44Z
+- **Git branch:** `main` @ `5380d7e`
 - **Proposal pipeline:** 2 Solution Designed | 0 In Progress | 0 Triaged
 
 ---

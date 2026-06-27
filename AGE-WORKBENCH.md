@@ -1,5 +1,5 @@
 # AGE Workbench
-**Last Updated:** 2026-06-27T18:13:00Z  
+**Last Updated:** 2026-06-27T19:13:37Z  
 **AGE Status:** Active  
 
 ---
@@ -8,11 +8,11 @@
 
 | Priority | Table | RPN | Status | Process Step / Design Element | Failure Mode |
 |----------|-------|-----|--------|-------------------------------|--------------|
-| [CRITICAL] | PFMEA | 240 | Triaged | Content Creation | Rescue modeling in hero / parent copy |
+| [CRITICAL] | PFMEA | 240 | In Progress | Content Creation | Rescue modeling in hero / parent copy |
 | [CRITICAL] | DFMEA | 210 | Open | SAGA Proposal Structure | Proposals missing explicit Current State → Ta |
 | [CRITICAL] | DFMEA | 180 | Open | Runtime Monitor | Monitor not wired to all policy/content modif |
 | [CRITICAL] | PFMEA | 175 | Open | Content Creation | Aspiration theater framing |
-| [CRITICAL] | DFMEA | 160 | Open | Verification Pipeline | No automated gate preventing un-verified prop |
+| [CRITICAL] | DFMEA | 160 | Solution Designed | Verification Pipeline | No automated gate preventing un-verified prop |
 | [HIGH]     | DFMEA | 144 | Open | Audit Log Parser | Regex-based parser fragile to format variatio |
 | [HIGH]     | PFMEA | 108 | Open | SAGA Loop Operation | Proposal bypasses verification pipeline |
 | [MONITOR]  | PFMEA | 96 | Open | Audit System | Incomplete or missing audit trail on refusal |
@@ -26,7 +26,7 @@
 
 ### Critical (RPN ≥ 150) — Requires Active Work
 - **RPN 240** [PFMEA] Content Creation / Rescue modeling in hero / parent copy
-  - Status: Triaged
+  - Status: In Progress
   - Recommended Action: Enforce Way Through checklist before publish; run anti-pattern scan on key pages
 - **RPN 210** [DFMEA] SAGA Proposal Structure / Proposals missing explicit Current State → Target State → Delta → Gap-Closing structure
   - Status: Open
@@ -38,7 +38,7 @@
   - Status: Open
   - Recommended Action: Add evidence-first framing rules to operational policies
 - **RPN 160** [DFMEA] Verification Pipeline / No automated gate preventing un-verified proposals from applying policy changes
-  - Status: Open
+  - Status: Solution Designed
   - Recommended Action: Implement `needs-verification` → `verified` label gate with automated check
 
 ### High (RPN 100–149) — SAGA Trigger Threshold
@@ -57,19 +57,22 @@
 
 ## In-Progress Items
 
-*(No rows currently In Progress or Solution Designed)*
+- [PFMEA] RPN 240 — Content Creation / Rescue modeling in hero / parent copy
+  - Status: In Progress <!-- AGE: 2026-06-27 | Issue #6 assigned AGE proceed; active implementation in this branch -->
+- [DFMEA] RPN 160 — Verification Pipeline / No automated gate preventing un-verified proposals from applying policy changes
+  - Status: Solution Designed <!-- AGE: 2026-06-27 | PR #12 implements verification gate in age-pr-analysis.yml. Founder triaged via issue #10 comment. Merge PR #12 to verify. -->
 
 ---
 
 ## System Health Pulse
 
 - **Open rows:** 9
-- **Critical unaddressed (Open/Triaged):** 4 Open + 1 Triaged
+- **Critical unaddressed (Open/Triaged):** 3
 - **Refusal rate (AUDIT-LOG.md):** 0.0%
 - **Last SAGA cycle:** see `saga-analyze.yml` run history
-- **Workbench last updated:** 2026-06-27T18:13:00Z
-- **Git branch:** `main` @ `d4a2574`
-- **Proposal pipeline:** 0 Solution Designed | 0 In Progress | 1 Triaged
+- **Workbench last updated:** 2026-06-27T19:13:37Z
+- **Git branch:** `copilot/age-overdue-critical-fmea-row` @ `90a2780`
+- **Proposal pipeline:** 1 Solution Designed | 1 In Progress | 0 Triaged
 
 ---
 
@@ -77,7 +80,7 @@
 
 | Session | Date | Actions Taken | Rows Moved | Notes |
 |---------|------|---------------|------------|-------|
-| AGE-001 | 2026-06-27 | Triaged PFMEA RPN 240 rescue modeling; generated and committed first full 7-section SAGA proposal prop-AGE-2026-06-27-rescue-modeling-outreach.md; updated FMEA status cell and workbench evidence trail | 1 (to Triaged) | First AGE session after Claude usage limit; one-row-at-a-time protocol observed; proposal centers child sovereign enactment per Way Through axiom; creates pre-publish control before first outreach deployment |
+| *(Updated by AGE at each session end)* | | | | |
 
 ---
 

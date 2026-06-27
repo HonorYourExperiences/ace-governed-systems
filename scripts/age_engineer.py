@@ -52,6 +52,37 @@ def load_config():
     return {"risk_thresholds": {"critical_rpn_floor": 150, "high_rpn_floor": 100}}
 
 
+def split_table_cells(line: str, expected_cols: int = 11) -> list[str]:
+    """
+    Split a markdown table row into cells while preserving delimiter characters in the final cell.
+
+    Args:
+        line: Markdown table row string, e.g. "| a | b | ... | status |".
+        expected_cols: Number of cells expected after splitting.
+
+    We intentionally use maxsplit=(expected_cols - 1) so content in the status cell can contain
+    additional `|` characters (for example in evidence comments) without shifting column indexes.
+    The default expected column count is 11 because PFMEA/DFMEA tables in this repository use
+    exactly 11 columns (through the Status field).
+    Returns [] when the row is malformed or does not match the expected column count.
+    """
+    stripped = line.strip()
+    if not (stripped.startswith("|") and stripped.endswith("|")):
+        # Caller treats [] as "not a data row or malformed row" and skips it.
+        return []
+    # expected_cols - 1 splits yield expected_cols cells and preserve any extra pipes in the final cell.
+    cells = [c.strip() for c in stripped[1:-1].split("|", expected_cols - 1)]
+    # Return [] on malformed row so downstream callers safely skip it via len(cells) checks.
+    return cells if len(cells) == expected_cols else []
+
+
+def sanitize_status_note(note: str) -> str:
+    """Sanitize evidence note text for safe embedding in a markdown table HTML comment."""
+    escaped = note.replace("|", "/").replace("<", "[").replace(">", "]")
+    normalized_hyphens = re.sub(r"-{2,}", "- -", escaped)
+    return " ".join(normalized_hyphens.replace("\r", " ").replace("\n", " ").split())
+
+
 def parse_fmea_rows(sop_path: Path) -> list[dict]:
     """
     Parse all PFMEA and DFMEA rows from the SOP file.
@@ -75,7 +106,7 @@ def parse_fmea_rows(sop_path: Path) -> list[dict]:
             continue
 
         if current_table and stripped.startswith("|") and stripped.endswith("|"):
-            cells = [c.strip() for c in stripped.split("|")[1:-1]]
+            cells = split_table_cells(stripped)
 
             if len(cells) < 11:
                 continue
@@ -216,7 +247,7 @@ def cmd_update_status(args):
             current_table = "dfmea"
 
         if current_table and current_table == args.table and stripped.startswith("|"):
-            cells = [c.strip() for c in stripped.split("|")[1:-1]]
+            cells = split_table_cells(stripped)
             if len(cells) < 11:
                 continue
             if cells[0] in ("Process Step", "Design Element"):
@@ -230,9 +261,9 @@ def cmd_update_status(args):
         return 1
 
     # Reconstruct the line with updated status cell
-    cells = [c.strip() for c in lines[found_line].strip().split("|")[1:-1]]
+    cells = split_table_cells(lines[found_line])
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    note_safe = args.note.replace("-->", "-").replace("<!--", "-")
+    note_safe = sanitize_status_note(args.note)
     new_status = f"{args.status} <!-- AGE: {timestamp} | {note_safe} -->"
     cells[10] = new_status
     lines[found_line] = "| " + " | ".join(cells) + " |"

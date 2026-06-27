@@ -16,6 +16,7 @@ Exit codes: 0=success, 1=error, 2=no rows found / empty queue
 import argparse
 import json
 import re
+import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -24,6 +25,14 @@ SOP_PATH = Path(__file__).parent.parent / "governed_systems_SOP_PFMEA_DFMEA.md"
 WORKBENCH_PATH = Path(__file__).parent.parent / "AGE-WORKBENCH.md"
 CONFIG_PATH = Path(__file__).parent.parent / "fmea-agent.config.json"
 AUDIT_LOG_PATH = Path(__file__).parent.parent / "AUDIT-LOG.md"
+
+REQUIRED_SOP_SECTIONS = [
+    "## Context",
+    "## Prerequisites",
+    "## Steps",
+    "## Verification",
+    "## Turnback Criteria",
+]
 
 REQUIRED_PROPOSAL_SECTIONS = [
     "## 1. Current State Assessment",
@@ -426,6 +435,26 @@ def cmd_report(args):
     else:
         lines.append("*(No rows currently In Progress or Solution Designed)*")
 
+    # Git state for health pulse
+    try:
+        git_branch = subprocess.run(
+            ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+            capture_output=True, text=True, timeout=5
+        ).stdout.strip() or "unknown"
+        git_sha = subprocess.run(
+            ["git", "rev-parse", "--short", "HEAD"],
+            capture_output=True, text=True, timeout=5
+        ).stdout.strip() or "unknown"
+    except Exception:
+        git_branch, git_sha = "unknown", "unknown"
+
+    # Proposal pipeline counts from row statuses
+    pipeline = {
+        "Solution Designed": len([r for r in rows if "Solution Designed" in r["status"]]),
+        "In Progress": len([r for r in rows if "In Progress" in r["status"] and "Solution Designed" not in r["status"]]),
+        "Triaged": len([r for r in rows if "Triaged" in r["status"] and "In Progress" not in r["status"] and "Solution Designed" not in r["status"]]),
+    }
+
     lines += [
         "",
         "---",
@@ -438,6 +467,9 @@ def cmd_report(args):
         f"- **Refusal rate (AUDIT-LOG.md):** {refusal_rate}%",
         "- **Last SAGA cycle:** see `saga-analyze.yml` run history",
         f"- **Workbench last updated:** {now}",
+        f"- **Git branch:** `{git_branch}` @ `{git_sha}`",
+        f"- **Proposal pipeline:** {pipeline['Solution Designed']} Solution Designed | "
+        f"{pipeline['In Progress']} In Progress | {pipeline['Triaged']} Triaged",
         "",
         "---",
         "",
@@ -463,6 +495,98 @@ def cmd_report(args):
         print(f"AGE-WORKBENCH.md updated: {len(rows)} open rows.")
 
     return 0
+
+
+def cmd_preflight(args):
+    config = load_config()
+    thresholds = config.get("risk_thresholds", {})
+    critical_floor = thresholds.get("critical_rpn_floor", 150)
+
+    failures = []
+    warnings = []
+
+    # Check 1: critical config files readable
+    for label, path in [("fmea-agent.config.json", CONFIG_PATH), ("SOP file", SOP_PATH)]:
+        if not path.exists():
+            failures.append(f"[config-check] {label} not found at {path}")
+
+    if failures:
+        for f in failures:
+            print(f"FAIL {f}")
+        return 2
+
+    all_rows = parse_fmea_rows(SOP_PATH)
+
+    # Check 2: Critical rows with Open/Triaged status and no AGE evidence note
+    critical_unaddressed = [
+        r for r in all_rows
+        if r["rpn"] >= critical_floor
+        and r["status"] in ("Open", "Triaged")
+        and "<!-- AGE:" not in r["raw_status"]
+    ]
+    for r in critical_unaddressed:
+        warnings.append(
+            f"[critical-unaddressed] RPN {r['rpn']} [{r['table'].upper()}] "
+            f"'{r['step_or_element']} / {r['failure_mode']}' — "
+            f"status '{r['status']}' with no AGE triage note"
+        )
+
+    # Check 3: Closed rows without evidence artifact
+    closed_no_evidence = [
+        r for r in all_rows
+        if "Closed" in r["status"] and "<!-- AGE:" not in r["raw_status"]
+    ]
+    for r in closed_no_evidence:
+        failures.append(
+            f"[integrity-violation] RPN {r['rpn']} [{r['table'].upper()}] "
+            f"'{r['step_or_element']} / {r['failure_mode']}' — "
+            f"Closed without AGE evidence artifact"
+        )
+
+    # Check 4: Proposal lint
+    proposals_dir = SOP_PATH.parent / "proposals"
+    if proposals_dir.exists():
+        for pf in sorted(proposals_dir.glob("prop-AGE-*.md")):
+            text = pf.read_text(encoding="utf-8")
+            missing = [s for s in REQUIRED_PROPOSAL_SECTIONS if s not in text]
+            if missing:
+                failures.append(
+                    f"[proposal-lint] {pf.name} missing: {', '.join(missing)}"
+                )
+
+    for w in warnings:
+        print(f"WARN {w}")
+    for f in failures:
+        print(f"FAIL {f}")
+
+    if failures:
+        print(f"\nPreflight: {len(failures)} FAIL, {len(warnings)} WARN")
+        return 2
+    elif warnings:
+        print(f"\nPreflight: 0 FAIL, {len(warnings)} WARN — system operational with warnings")
+        return 0
+    else:
+        print("Preflight: all checks PASS — system clear")
+        return 0
+
+
+def cmd_lint_sop(args):
+    path = Path(args.file)
+    if not path.exists():
+        print(f"ERROR: File not found: {path}", file=sys.stderr)
+        return 1
+
+    text = path.read_text(encoding="utf-8")
+    missing = [s for s in REQUIRED_SOP_SECTIONS if s not in text]
+
+    if missing:
+        print(f"FAIL: SOP {path.name} is missing required sections:")
+        for m in missing:
+            print(f"  - {m}")
+        return 1
+    else:
+        print(f"PASS: {path.name} conforms to 5-section SOP format.")
+        return 0
 
 
 def cmd_lint_proposal(args):
@@ -537,6 +661,13 @@ def main():
     lint_parser = subparsers.add_parser("lint-proposal", help="Validate a proposal file")
     lint_parser.add_argument("--file", required=True, help="Path to the proposal markdown file")
 
+    # preflight
+    subparsers.add_parser("preflight", help="Run system integrity checks before session work")
+
+    # lint-sop
+    sop_lint_parser = subparsers.add_parser("lint-sop", help="Validate a SOP file conforms to 5-section format")
+    sop_lint_parser.add_argument("--file", required=True, help="Path to the SOP markdown file")
+
     args = parser.parse_args()
 
     dispatch = {
@@ -546,6 +677,8 @@ def main():
         "verify-closure": cmd_verify_closure,
         "report": cmd_report,
         "lint-proposal": cmd_lint_proposal,
+        "preflight": cmd_preflight,
+        "lint-sop": cmd_lint_sop,
     }
 
     if args.command not in dispatch:

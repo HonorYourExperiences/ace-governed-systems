@@ -1,6 +1,8 @@
 name: Generate Audit Dashboard
 
 on:
+  push:
+    branches: [main]
   schedule:
     - cron: '0 6 * * *'   # Daily at 06:00 UTC
   workflow_dispatch:
@@ -35,7 +37,7 @@ jobs:
         run: python3 scripts/generate_dashboard.py
 
       - name: Commit updated dashboard files
-        if: steps.generate.outcome == 'success' and steps.cache.outputs.cache-hit != 'true'
+        if: steps.generate.outcome == 'success' && steps.cache.outputs.cache-hit != 'true'
         uses: EndBug/add-and-commit@v9
         with:
           add: |
@@ -45,7 +47,7 @@ jobs:
           default_author: github_actions
 
       - name: Upload dashboard as artifact
-        if: steps.generate.outcome == 'success' and steps.cache.outputs.cache-hit != 'true'
+        if: steps.generate.outcome == 'success' && steps.cache.outputs.cache-hit != 'true'
         uses: actions/upload-artifact@v4
         with:
           name: audit-dashboard-${{ github.run_number }}

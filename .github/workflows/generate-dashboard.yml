@@ -1,6 +1,8 @@
 name: Generate Audit Dashboard Data
 
 on:
+  push:
+    branches: [main]
   schedule:
     - cron: '0 6 * * *'  # Daily at 06:00 UTC
   workflow_dispatch:  # Allow manual trigger
@@ -24,8 +26,11 @@ jobs:
           import json
           from datetime import datetime
 
-          with open('AUDIT-LOG.md', 'r') as f:
-              content = f.read()
+          try:
+              with open('AUDIT-LOG.md', 'r') as f:
+                  content = f.read()
+          except FileNotFoundError:
+              content = ''
 
           # Extract basic stats
           total = len(re.findall(r'^## Audit:', content, re.MULTILINE))

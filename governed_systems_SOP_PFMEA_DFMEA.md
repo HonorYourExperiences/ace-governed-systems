@@ -30,6 +30,11 @@ These documents are living artifacts. They are automatically populated and updat
 - SAGA Analyze generates verified proposals to close identified gaps.
 - Updates to SOP, FMEAs, and operational policies happen only through the verification pipeline.
 
+**Implementation (Active):**
+- `audit-processor.yml` — On every `audit`-labeled refusal issue: appends a PFMEA row via `scripts/pfmea_append.py` and creates a structured SAGA gap-closing proposal issue labeled `needs-verification`.
+- `saga-analyze.yml` — Weekly (Monday 07:00 UTC) scheduled run: executes `scripts/saga_analyze.py` which reads AUDIT-LOG.md and PFMEA/DFMEA tables, identifies deltas (refusal rate > 10%, recurring reasons, RPN ≥ 100), and posts a structured gap-closing proposal issue labeled `needs-verification`.
+- **Verification gate:** Proposals are blocked from triggering policy changes until a human reviewer adds the `verified` label. The `needs-verification` label is the indicator that a proposal requires human review.
+
 ### Explicit Capability Gap-Closing Structure (Added for Self-Building)
 
 **In SAGA Analyze, the system must now explicitly do:**
@@ -62,13 +67,36 @@ This turns SAGA into a deliberate capability-building engine that repeatedly mea
 
 ## 2. Process Failure Mode and Effects Analysis (PFMEA)
 
-(The table structure remains the same as previously defined. It is automatically appended to when issues are detected.)
+> **Columns:** Process Step | Failure Mode | Effect of Failure | S (1–10) | Cause / Mechanism | O (1–10) | Current Controls | D (1–10) | RPN (S×O×D) | Recommended Action | Status
+>
+> Rows are automatically appended by the audit-processor workflow when a refusal or anti-pattern match is detected. RPN ≥ 100 triggers automatic SAGA Analyze.
+
+| Process Step | Failure Mode | Effect of Failure | S | Cause / Mechanism | O | Current Controls | D | RPN | Recommended Action | Status |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Content Creation | Rescue modeling in hero / parent copy | Way Through axiom erosion; models outsourcing over capability | 8 | Implicit framing defaults in copywriting without explicit guidelines | 6 | Way Through content guidelines (Proposal B) | 5 | 240 | Enforce Way Through checklist before publish; run anti-pattern scan on key pages | Open |
+| Content Creation | Aspiration theater framing | Evidence & Capability axiom erosion; builds false confidence | 7 | Lack of explicit evidence-first framing rules | 5 | SAGA proposal review | 5 | 175 | Add evidence-first framing rules to operational policies | Open |
+| SAGA Loop Operation | Proposal bypasses verification pipeline | Unverified change enters production; governance gap | 9 | Missing enforcement gate on proposal application step | 3 | Runtime monitor check (partial) | 4 | 108 | Wire runtime monitor as mandatory first step in all update workflows | Open |
+| Audit System | Incomplete or missing audit trail on refusal | Audit Integrity axiom violation; lineage gap | 8 | Workflow error handling not propagating failure to audit log | 3 | `continue-on-error` + commit step in audit-processor | 4 | 96 | Add explicit error-path audit logging; test refusal path end-to-end | Open |
+| Runtime Monitor | Core axiom check skipped or mis-keyed | Core drift; axiom silently modified | 10 | Monitor not wired to all modification entry points | 2 | Constitution YAML loaded per run | 3 | 60 | Enumerate all entry points; verify monitor is called at each | Open |
+
+<!-- PFMEA_AUTO_APPEND_MARKER -->
 
 ---
 
 ## 3. Design Failure Mode and Effects Analysis (DFMEA)
 
-(The table structure remains the same. It is automatically updated on modeling gaps or real refusals that reveal design issues.)
+> **Columns:** Design Element | Failure Mode | Effect of Failure | S (1–10) | Cause / Mechanism | O (1–10) | Current Controls | D (1–10) | RPN (S×O×D) | Recommended Action | Status
+>
+> Rows are appended when a refusal or near-miss reveals a structural design issue.
+
+| Design Element | Failure Mode | Effect of Failure | S | Cause / Mechanism | O | Current Controls | D | RPN | Recommended Action | Status |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Runtime Monitor | Monitor not wired to all policy/content modification points | Constitution enforcement bypassed on unwired paths | 9 | Incremental wiring; new workflows added without monitor hook | 4 | RUNTIME-MONITOR-WIRING.md reference doc | 5 | 180 | Enforce monitor wiring check in all new workflow PRs | Open |
+| SAGA Proposal Structure | Proposals missing explicit Current State → Target State → Delta → Gap-Closing structure | SAGA Theater (process without measurable substance) | 7 | Original proposal templates did not mandate this structure | 5 | Explicit capability gap-closing structure section in SOP | 6 | 210 | Update proposal template; validate structure in audit-processor before accepting | Open |
+| Verification Pipeline | No automated gate preventing un-verified proposals from applying policy changes | Manual oversight failure; drift risk in high-volume cycles | 8 | Gate not yet implemented as code; relies on human review | 4 | Proposal label workflow (partial) | 5 | 160 | Implement `needs-verification` → `verified` label gate with automated check | Open |
+| Audit Log Parser | Regex-based parser fragile to format variations | Dashboard data corrupted; metrics incorrect | 6 | Hand-crafted regex without schema validation | 4 | Manual review of generated dashboard | 6 | 144 | Add schema validation to `generate_dashboard.py`; write unit tests | Open |
+
+<!-- DFMEA_AUTO_APPEND_MARKER -->
 
 ---
 

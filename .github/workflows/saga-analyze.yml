@@ -1,0 +1,96 @@
+name: SAGA Analyze — Phase 2 Continuous Update
+
+on:
+  schedule:
+    - cron: '0 7 * * 1'   # Every Monday at 07:00 UTC (weekly SAGA cycle)
+  workflow_dispatch:       # Allow manual trigger
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  saga-analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run SAGA Analyze
+        id: analyze
+        continue-on-error: true
+        run: |
+          python3 scripts/saga_analyze.py
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Read proposal draft
+        id: read_proposal
+        if: steps.analyze.outcome == 'success'
+        run: |
+          python3 - <<'PYEOF'
+          import json, os, sys
+          try:
+              with open('docs/saga-proposal-draft.json', 'r') as f:
+                  data = json.load(f)
+          except (FileNotFoundError, json.JSONDecodeError) as e:
+              print(f"ERROR: Could not read proposal draft: {e}", file=sys.stderr)
+              sys.exit(1)
+          has_deltas = data.get('has_deltas', False)
+          body = data.get('proposal_body', '')
+          delta_count = data.get('delta_count', 0)
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as out:
+              out.write(f"has_deltas={str(has_deltas).lower()}\n")
+              out.write(f"delta_count={delta_count}\n")
+          with open('/tmp/proposal_body.txt', 'w') as bf:
+              bf.write(body)
+          PYEOF
+
+      - name: Post gap-closing proposal issue
+        if: steps.analyze.outcome == 'success' && steps.read_proposal.outputs.has_deltas == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const core = require('@actions/core');
+            try {
+              const body = fs.readFileSync('/tmp/proposal_body.txt', 'utf8');
+              const today = new Date().toISOString().split('T')[0];
+              const deltaCount = '${{ steps.read_proposal.outputs.delta_count }}';
+
+              const title = `SAGA Analyze — ${deltaCount} Delta(s) Identified (${today})`;
+
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['saga-analyze', 'gap-closing', 'auto-generated', 'needs-verification']
+              });
+
+              console.log(`Created SAGA proposal issue: ${title}`);
+            } catch (error) {
+              core.setFailed(`Failed to create SAGA proposal issue: ${error.message}`);
+            }
+
+      - name: No deltas found — log to summary
+        if: steps.analyze.outcome != 'success' || steps.read_proposal.outputs.has_deltas == 'false'
+        run: |
+          echo "### SAGA Analyze Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "No significant deltas found above threshold. No proposal generated." >> $GITHUB_STEP_SUMMARY
+          echo "System is within target state bounds." >> $GITHUB_STEP_SUMMARY
+
+      - name: Summarize deltas in job summary
+        if: steps.analyze.outcome == 'success' && steps.read_proposal.outputs.has_deltas == 'true'
+        run: |
+          echo "### SAGA Analyze — Gap-Closing Proposal Created" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**${{ steps.read_proposal.outputs.delta_count }} delta(s)** identified." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "A structured gap-closing proposal issue has been created and labeled \`needs-verification\`." >> $GITHUB_STEP_SUMMARY
+          echo "A human reviewer must add the \`verified\` label before any changes are applied." >> $GITHUB_STEP_SUMMARY

@@ -75,14 +75,24 @@ This document serves as the living development loop for Cape-Able Heroes. It fol
 
 **Goal:** Generate revenue and gather stronger market signals.
 
+### Supporting Documents
+
+- `PAID-ACTIVATION-PLAYBOOK.md` — Pre/during/post playbook for delivering a paid WonderLab
+- `TESTIMONIAL-CASE-STUDY.md` — Templates for collecting testimonials and building case studies
+- `CHANNEL-TESTING-TRACKER.md` — Running log for outreach across all buyer channels
+- `OUTREACH-TEMPLATES.md` — Outreach messages for all buyer types (created in Phase 1)
+- `proposals/2026-06-27-cape-able-heroes-phase3-go-to-market.md` — SAGA proposal governing this phase
+
 ### Priority Tasks
 
 | # | Task | Description | Owner | Status | Notes |
 |---|------|-------------|-------|--------|-------|
-| 1 | Begin Outreach | Reach out to schools, camps, parent groups, libraries, and churches | Rian | Not Started | Start with warm leads and existing network |
-| 2 | Run Paid Activations | Deliver WonderLabs to paying customers | Rian | Not Started | Primary revenue in this phase |
-| 3 | Collect Testimonials & Case Studies | Document real outcomes and parent/child feedback | Rian | Not Started | Critical for future marketing and applications |
-| 4 | Test Multiple Channels | Experiment with direct parent sales, school partnerships, and event bookings | Rian | Not Started | Learn what converts best |
+| 1 | Begin Outreach | Reach out to schools, camps, parent groups, libraries, and churches | Rian | Not Started | Log every contact in CHANNEL-TESTING-TRACKER.md from day one |
+| 2 | Run Paid Activations | Deliver WonderLabs to paying customers | Rian | Not Started | Use PAID-ACTIVATION-PLAYBOOK.md for every activation |
+| 3 | Collect Testimonials & Case Studies | Document real outcomes and parent/child feedback | Rian | Not Started | Use TESTIMONIAL-CASE-STUDY.md — exact quotes only |
+| 4 | Test Multiple Channels | Experiment with direct parent sales, school partnerships, and event bookings | Rian | Not Started | SAGA Analyze trigger when one channel converts 2x others |
+
+**Phase 3 is complete when:** ≥3 paid activations run, ≥5 testimonials documented, ≥1 full case study built, ≥3 channels tested with conversion data, and Phase 4 proposal filed.
 
 ## Phase 4 – Long-Term Model (Later Stage)
 

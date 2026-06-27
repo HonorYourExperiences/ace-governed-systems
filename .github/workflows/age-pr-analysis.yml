@@ -23,6 +23,73 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Enforce verified label gate for policy changes
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const core = require('@actions/core');
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const pullNumber = context.payload.pull_request.number;
+            const title = context.payload.pull_request.title || '';
+            const body = context.payload.pull_request.body || '';
+
+            const policyPaths = [
+              'governed_systems_SOP_PFMEA_DFMEA.md',
+              'RUNTIME-MONITOR-WIRING.md',
+              'proposals/'
+            ];
+
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner,
+              repo,
+              pull_number: pullNumber,
+              per_page: 100
+            });
+
+            const touchesPolicy = files.some(file =>
+              policyPaths.some(path => file.filename === path || file.filename.startsWith(path))
+            );
+
+            if (!touchesPolicy) {
+              core.info('Verification gate skipped: PR does not modify policy/proposal files.');
+              return;
+            }
+
+            const refs = [...new Set([...`${title}\n${body}`.matchAll(/#(\d+)/g)].map(m => Number(m[1])))];
+            if (refs.length === 0) {
+              core.setFailed(
+                'Verification gate failed: policy/proposal changes require at least one linked issue reference (e.g., "Closes #123") so `needs-verification` status can be checked.'
+              );
+              return;
+            }
+
+            const needsVerificationOnly = [];
+
+            for (const issueNumber of refs) {
+              try {
+                const issue = await github.rest.issues.get({ owner, repo, issue_number: issueNumber });
+                const labels = (issue.data.labels || []).map(l => typeof l === 'string' ? l : l.name);
+                const hasNeeds = labels.includes('needs-verification');
+                const isVerified = labels.includes('verified');
+
+                if (hasNeeds && !isVerified) {
+                  needsVerificationOnly.push(`#${issueNumber}`);
+                }
+              } catch (error) {
+                core.warning(`Could not inspect labels for #${issueNumber}: ${error.message}`);
+              }
+            }
+
+            if (needsVerificationOnly.length > 0) {
+              core.setFailed(
+                `Verification gate failed: ${needsVerificationOnly.join(', ')} is labeled \`needs-verification\` but not \`verified\`.`
+              );
+              return;
+            }
+
+            core.info('Verification gate passed: no linked issue is blocked in `needs-verification` state.');
+
       - name: Run PR FMEA analysis
         id: fmea
         env:

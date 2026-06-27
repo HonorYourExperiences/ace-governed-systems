@@ -33,7 +33,7 @@ These documents are living artifacts. They are automatically populated and updat
 **Implementation (Active):**
 - `audit-processor.yml` — On every `audit`-labeled refusal issue: appends a PFMEA row via `scripts/pfmea_append.py` and creates a structured SAGA gap-closing proposal issue labeled `needs-verification`.
 - `saga-analyze.yml` — Weekly (Monday 07:00 UTC) scheduled run: executes `scripts/saga_analyze.py` which reads AUDIT-LOG.md and PFMEA/DFMEA tables, identifies deltas (refusal rate > 10%, recurring reasons, RPN ≥ 100), and posts a structured gap-closing proposal issue labeled `needs-verification`.
-- **Verification gate:** Proposals are blocked from triggering policy changes until a human reviewer adds the `verified` label. The `needs-verification` label is the indicator that a proposal requires human review.
+- **Verification gate:** `age-pr-analysis.yml` checks pull requests that modify policy/proposal files (`governed_systems_SOP_PFMEA_DFMEA.md`, `RUNTIME-MONITOR-WIRING.md`, `proposals/`) and fails if any linked issue is still `needs-verification` without `verified`.
 - **AGE Engineer Role (Active):** An AGE agent manages the complete FMEA row lifecycle via Claude Code sessions. The AGE triages open rows, designs solutions, generates SAGA proposals, and transitions rows through Open → Verified. Only humans may transition rows from Verified → Closed. See `CLAUDE.md` for session operating instructions and `AGE-ENGINEER-ROLE.md` for the role charter. Live status: `AGE-WORKBENCH.md`.
 
 ### Explicit Capability Gap-Closing Structure (Added for Self-Building)

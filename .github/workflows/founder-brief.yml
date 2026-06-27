@@ -1,0 +1,33 @@
+name: AGE — Founder Decision Brief
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * 1'   # Monday 09:00 UTC — after AGE scan (08:00) picks up the week's changes
+
+permissions:
+  contents: read
+  issues: write
+  actions: read   # needed to read workflow run history for health summary
+
+jobs:
+  founder-brief:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate and post Founder Decision Brief
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          python3 scripts/founder_brief.py
+          echo "## Founder Brief" >> "$GITHUB_STEP_SUMMARY"
+          python3 scripts/founder_brief.py --dry-run >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true

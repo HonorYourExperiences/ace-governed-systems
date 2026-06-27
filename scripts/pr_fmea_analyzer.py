@@ -106,6 +106,54 @@ def get_critical_system_warnings(diff_text: str) -> list[str]:
     return warnings
 
 
+def call_grok_api(diff_text: str, pr_title: str) -> dict:
+    """Call xAI Grok API (OpenAI-compatible endpoint)."""
+    try:
+        import urllib.request
+    except ImportError:
+        return None
+
+    api_key = os.environ.get("XAI_API_KEY", "")
+    if not api_key:
+        return None
+
+    config = load_config()
+    model = config.get("pr_analysis", {}).get("grok_model", "grok-3")
+
+    user_content = f"PR Title: {pr_title}\n\nDiff:\n{diff_text}"
+
+    payload = {
+        "model": model,
+        "max_tokens": 2000,
+        "messages": [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": user_content},
+        ],
+    }
+
+    data = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        "https://api.x.ai/v1/chat/completions",
+        data=data,
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "content-type": "application/json",
+        },
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            body = json.loads(resp.read().decode("utf-8"))
+            content = body["choices"][0]["message"]["content"]
+            match = re.search(r"\{.*\}", content, re.DOTALL)
+            if match:
+                return json.loads(match.group())
+    except Exception as e:
+        print(f"Warning: Grok API call failed: {e}", file=sys.stderr)
+
+    return None
+
+
 def call_claude_api(diff_text: str, pr_title: str) -> dict:
     try:
         import urllib.request
@@ -202,7 +250,7 @@ def call_openai_api(diff_text: str, pr_title: str) -> dict:
 
 
 def fallback_rule_based_analysis(diff_text: str) -> dict:
-    """Rule-based analysis when Claude API is unavailable."""
+    """Rule-based analysis when all LLM APIs are unavailable."""
     findings = []
     config = load_config()
     critical = config.get("critical_systems", {})
@@ -250,10 +298,10 @@ def fallback_rule_based_analysis(diff_text: str) -> dict:
             })
 
     return {
-        "summary": f"Rule-based analysis found {len(findings)} potential issue(s). Claude API was unavailable for deeper analysis.",
+        "summary": f"Rule-based analysis found {len(findings)} potential issue(s). All LLM providers were unavailable for deeper analysis.",
         "findings": findings,
         "axiom_risks": [],
-        "recommended_next_steps": ["Review findings above", "Enable Claude API for deeper analysis"],
+        "recommended_next_steps": ["Review findings above", "Check API key secrets and provider availability"],
     }
 
 
@@ -339,8 +387,10 @@ def main():
 
     critical_warnings = get_critical_system_warnings(diff_text)
 
-    # Try Claude API first, then OpenAI fallback, then rule-based
-    analysis = call_claude_api(diff_text, args.pr_title)
+    # Try Grok first (resilient to Claude limits), then Claude, then OpenAI, then rule-based
+    analysis = call_grok_api(diff_text, args.pr_title)
+    if analysis is None:
+        analysis = call_claude_api(diff_text, args.pr_title)
     if analysis is None:
         analysis = call_openai_api(diff_text, args.pr_title)
     if analysis is None:

@@ -1,5 +1,5 @@
 # AGE Workbench
-**Last Updated:** 2026-06-27T19:13:37Z  
+**Last Updated:** 2026-06-27T19:15:36Z  
 **AGE Status:** Active  
 
 ---
@@ -8,7 +8,7 @@
 
 | Priority | Table | RPN | Status | Process Step / Design Element | Failure Mode |
 |----------|-------|-----|--------|-------------------------------|--------------|
-| [CRITICAL] | PFMEA | 240 | In Progress | Content Creation | Rescue modeling in hero / parent copy |
+| [CRITICAL] | PFMEA | 240 | Verified | Content Creation | Rescue modeling in hero / parent copy |
 | [CRITICAL] | DFMEA | 210 | Open | SAGA Proposal Structure | Proposals missing explicit Current State → Ta |
 | [CRITICAL] | DFMEA | 180 | Open | Runtime Monitor | Monitor not wired to all policy/content modif |
 | [CRITICAL] | PFMEA | 175 | Open | Content Creation | Aspiration theater framing |
@@ -26,7 +26,7 @@
 
 ### Critical (RPN ≥ 150) — Requires Active Work
 - **RPN 240** [PFMEA] Content Creation / Rescue modeling in hero / parent copy
-  - Status: In Progress
+  - Status: Verified
   - Recommended Action: Enforce Way Through checklist before publish; run anti-pattern scan on key pages
 - **RPN 210** [DFMEA] SAGA Proposal Structure / Proposals missing explicit Current State → Target State → Delta → Gap-Closing structure
   - Status: Open
@@ -57,8 +57,6 @@
 
 ## In-Progress Items
 
-- [PFMEA] RPN 240 — Content Creation / Rescue modeling in hero / parent copy
-  - Status: In Progress <!-- AGE: 2026-06-27 | Issue #6 assigned AGE proceed; active implementation in this branch -->
 - [DFMEA] RPN 160 — Verification Pipeline / No automated gate preventing un-verified proposals from applying policy changes
   - Status: Solution Designed <!-- AGE: 2026-06-27 | PR #12 implements verification gate in age-pr-analysis.yml. Founder triaged via issue #10 comment. Merge PR #12 to verify. -->
 
@@ -70,9 +68,9 @@
 - **Critical unaddressed (Open/Triaged):** 3
 - **Refusal rate (AUDIT-LOG.md):** 0.0%
 - **Last SAGA cycle:** see `saga-analyze.yml` run history
-- **Workbench last updated:** 2026-06-27T19:13:37Z
-- **Git branch:** `copilot/age-overdue-critical-fmea-row` @ `90a2780`
-- **Proposal pipeline:** 1 Solution Designed | 1 In Progress | 0 Triaged
+- **Workbench last updated:** 2026-06-27T19:15:36Z
+- **Git branch:** `copilot/engineer-scope` @ `2858083`
+- **Proposal pipeline:** 1 Solution Designed | 0 In Progress | 0 Triaged
 
 ---
 

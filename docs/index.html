@@ -124,6 +124,108 @@
             color: #666;
             margin-top: 15px;
         }
+        .proposal-btn {
+            background: var(--color-gold);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        .proposal-btn:hover {
+            background: #a88c5a;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 22, 47, 0.85);
+        }
+        .modal-content {
+            background-color: var(--color-cream);
+            margin: 5% auto;
+            padding: 0;
+            border: 2px solid var(--color-gold);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .modal-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--color-gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border-radius: 10px 10px 0 0;
+        }
+        .modal-header h3 {
+            margin: 0;
+            color: var(--color-navy);
+        }
+        .modal-body {
+            padding: 25px;
+            overflow-y: auto;
+            flex: 1;
+            background: #fdfaf3;
+        }
+        .modal-footer {
+            padding: 15px 25px;
+            border-top: 1px solid var(--color-gold);
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            background: white;
+            border-radius: 0 0 10px 10px;
+        }
+        .modal pre {
+            background: #0A162F;
+            color: #F5F1E9;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .btn-primary {
+            background: var(--color-gold);
+            color: white;
+        }
+        .btn-secondary {
+            background: #e8e0d0;
+            color: var(--color-navy);
+        }
+        .close {
+            color: #666;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .close:hover {
+            color: var(--color-navy);
+        }
     </style>
 </head>
 <body>
@@ -155,8 +257,8 @@
         <!-- Interactive FMEA Explorer -->
         <h2>Interactive FMEA Explorer</h2>
         <p style="color: #555; max-width: 720px; margin-bottom: 15px;">
-            Sortable and filterable view of open critical &amp; high RPN rows from the governed FMEA tables. 
-            Data is a live snapshot of the current AGE-managed state.
+            Sortable and filterable view of open critical &amp; high RPN rows. 
+            Click <strong>Draft Proposal</strong> on any row to generate a ready-to-use SAGA proposal.
         </p>
 
         <div class="filter-bar">
@@ -176,6 +278,7 @@
                     <th onclick="sortTable(3)">Failure Mode</th>
                     <th onclick="sortTable(4)">Status</th>
                     <th>Recommended Action</th>
+                    <th style="width: 110px;">Action</th>
                 </tr>
             </thead>
             <tbody id="fmea-tbody">
@@ -185,9 +288,27 @@
 
         <p class="fmea-note">
             Source: <code>governed_systems_SOP_PFMEA_DFMEA.md</code> + <code>AGE-WORKBENCH.md</code>. 
-            All changes must still flow through SAGA proposals and evidence notes. 
+            Generated proposals are drafts — review, commit to <code>proposals/</code>, and update the row status through proper SAGA flow.
             <a href="https://github.com/HonorYourExperiences/ace-governed-systems/blob/main/governed_systems_SOP_PFMEA_DFMEA.md" target="_blank" style="color: var(--color-gold);">View full source →</a>
         </p>
+    </div>
+
+    <!-- Proposal Modal -->
+    <div id="proposal-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">SAGA Proposal Draft</h3>
+                <span class="close" onclick="closeProposalModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <pre id="proposal-content"></pre>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeProposalModal()">Close</button>
+                <button class="btn btn-primary" onclick="copyProposalToClipboard()">Copy to Clipboard</button>
+                <button class="btn btn-primary" onclick="downloadProposal()">Download .md</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -260,7 +381,6 @@
 
             const ctx = document.getElementById('reasons-chart');
             if (ctx && data.top_reasons && data.top_reasons.length > 0) {
-                // Clear previous chart if exists
                 if (ctx.chart) ctx.chart.destroy();
                 ctx.chart = new Chart(ctx, {
                     type: 'bar',
@@ -296,7 +416,7 @@
             }
         }
 
-        // === Interactive FMEA Explorer ===
+        // === Interactive FMEA Explorer + One-Click Proposal ===
         const fmeaData = [
             { priority: "CRITICAL", rpn: 240, table: "PFMEA", failure_mode: "Rescue modeling in hero / parent copy", status: "Triaged", action: "Enforce Way Through checklist before publish; run anti-pattern scan on key pages" },
             { priority: "CRITICAL", rpn: 210, table: "DFMEA", failure_mode: "Proposals missing explicit Current State → Target State → Delta → Gap-Closing structure", status: "Open", action: "Update proposal template; validate structure in audit-processor before accepting" },
@@ -310,6 +430,7 @@
         let currentFilter = 'all';
         let currentSearch = '';
         let sortDirection = {};
+        let currentProposalRow = null;
 
         function renderFMEATable(data) {
             const tbody = document.getElementById('fmea-tbody');
@@ -318,14 +439,18 @@
 
             if (data.length === 0) {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td colspan="6" style="text-align:center; padding:30px; color:#666;">No rows match the current filters.</td>`;
+                tr.innerHTML = `<td colspan="7" style="text-align:center; padding:30px; color:#666;">No rows match the current filters.</td>`;
                 tbody.appendChild(tr);
                 return;
             }
 
-            data.forEach(row => {
+            data.forEach((row, index) => {
                 const tr = document.createElement('tr');
                 if (row.priority === 'CRITICAL') tr.classList.add('critical');
+                
+                // Find original index for proposal generation
+                const originalIndex = fmeaData.findIndex(r => r.rpn === row.rpn && r.failure_mode === row.failure_mode);
+                
                 tr.innerHTML = `
                     <td><strong>${row.priority}</strong></td>
                     <td class="rpn">${row.rpn}</td>
@@ -333,6 +458,9 @@
                     <td>${row.failure_mode}</td>
                     <td>${row.status}</td>
                     <td>${row.action}</td>
+                    <td>
+                        <button class="proposal-btn" onclick="showProposalModal(${originalIndex})">Draft Proposal</button>
+                    </td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -399,6 +527,119 @@
             rows.forEach(row => tbody.appendChild(row));
         }
 
+        // One-click SAGA Proposal Generator
+        function generateProposalMarkdown(row) {
+            const today = new Date().toISOString().split('T')[0];
+            const slug = row.failure_mode.toLowerCase()
+                .replace(/[^a-z0-9\s]/g, '')
+                .replace(/\s+/g, '-')
+                .substring(0, 40);
+            
+            const proposalId = `prop-USER-${today}-${slug}`;
+
+            return `# SAGA Proposal: Close ${row.failure_mode} Gap
+
+**Proposal ID:** ${proposalId}
+**Source:** Interactive FMEA Explorer | ${row.table} RPN ${row.rpn} | Status: ${row.status}
+**Preserves Core Axioms:** true — directly addresses ${row.failure_mode.includes('Rescue') || row.failure_mode.includes('Aspiration') ? 'Way Through and Evidence & Capability' : 'governance integrity and Audit Integrity'}.
+
+## 1. Current State Assessment
+${row.failure_mode} is active in the ${row.table} (RPN ${row.rpn}, Status: ${row.status}).
+This creates measurable risk to the core axioms and slows the SAGA improvement loop.
+Current controls are insufficient or not yet enforced.
+
+## 2. Target State Definition
+The gap is closed. RPN reduced below 100. The specific failure mode no longer appears in brand content, proposals, or workflows. The recommended action from the FMEA row is fully implemented and verified.
+
+## 3. Delta Identification & Measurement
+| Gap Area | Current | Target | Delta |
+|----------|---------|--------|-------|
+| ${row.failure_mode.split(' ').slice(0,3).join(' ')} | Present (RPN ${row.rpn}) | Resolved (RPN < 100) | Implement ${row.action.split(';')[0]} and verify |
+
+## 4. Gap-Closing Proposal
+${row.action}
+
+Additional concrete steps:
+1. Create or update the relevant checklist / template / wiring as described.
+2. Run the anti-pattern scan or validation on affected files.
+3. Commit the change with clear evidence note.
+4. Update the FMEA row status to Verified with reference to this proposal.
+
+## 5. Verification Criteria
+- The specific failure mode no longer triggers in scans or reviews.
+- RPN re-evaluation shows reduction.
+- Evidence artifact (checklist, revised file, scan log) exists and is committed.
+- Row status moved to Verified (human confirmation required for Closed).
+
+## 6. Preserves Core Axioms
+This proposal strengthens the axiom(s) threatened by the failure mode while maintaining full lineage and human oversight on closure.
+
+## 7. Implementation & Rollback Notes
+Low-risk change scoped to the affected area. Rollback is revert of the specific files changed. No constitution or immutable layer is modified.
+
+---
+*Generated from Interactive FMEA Explorer on ${today}. This is a draft. Review, refine, and commit to proposals/ following the governed process.*`;
+        }
+
+        function showProposalModal(originalIndex) {
+            const row = fmeaData[originalIndex];
+            if (!row) return;
+
+            currentProposalRow = row;
+            const markdown = generateProposalMarkdown(row);
+
+            document.getElementById('modal-title').textContent = `SAGA Proposal Draft — RPN ${row.rpn} ${row.table}`;
+            document.getElementById('proposal-content').textContent = markdown;
+            document.getElementById('proposal-modal').style.display = 'block';
+        }
+
+        function closeProposalModal() {
+            document.getElementById('proposal-modal').style.display = 'none';
+            currentProposalRow = null;
+        }
+
+        function copyProposalToClipboard() {
+            const content = document.getElementById('proposal-content').textContent;
+            navigator.clipboard.writeText(content).then(() => {
+                const originalText = event.target ? event.target.textContent : '';
+                // Simple feedback
+                const btns = document.querySelectorAll('.modal-footer .btn');
+                btns.forEach(b => {
+                    if (b.textContent.includes('Copy')) {
+                        const orig = b.textContent;
+                        b.textContent = 'Copied!';
+                        setTimeout(() => { b.textContent = orig; }, 1800);
+                    }
+                });
+            }).catch(() => {
+                alert('Copy failed. Please select and copy manually.');
+            });
+        }
+
+        function downloadProposal() {
+            if (!currentProposalRow) return;
+            const content = document.getElementById('proposal-content').textContent;
+            const filename = `prop-USER-${new Date().toISOString().split('T')[0]}-${currentProposalRow.failure_mode.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0,30)}.md`;
+
+            const blob = new Blob([content], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Click outside modal to close
+        window.onclick = function(event) {
+            const modal = document.getElementById('proposal-modal');
+            if (event.target === modal) {
+                closeProposalModal();
+            }
+        }
+
         async function initDashboard() {
             // Audit section
             let auditData = await fetchFromGitHubAPI();
@@ -413,19 +654,13 @@
             }
             updateDashboard(auditData);
 
-            // FMEA section - initial render with all data
+            // FMEA section
             currentFMEAData = [...fmeaData];
             renderFMEATable(currentFMEAData);
 
-            // Set initial active filter button
+            // Initial filter button
             const allBtn = document.querySelector('.filter-bar .filter-btn[data-filter="all"]');
             if (allBtn) allBtn.classList.add('active');
-
-            // Keyboard accessibility hint (optional)
-            const searchInput = document.getElementById('fmea-search');
-            if (searchInput) {
-                searchInput.addEventListener('input', filterFMEATable);
-            }
         }
 
         window.onload = initDashboard;

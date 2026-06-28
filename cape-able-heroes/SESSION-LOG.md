@@ -99,6 +99,7 @@ Keep all supporting documents (Observation Tool sheet, Feedback Forms) in:
 - [ ] Parent feedback forms collected — how many: ___
 - [ ] Facilitator debrief form completed
 - [x] Public LinkedIn source captured
+- [x] Photo evidence captured and filed
 - [x] Notable moments logged below
 
 **Top 3 observations from this session:**
@@ -125,6 +126,7 @@ No child or parent quote captured yet. Public partner excerpt is stored in the s
 
 **Founder debrief additions:**
 - `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/founder-debrief-design-observations.md`
+- `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/photo-evidence-log.md`
 
 ---
 

@@ -1,8 +1,9 @@
 # Aviation WonderLab Method
 
 **Status:** v0.1 field-derived method  
-**Evidence base:** Founder debrief from first Aviation WonderLab + public LinkedIn source card  
+**Evidence base:** Founder debrief from first Aviation WonderLab + public LinkedIn source card + photo evidence log
 **Primary source card:** `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/linkedin-source-card.md`  
+**Photo evidence log:** `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/photo-evidence-log.md`
 **Core offer:** Aviation WonderLab: First Fold to First Flight
 
 ---
@@ -24,7 +25,9 @@ The core transformation:
 | Planned worksheet was too heavy for the live opening | A child reacted with overwhelm when shown the technical-looking airline/FAA-style form | Technical forms belong later, as a take-home or advanced station, not the first entry point |
 | First fold was a real threshold | Some children hesitated or became discouraged by the first precise fold | The first fold needs its own protocol |
 | Mechanic entry point worked | A child could participate by using a rubber mallet to secure folds, framed as mechanic/riveting work | Not every child has to enter as the folder; legitimate build roles lower the barrier |
+| Role identity board existed | The Cape-Able Heroes of Flight board showed aviation roles paired with cape-abilities | Role cards should build from existing physical role language rather than start from scratch |
 | Payload creativity emerged | A child built a plane carrying torn colored-paper "cargo" that released behind the aircraft during flight | Aircraft design should support mission, payload, visual identity, and air-show effects, not only distance |
+| Thank-you board exists | Participant thank-you messages were captured on a handmade BYDT board | Positive affect is present, but names/messages require permission before public use |
 | Flight testing created recognition | Children saw changes in flight path after small adjustments | The engineering feedback loop is the backbone |
 | Open mic surfaced meaning | A child named the lesson: there is always an opportunity for a second chance | Reflection must be a required closeout, not optional |
 
@@ -56,11 +59,13 @@ Initial role set:
 
 | Role | What the child owns | Entry path |
 |------|---------------------|------------|
+| I Fly / Pilot | Tests the aircraft and reports what happened | Focus |
+| I Guide / Air Traffic Controller | Helps direct the mission, order, and launch flow | Awareness |
+| I Fix / Aircraft Mechanic | Helps secure folds, check structure, and make repairs | Precision |
+| I Secure / Airport Security Officer | Helps the team make safe, careful choices | Judgment |
+| I Care / Ground Support | Helps teammates stay ready and included | Support |
+| I Design / Aerospace Engineer | Chooses shape, wing style, and improvement ideas | Systems improvement |
 | Airline Founder | Names the airline, mission, and destination | Imagination and leadership |
-| Aircraft Designer | Chooses shape, colors, wing style, and design intent | Visual thinking |
-| Aircraft Mechanic | Helps secure folds, check structure, and make repairs | Hands-on support |
-| Test Pilot | Throws the plane and reports what happened | Courage and observation |
-| Flight Engineer | Suggests one adjustment after each test | Pattern recognition |
 | Payload Designer | Chooses what the aircraft carries, releases, delivers, or represents | Mission imagination |
 
 ### 3. Crew Staffing Moment
@@ -199,6 +204,7 @@ Kit sections:
 |----------------|--------|---------------------|
 | First Fold Protocol | Observed need | Test in next session with planned language |
 | Mechanic Entry Point | Observed working | Include mechanic role card and observe participation rate |
+| Cape-Able Heroes of Flight role board | Visually evidenced | Translate board roles into durable role cards and crew staffing prompts |
 | Payload and Mission Design | Observed emerging | Add optional payload station and capture at least 3 design examples |
 | Flight Crew Role Cards | Hypothesis from debrief | Test with at least 3 crews |
 | Crew Staffing Moment | Hypothesis from debrief | Track whether missing-role prompts increase participation |
@@ -222,7 +228,7 @@ Kit sections:
 
 Create:
 
-- six role cards
+- role cards derived from the Cape-Able Heroes of Flight board
 - optional payload/cargo station
 - crew staffing worksheet
 - first fold facilitator script

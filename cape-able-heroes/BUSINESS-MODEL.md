@@ -64,7 +64,7 @@ This format is designed to be run as a premium, founder-led experience initially
 
 | Stage | Offer | Target Buyer | Est. Price Range | Purpose |
 |-------|-------|--------------|------------------|---------|
-| 1. Entry | Cape-Able Hero Kit | Parents | $25–$45 | Low-barrier entry and at-home continuation |
+| 1. Entry | Cape-Able Hero Kit / Color Your Own artifacts | Parents | $25–$45 | Low-barrier entry and at-home continuation |
 | 2. Local Events | Cape-Able Mini WonderLab | Parents, small groups, libraries, churches | $250–$750 per event | Fast early revenue and real-world testing |
 | 3. Institutional | Cape-Able Heroes Activation | Schools, camps, after-school programs | $750–$2,500+ | Higher volume and recurring opportunities |
 | 4. Scalable Product | Educator / Facilitator Toolkit | Teachers, coaches, youth workers | $97–$297 | Scales reach without founder presence |
@@ -111,4 +111,5 @@ Unlike traditional dress-up, generic confidence activities, or standard enrichme
 3. Run Session 2 with the Aviation WonderLab build pack: role cards, crew staffing, payload station, first-fold script, mechanic entry protocol, and observation sheet.
 4. Collect structured observation and feedback data during/after Session 2.
 5. Test the take-home airline kit as the first at-home continuation bridge.
-6. Continue until 3 sessions are complete, then run the Phase 1 Evidence Review in `SESSION-LOG.md`.
+6. Test Cape-Able Color Your Own product interest with parents/hosts before manufacturing.
+7. Continue until 3 sessions are complete, then run the Phase 1 Evidence Review in `SESSION-LOG.md`.

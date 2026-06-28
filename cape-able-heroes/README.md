@@ -26,6 +26,7 @@ Cape-Able Heroes helps children feel capable, recognized, and brave enough to st
 - `field-evidence/` — source cards, debrief notes, photo logs, and governed field artifacts
 - `BUSINESS-MODEL.md` — business model and offer ladder
 - `PRODUCT-ECOSYSTEM.md` — product architecture across tools, sessions, and partner offers
+- `product-concepts/cape-able-color-your-own/` — validation-ready Color Your Own cape, sticker, and magnet product concept
 - `proposals/` — Cape-Able Heroes offer-development proposals, separate from root-level governance proposals
 
 ## Status

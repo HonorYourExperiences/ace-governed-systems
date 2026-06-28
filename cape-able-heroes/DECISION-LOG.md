@@ -40,6 +40,14 @@ You do not need to log routine task completion. Log decisions.
 
 ---
 **Date:** 2026-06-28
+**Decision:** Add Cape-Able Color Your Own as a validation-ready product concept family, not a proven product line.
+**Why:** The concept assets show a strong physical product path for capes, stickers, and magnets, and the first WonderLab evidence supports tangible identity artifacts. Buyer demand is not proven yet, so the governed move is to test interest before manufacturing.
+**Alternatives considered:** Treat the cape as the immediate first product; ignore the product concept until more sessions are complete; fold the idea into the generic Hero Kit without its own validation plan.
+**How to revisit:** If parents or hosts do not express purchase interest after the next sessions, keep Color Your Own as session material only or defer it behind the take-home airline kit.
+---
+
+---
+**Date:** 2026-06-28
 **Decision:** Make Flight Crew Role Cards and the Crew Staffing Moment the next Aviation WonderLab build direction.
 **Why:** The first field session showed that not every child enters through the same task. The mechanic/rubber-mallet moment created a legitimate participation path for a child who was not ready to own the whole paper-airplane build, and the role-card model turns that into a repeatable aviation crew structure.
 **Alternatives considered:** Keep everyone making individual paper airplanes; keep the airline-design worksheet as the opening activity; treat role assignments as optional flavor instead of the core structure.

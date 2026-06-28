@@ -65,7 +65,7 @@ See `AGE-WORKBENCH.md` for the full queue.
 
 → **Convert Aviation WonderLab Session 1 into a permission-cleared proof package and next booking ask.**
 
-Start with the host/partner follow-up: confirm exact date, venue, child count, age range, permission status, and whether they want the next Aviation WonderLab. Then log the contact in `cape-able-heroes/CHANNEL-TESTING-TRACKER.md`.
+Start with the host/partner follow-up: confirm exact date, venue, child count, age range, permission status, and whether they want the next Aviation WonderLab. Include one product-interest question for Cape-Able Color Your Own: cape, stickers, or magnets. Then log the contact in `cape-able-heroes/CHANNEL-TESTING-TRACKER.md`.
 
 ---
 
@@ -77,6 +77,7 @@ Start with the host/partner follow-up: confirm exact date, venue, child count, a
 | Host/partner details confirmed | 1 | [ ] |
 | Public-use permission status logged | 1 | [ ] |
 | Next booking ask sent | 1 | [ ] |
+| Color Your Own product-interest question asked | 1 | [ ] |
 | 3–5 contacts reached | 3–5 | [ ] |
 | Session 2 run | 2 | [ ] |
 | Session 3 run + Evidence Review | 3 | [ ] |
@@ -105,7 +106,7 @@ Start with the host/partner follow-up: confirm exact date, venue, child count, a
 ## If You Have Less Than 30 Minutes
 
 Do exactly one of these:
-1. Send the host/partner follow-up and permission-confirmation message.
+1. Send the host/partner follow-up, permission-confirmation message, and Color Your Own product-interest question.
 2. Log the contact in `cape-able-heroes/CHANNEL-TESTING-TRACKER.md`.
 3. Open `FOUNDER-MORNING-RUNBOOK.md` and complete the first unchecked human-only item.
 

@@ -72,6 +72,7 @@ These have appeared in brainstorms, customer conversations, or market observatio
 |---------|-----------|-----------|------------------|
 | Cape-Able Heroes Storybook Series | Illustrated books featuring children using a Cape-Able Strength to work through a real challenge | Parents will purchase books that reinforce the identity model at home | Parent surveys + book prototype test at 3+ sessions |
 | At-Home Challenge Kit (subscription or one-off) | Monthly or seasonal kit with themed challenges for families | Parents want continuation after the WonderLab; a structured kit reduces the "what do we do now?" drop-off | Test demand with post-session offers to real parents |
+| Cape-Able Color Your Own product line | Colorable cape, sticker, and magnet products that turn creative personalization into wearable/displayable identity artifacts | Parents and hosts may want a low-barrier physical continuation product after a WonderLab | Test parent/host interest after the next WonderLab; compare cape vs stickers vs magnets before production |
 | Digital Mission Cards | App or web-based Hero Cards and challenge prompts | Some parents prefer digital artifacts | Survey current WonderLab families; demand must exceed 30% expressed interest before building |
 | Cape-Able Heroes Audio Experience | Audio stories where children follow a hero through a challenge, with built-in pause points for real participation | Could extend the experience to contexts without a facilitator | Pilot with one audio story and measure engagement |
 | Parent Coaching Add-On | Short coaching call or guide for parents who want to continue the identity work at home | Parents who experience the WonderLab will want to know how to continue it | Offer this post-session and measure uptake |
@@ -102,6 +103,7 @@ Use this to track the moment when a Hypothesized product has accumulated enough 
 |---------|----------------|---------------|-------------------|
 | Storybook Series | Parent surveys + prototype test | None yet | No |
 | At-Home Challenge Kit | Post-session demand signal from real parents | Session 1 debrief supports a take-home bridge; parent demand not yet tested | Partial — test with take-home airline kit after Session 2 |
+| Cape-Able Color Your Own product line | 5+ parent/host yes responses, 3+ paid preorders, or 1+ host asking for pack pricing | Concept assets captured; field evidence supports tangible artifacts, but buyer demand is untested | Partial - ask after next WonderLab follow-up |
 | Digital Mission Cards | >30% expressed interest from surveyed WonderLab families | None yet | No |
 | Audio Experience | Pilot test results | None yet | No |
 | Parent Coaching Add-On | Post-session uptake from real offer | None yet | No — offer it first |
@@ -115,7 +117,7 @@ Every product that moves to "Ready to Build" must have a SAGA proposal. Log them
 
 | Product | Proposal File | Decision | Date |
 |---------|--------------|---------|------|
-| *(none yet)* | | | |
+| Cape-Able Color Your Own product line | `proposals/2026-06-28-cape-able-color-your-own-product-line.md` | Validate before build | 2026-06-28 |
 
 ---
 

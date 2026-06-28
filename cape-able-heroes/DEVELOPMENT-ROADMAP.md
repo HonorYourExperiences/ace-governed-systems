@@ -39,6 +39,7 @@ This document serves as the living development loop for Cape-Able Heroes. It fol
 | 2 | Design Printable Challenge Cards | Create clean, printable cards that connect hero identity to action + reflection | Rian | **Complete** | See `CHALLENGE-CARDS.md` — 5 themes ready |
 | 3 | Create Observation Tools | Simple, non-clinical tools to capture participation, language use, and observed shifts during sessions | Rian | **Complete** | See `OBSERVATION-TOOL.md` |
 | 4 | Define Take-Home Kit Contents | Decide what goes into the basic Hero Kit (badge, certificate, mission card, parent guide) | Rian | In Progress | Aviation take-home airline kit is drafted as a next-session bridge |
+| 5 | Validate Cape-Able Color Your Own product line | Test parent/host demand for colorable cape, sticker, and magnet products before manufacturing | Rian | Proposed | See `product-concepts/cape-able-color-your-own/` and proposal `2026-06-28-cape-able-color-your-own-product-line.md` |
 
 ## Phase 1 – Validation 🟢 ACTIVE (Target: Next 4–8 weeks)
 
@@ -69,6 +70,7 @@ This document serves as the living development loop for Cape-Able Heroes. It fol
 | # | Task | Description | Owner | Status | Notes |
 |---|------|-------------|-------|--------|-------|
 | 1 | Develop Take-Home Hero Kit | Finalize contents, design, and pricing for the entry-level product | Rian | Not Started | $25–$45 range |
+| 1A | Evaluate Color Your Own artifacts | Compare cape, sticker, and magnet demand as possible Hero Kit components or add-ons | Rian | Proposed | Do not manufacture before buyer signal |
 | 2 | Create Educator / Facilitator Toolkit | Package the WonderLab experience so others can run it (lesson plans, materials list, language guide) | Rian | Not Started | Key to scaling without founder presence in every room |
 | 3 | Define Pricing & Packaging | Finalize pricing tiers for kits, events, and toolkits | Rian | Not Started | Based on early testing |
 | 4 | Document Delivery Standards | Create basic quality and safety guidelines for future facilitators | Rian | Not Started | Important for schools and camps |

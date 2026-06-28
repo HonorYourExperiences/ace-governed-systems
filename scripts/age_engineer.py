@@ -466,18 +466,15 @@ def cmd_report(args):
     else:
         lines.append("*(No rows currently In Progress or Solution Designed)*")
 
-    # Git state for health pulse
+    # Git state for health pulse. Avoid embedding the current commit SHA because
+    # regenerating the report after a commit would immediately dirty the file.
     try:
         git_branch = subprocess.run(
             ["git", "rev-parse", "--abbrev-ref", "HEAD"],
             capture_output=True, text=True, timeout=5
         ).stdout.strip() or "unknown"
-        git_sha = subprocess.run(
-            ["git", "rev-parse", "--short", "HEAD"],
-            capture_output=True, text=True, timeout=5
-        ).stdout.strip() or "unknown"
     except Exception:
-        git_branch, git_sha = "unknown", "unknown"
+        git_branch = "unknown"
 
     # Proposal pipeline counts from row statuses
     pipeline = {
@@ -498,7 +495,7 @@ def cmd_report(args):
         f"- **Refusal rate (AUDIT-LOG.md):** {refusal_rate}%",
         "- **Last SAGA cycle:** see `saga-analyze.yml` run history",
         f"- **Workbench last updated:** {now}",
-        f"- **Git branch:** `{git_branch}` @ `{git_sha}`",
+        f"- **Git branch:** `{git_branch}`",
         f"- **Proposal pipeline:** {pipeline['Solution Designed']} Solution Designed | "
         f"{pipeline['In Progress']} In Progress | {pipeline['Triaged']} Triaged",
         "",

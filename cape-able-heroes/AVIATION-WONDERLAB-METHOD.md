@@ -1,0 +1,203 @@
+# Aviation WonderLab Method
+
+**Status:** v0.1 field-derived method  
+**Evidence base:** Founder debrief from first Aviation WonderLab + public LinkedIn source card  
+**Primary source card:** `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/linkedin-source-card.md`  
+**Core offer:** Aviation WonderLab: First Fold to First Flight
+
+---
+
+## Method Thesis
+
+Aviation WonderLab is not a paper-airplane activity. It is a flight crew experience where children practice aviation, engineering, and identity through a real build-test-adjust loop.
+
+The core transformation:
+
+> A child meets a threshold, finds an entry role, tests something real, sees evidence, adjusts, and names what they learned about themselves.
+
+---
+
+## Field Signals From Session 1
+
+| Signal | What happened | Method implication |
+|--------|---------------|--------------------|
+| Planned worksheet was too heavy for the live opening | A child reacted with overwhelm when shown the technical-looking airline/FAA-style form | Technical forms belong later, as a take-home or advanced station, not the first entry point |
+| First fold was a real threshold | Some children hesitated or became discouraged by the first precise fold | The first fold needs its own protocol |
+| Mechanic entry point worked | A child could participate by using a rubber mallet to secure folds, framed as mechanic/riveting work | Not every child has to enter as the folder; legitimate build roles lower the barrier |
+| Flight testing created recognition | Children saw changes in flight path after small adjustments | The engineering feedback loop is the backbone |
+| Open mic surfaced meaning | A child named the lesson: there is always an opportunity for a second chance | Reflection must be a required closeout, not optional |
+
+---
+
+## Core Mechanisms
+
+### 1. The First Fold Protocol
+
+The first fold is the first threshold. Treat it as an explicit facilitation moment.
+
+Facilitator stance:
+
+- Demonstrate once.
+- Let children try.
+- Do not shame imprecision.
+- Offer roles for children who are not ready to fold independently.
+- Treat precision as practice, not as a condition for belonging.
+
+Prompt:
+
+> "The first fold is where the aircraft begins. It does not have to be perfect. It has to begin."
+
+### 2. Flight Crew Role Cards
+
+Children choose or receive a real aviation role before the build begins.
+
+Initial role set:
+
+| Role | What the child owns | Entry path |
+|------|---------------------|------------|
+| Airline Founder | Names the airline, mission, and destination | Imagination and leadership |
+| Aircraft Designer | Chooses shape, colors, wing style, and design intent | Visual thinking |
+| Aircraft Mechanic | Helps secure folds, check structure, and make repairs | Hands-on support |
+| Test Pilot | Throws the plane and reports what happened | Courage and observation |
+| Flight Engineer | Suggests one adjustment after each test | Pattern recognition |
+
+### 3. Crew Staffing Moment
+
+Before building, each group checks whether the crew is staffed.
+
+Facilitator prompt:
+
+> "Before any aircraft flies, the crew has to be staffed. Who do you have? Who are you missing?"
+
+If a role is missing, the crew may:
+
+- hire a teammate into the role
+- cross-train someone
+- contract a specialist from another crew for one task
+- assign an apprentice who shadows first
+
+Design purpose:
+
+> A child who does not want one role is not outside the mission. They may belong somewhere else in the system.
+
+### 4. Mechanic Entry Point
+
+When a child is not ready to perform the whole task, give them a real contribution inside the task.
+
+Observed example:
+
+- Facilitator makes the fold.
+- Child uses a rubber mallet to secure the crease.
+- The action is framed as mechanic/riveting work.
+
+Why it matters:
+
+The child is not watching an adult do the work for them. The child is participating as a mechanic. The aircraft carries evidence of their contribution.
+
+### 5. Engineering Feedback Loop
+
+Each flight cycle follows the same structure:
+
+1. Fly it.
+2. Watch what happened.
+3. Name one behavior.
+4. Adjust one thing.
+5. Fly again.
+
+Prompts:
+
+- "What did your aircraft do?"
+- "What is one thing you can change?"
+- "What did the second flight teach you?"
+- "Did it fail the same way twice?"
+
+### 6. Open Mic Reflection
+
+The closeout is where the experience becomes identity.
+
+Required prompt:
+
+> "What did this exercise teach you about yourself and what you are capable of?"
+
+Session 1 signal:
+
+> "There is always an opportunity for a second chance."
+
+Use this as a model of the kind of meaning the session is designed to surface, not as a guaranteed outcome.
+
+---
+
+## Standard Session Arc v1
+
+1. Welcome: "Today you are an aviation crew."
+2. Choose role cards.
+3. Crew staffing check.
+4. First Fold Protocol.
+5. Build aircraft with role-specific contributions.
+6. First flight test.
+7. Crew debrief: what happened?
+8. One adjustment.
+9. Second flight test.
+10. Open mic reflection.
+11. Take-home airline kit.
+
+---
+
+## Take-Home Airline Kit
+
+The airline-design worksheet should move from live-session opener to take-home bridge unless a longer session has enough time for it.
+
+Purpose:
+
+- extend the experience to parents/caregivers
+- make technical-looking forms familiar, not scary
+- let children explain the mission in their own words
+- create an at-home second flight
+
+Kit sections:
+
+- airline name
+- mission type: passenger, cargo, rescue, delivery, exploration
+- destination or route
+- aircraft design
+- what happened on first flight
+- what changed on second flight
+- what the aircraft taught me
+
+---
+
+## Evidence Status
+
+| Method element | Status | Verification target |
+|----------------|--------|---------------------|
+| First Fold Protocol | Observed need | Test in next session with planned language |
+| Mechanic Entry Point | Observed working | Include mechanic role card and observe participation rate |
+| Flight Crew Role Cards | Hypothesis from debrief | Test with at least 3 crews |
+| Crew Staffing Moment | Hypothesis from debrief | Track whether missing-role prompts increase participation |
+| Engineering Feedback Loop | Observed working | Capture before/after adjustment examples |
+| Open Mic Reflection | Observed working | Capture exact child quotes with permission workflow |
+| Take-Home Airline Kit | Hypothesis from debrief | Send with families and request one follow-up signal |
+
+---
+
+## What Not To Claim Yet
+
+- Do not claim guaranteed confidence gains.
+- Do not claim every child experienced the same transformation.
+- Do not claim role cards are validated until tested.
+- Do not use child quotes publicly without permission.
+- Do not present the Delta-adjacent context as a formal Delta partnership unless formally confirmed.
+
+---
+
+## Next Build
+
+Create:
+
+- five role cards
+- crew staffing worksheet
+- first fold facilitator script
+- mechanic entry point tool protocol
+- flight test observation sheet
+- take-home airline kit
+

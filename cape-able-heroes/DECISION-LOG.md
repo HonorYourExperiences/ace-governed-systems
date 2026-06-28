@@ -38,7 +38,13 @@ You do not need to log routine task completion. Log decisions.
 
 ## Decision Entries
 
-*(Most recent at top.)*
+---
+**Date:** 2026-06-28
+**Decision:** Make Flight Crew Role Cards and the Crew Staffing Moment the next Aviation WonderLab build direction.
+**Why:** The first field session showed that not every child enters through the same task. The mechanic/rubber-mallet moment created a legitimate participation path for a child who was not ready to own the whole paper-airplane build, and the role-card model turns that into a repeatable aviation crew structure.
+**Alternatives considered:** Keep everyone making individual paper airplanes; keep the airline-design worksheet as the opening activity; treat role assignments as optional flavor instead of the core structure.
+**How to revisit:** If the next session shows role cards slow down entry, create confusion, or reduce participation, simplify to three roles or use roles only after the first flight.
+---
 
 ---
 

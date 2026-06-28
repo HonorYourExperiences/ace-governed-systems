@@ -4,15 +4,15 @@
 
 ## Decision Signal
 
-**GREEN:** All current AGE rows are Verified.
+**GREEN:** All current AGE rows are Closed.
 
-That means the engineering agent has corrected the identified risks enough to produce evidence. The remaining decision is human-only: whether to accept the evidence and move rows from `Verified` to `Closed`.
+That means the engineering agent corrected the identified risks, produced evidence, and the founder accepted those verified fixes as finalized.
 
-## What You Need To Decide
+## Decision Status
 
-**Decision:** Do you accept the verified controls as good enough to close the current governance risks?
+**Decision:** Already made. The founder accepted the verified controls as good enough to close the current governance risks.
 
-Recommended answer for today: **Yes for engineering correction; review before marking Closed.**
+Current operating state: **Closed.**
 
 Why: the system now has automated gates for the previously open risks:
 
@@ -25,7 +25,7 @@ Why: the system now has automated gates for the previously open risks:
 
 | Symbol | Meaning | Founder Action |
 |---|---|---|
-| GREEN | Corrected and verified by AGE | Review for `Closed` acceptance |
+| GREEN | Corrected, verified, and accepted | Continue operating |
 | YELLOW | Needs founder judgment | Decide whether evidence is enough |
 | RED | Blocked or unsafe | Do not proceed |
 
@@ -33,10 +33,10 @@ Why: the system now has automated gates for the previously open risks:
 
 | Area | Signal | Plain Language | Decision |
 |---|---|---|---|
-| Critical risks | GREEN | The highest-risk governance failures have implemented controls and evidence notes. | Review for closure |
-| High risks | GREEN | Automation now blocks the major bypass paths. | Review for closure |
-| Monitor risks | GREEN | The last two open rows were corrected: audit failure logging and runtime entrypoint coverage. | Review for closure |
-| Human governance | YELLOW | AGE cannot mark rows `Closed`; that is intentionally founder-only. | Decide when to accept closure |
+| Critical risks | GREEN | The highest-risk governance failures have implemented controls, evidence notes, and founder closure. | Closed |
+| High risks | GREEN | Automation now blocks the major bypass paths, and founder closure is recorded. | Closed |
+| Monitor risks | GREEN | The last two open rows were corrected and founder closure is recorded. | Closed |
+| Human governance | GREEN | Founder approval was given to close all verified rows. | Decision complete |
 
 ## Source Links
 

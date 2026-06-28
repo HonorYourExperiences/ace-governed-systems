@@ -31,7 +31,7 @@ Most protected window (day + time): ___________________________
 | Workstream | Current Phase | Status |
 |------------|--------------|--------|
 | Cape-Able Heroes | Phase 1 — Validation | Active — Session 1 evidence captured; next move is permission + next booking |
-| bydt.org Governance | AGE queue | Operational; all current FMEA rows Verified pending human Closed review |
+| bydt.org Governance | AGE queue | Operational; all current FMEA rows Closed by founder approval |
 | bydt.org Content | Way Through / evidence-first gates | Active for Cape-Able content scans |
 
 ---
@@ -42,17 +42,17 @@ The AGE (Axiomatic Governance Engineer) is active. Live state is in [`AGE-WORKBE
 
 | Priority | Table | RPN | Status | Failure Mode |
 |----------|-------|-----|--------|--------------|
-| CRITICAL | PFMEA | 240 | Verified | Rescue modeling in hero / parent copy |
-| CRITICAL | DFMEA | 210 | Verified | Proposals missing Current→Target→Delta→Gap-Closing structure |
-| CRITICAL | DFMEA | 180 | Verified | Monitor not wired to all policy/content modification points |
-| CRITICAL | PFMEA | 175 | Verified | Aspiration theater framing |
-| CRITICAL | DFMEA | 160 | Verified | No automated gate preventing un-verified proposals |
-| HIGH | DFMEA | 144 | Verified | Regex-based audit log parser fragile to format variations |
-| HIGH | PFMEA | 108 | Verified | Proposal bypasses verification pipeline |
-| MONITOR | PFMEA | 96 | Verified | Incomplete audit trail on refusal |
-| MONITOR | PFMEA | 60 | Verified | Core axiom check skipped or mis-keyed |
+| CRITICAL | PFMEA | 240 | Closed | Rescue modeling in hero / parent copy |
+| CRITICAL | DFMEA | 210 | Closed | Proposals missing Current→Target→Delta→Gap-Closing structure |
+| CRITICAL | DFMEA | 180 | Closed | Monitor not wired to all policy/content modification points |
+| CRITICAL | PFMEA | 175 | Closed | Aspiration theater framing |
+| CRITICAL | DFMEA | 160 | Closed | No automated gate preventing un-verified proposals |
+| HIGH | DFMEA | 144 | Closed | Regex-based audit log parser fragile to format variations |
+| HIGH | PFMEA | 108 | Closed | Proposal bypasses verification pipeline |
+| MONITOR | PFMEA | 96 | Closed | Incomplete audit trail on refusal |
+| MONITOR | PFMEA | 60 | Closed | Core axiom check skipped or mis-keyed |
 
-**AGE preflight status:** all checks PASS. All current Critical, High, and Monitor rows are Verified with evidence notes.
+**AGE preflight status:** all checks PASS. All current Critical, High, and Monitor rows are Closed with founder approval and AGE evidence notes.
 See `AGE-WORKBENCH.md` for the full queue.
 
 ---
@@ -134,6 +134,7 @@ Have you completed this week's founder reflection?
 
 | Date | What moved |
 |------|-----------|
+| 2026-06-28 | Founder accepted all Verified AGE rows as implemented and finalized; current FMEA queue is now fully Closed. |
 | 2026-06-28 | Resolved remaining AGE Monitor rows: audit processor failure logging and runtime entrypoint inventory are now verified. |
 | 2026-06-28 | Updated overnight: Session 1 evidence is now the active proof package; next action is permission confirmation and next booking ask. |
 

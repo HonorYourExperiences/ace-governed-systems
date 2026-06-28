@@ -150,20 +150,20 @@
         <p>This page translates AGE governance status into plain decision language.</p>
 
         <section class="signal">
-            <strong>GREEN: All current AGE rows are Verified.</strong>
-            <p>AGE has corrected the identified risks enough to produce evidence. The remaining decision is human-only: whether to accept the evidence and move rows from <code>Verified</code> to <code>Closed</code>.</p>
+            <strong>GREEN: All current AGE rows are Closed.</strong>
+            <p>AGE corrected the identified risks, produced evidence, and the founder accepted those verified fixes as finalized.</p>
         </section>
 
         <section class="decision-box">
-            <h2>Decision In Front Of You</h2>
-            <p><strong>Do you accept the verified controls as good enough to close the current governance risks?</strong></p>
-            <p>Recommended read: accept that engineering correction is complete, then review evidence before marking rows <code>Closed</code>.</p>
+            <h2>Decision Status</h2>
+            <p><strong>Decision complete: founder accepted the verified controls as good enough to close the current governance risks.</strong></p>
+            <p>Current operating state: <code>Closed</code>.</p>
         </section>
 
         <section>
             <h2>Symbol Key</h2>
             <div class="grid">
-                <div class="card"><span class="symbol green">GREEN</span><p>Corrected and verified by AGE. Founder can review for closure.</p></div>
+                <div class="card"><span class="symbol green">GREEN</span><p>Corrected, verified, and accepted. Continue operating.</p></div>
                 <div class="card"><span class="symbol yellow">YELLOW</span><p>Needs founder judgment. Evidence exists, but acceptance is a human decision.</p></div>
                 <div class="card"><span class="symbol red">RED</span><p>Blocked or unsafe. Do not proceed until corrected.</p></div>
             </div>
@@ -184,26 +184,26 @@
                     <tr>
                         <td>Critical risks</td>
                         <td><span class="symbol green">GREEN</span></td>
-                        <td>The highest-risk governance failures have implemented controls and evidence notes.</td>
-                        <td>Review for closure.</td>
+                        <td>The highest-risk governance failures have implemented controls, evidence notes, and founder closure.</td>
+                        <td>Closed.</td>
                     </tr>
                     <tr>
                         <td>High risks</td>
                         <td><span class="symbol green">GREEN</span></td>
-                        <td>Automation now blocks the major bypass paths.</td>
-                        <td>Review for closure.</td>
+                        <td>Automation now blocks the major bypass paths, and founder closure is recorded.</td>
+                        <td>Closed.</td>
                     </tr>
                     <tr>
                         <td>Monitor risks</td>
                         <td><span class="symbol green">GREEN</span></td>
-                        <td>The last two open rows were corrected: audit failure logging and runtime entrypoint coverage.</td>
-                        <td>Review for closure.</td>
+                        <td>The last two open rows were corrected and founder closure is recorded.</td>
+                        <td>Closed.</td>
                     </tr>
                     <tr>
                         <td>Human governance</td>
-                        <td><span class="symbol yellow">YELLOW</span></td>
-                        <td>AGE cannot mark rows Closed. That protects founder authority.</td>
-                        <td>You decide when to accept closure.</td>
+                        <td><span class="symbol green">GREEN</span></td>
+                        <td>Founder approval was given to close all verified rows.</td>
+                        <td>Decision complete.</td>
                     </tr>
                 </tbody>
             </table>

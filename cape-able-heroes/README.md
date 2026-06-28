@@ -18,6 +18,7 @@ Cape-Able Heroes helps children feel capable, recognized, and brave enough to st
 - `WONDERLAB-UNIVERSAL-PRINCIPLES.md` — portable design doctrine for all WonderLab themes
 - `SESSION-FORMAT.md` — core WonderLab session structure and flow
 - `AVIATION-WONDERLAB-METHOD.md` — field-derived method for the flagship aviation offer
+- `AVIATION-WONDERLAB-BUILD-PACK.md` — next-session operating pack for Aviation WonderLab Session 2
 - `CHALLENGE-CARDS.md` — printable challenge card designs
 - `OBSERVATION-TOOL.md` — non-clinical field observation structure
 - `FEEDBACK-FORM.md` — participant and partner feedback capture

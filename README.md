@@ -89,6 +89,7 @@ Shows real-time(ish) audit metrics including refusal rates and top reasons.
 ## Key Files & Folders
 
 - `FOUNDER-COCKPIT.md` — **Start here.** Daily entry point: current status, one next action, time budget.
+- `FOUNDER-MORNING-RUNBOOK.md` — Current wake-up sequence and human-only action queue after the latest audit.
 - `FOUNDER-WEEKLY-REFLECTION.md` — Weekly SAGA-structured founder self-check (including Way Through self-assessment).
 - `proposals/` — Active and historical SAGA / AGE governance proposals for the overall governed system
 - `governed_systems_SOP_PFMEA_DFMEA.md` — Living procedures and risk analyses

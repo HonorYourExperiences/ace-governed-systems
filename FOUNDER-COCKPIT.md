@@ -10,7 +10,7 @@ This document is your daily entry point into the governed system. It tells you w
 
 <!-- Update this when you open the cockpit. -->
 
-___________________________
+2026-06-28
 
 ---
 
@@ -30,9 +30,9 @@ Most protected window (day + time): ___________________________
 
 | Workstream | Current Phase | Status |
 |------------|--------------|--------|
-| Cape-Able Heroes | Phase 1 — Validation | 🟢 Active — real-world only |
-| bydt.org Governance | Proposal A — Runtime Monitor Wiring | 🟡 Pending first action |
-| bydt.org Content | Proposal B — Way Through Content Guidelines | 🔵 Queued behind Proposal A |
+| Cape-Able Heroes | Phase 1 — Validation | Active — Session 1 evidence captured; next move is permission + next booking |
+| bydt.org Governance | AGE queue | Operational with 2 preflight warnings |
+| bydt.org Content | Way Through / evidence-first gates | Active for Cape-Able content scans |
 
 ---
 
@@ -42,18 +42,18 @@ The AGE (Axiomatic Governance Engineer) is active. Live state is in [`AGE-WORKBE
 
 | Priority | Table | RPN | Status | Failure Mode |
 |----------|-------|-----|--------|--------------|
-| CRITICAL | PFMEA | 240 | Open | Rescue modeling in hero / parent copy |
+| CRITICAL | PFMEA | 240 | Verified | Rescue modeling in hero / parent copy |
 | CRITICAL | DFMEA | 210 | Open | Proposals missing Current→Target→Delta→Gap-Closing structure |
-| CRITICAL | PFMEA | 175 | Open | Aspiration theater framing |
-| HIGH | DFMEA | 180 | Open | Monitor not wired to all policy/content modification points |
-| HIGH | DFMEA | 160 | Open | No automated gate preventing un-verified proposals |
+| CRITICAL | DFMEA | 180 | Open | Monitor not wired to all policy/content modification points |
+| CRITICAL | PFMEA | 175 | Solution Designed | Aspiration theater framing |
+| CRITICAL | DFMEA | 160 | Solution Designed | No automated gate preventing un-verified proposals |
 | HIGH | DFMEA | 144 | Open | Regex-based audit log parser fragile to format variations |
 | HIGH | PFMEA | 108 | Open | Proposal bypasses verification pipeline |
 | MONITOR | PFMEA | 96 | Open | Incomplete audit trail on refusal |
 | MONITOR | PFMEA | 60 | Open | Core axiom check skipped or mis-keyed |
 
-**3 Critical rows awaiting triage.** AGE session required.  
-See `AGE-WORKBENCH.md` for work queue and session log.
+**AGE preflight status:** 0 FAIL, 2 WARN. The active warnings are RPN 210 and RPN 180.
+See `AGE-WORKBENCH.md` for the full queue.
 
 ---
 
@@ -63,9 +63,9 @@ See `AGE-WORKBENCH.md` for work queue and session log.
 
 **Right now, the highest-leverage next action across the whole system is:**
 
-→ **Send the first outreach message** using `cape-able-heroes/OUTREACH-TEMPLATES.md`
+→ **Convert Aviation WonderLab Session 1 into a permission-cleared proof package and next booking ask.**
 
-Choose one contact. Send it now. Log it in `cape-able-heroes/CHANNEL-TESTING-TRACKER.md` the moment it is sent.
+Start with the host/partner follow-up: confirm exact date, venue, child count, age range, permission status, and whether they want the next Aviation WonderLab. Then log the contact in `cape-able-heroes/CHANNEL-TESTING-TRACKER.md`.
 
 ---
 
@@ -73,17 +73,17 @@ Choose one contact. Send it now. Log it in `cape-able-heroes/CHANNEL-TESTING-TRA
 
 | Milestone | Target | Done? |
 |-----------|--------|-------|
-| First outreach message sent | 1 | [ ] |
+| Session 1 evidence package created | 1 | [x] |
+| Host/partner details confirmed | 1 | [ ] |
+| Public-use permission status logged | 1 | [ ] |
+| Next booking ask sent | 1 | [ ] |
 | 3–5 contacts reached | 3–5 | [ ] |
-| First response received | 1 | [ ] |
-| First session booked | 1 | [ ] |
-| Session 1 run | 1 | [ ] |
 | Session 2 run | 2 | [ ] |
 | Session 3 run + Evidence Review | 3 | [ ] |
 | 10+ parent feedback forms | 10 | [ ] |
 | 1 paid session | 1 | [ ] |
 
-*Pre-session signals (before Session 1): see `cape-able-heroes/PRE-SESSION-SIGNALS.md`*
+*Session 1 proof package: `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/MANIFEST.md`*
 
 **Phase 1 is complete when all rows are checked.**
 
@@ -105,9 +105,9 @@ Choose one contact. Send it now. Log it in `cape-able-heroes/CHANNEL-TESTING-TRA
 ## If You Have Less Than 30 Minutes
 
 Do exactly one of these:
-1. Send one outreach message (Template 1 or 2 from `OUTREACH-TEMPLATES.md`)
-2. Log a recent decision in `cape-able-heroes/DECISION-LOG.md`
-3. Update this cockpit with current status
+1. Send the host/partner follow-up and permission-confirmation message.
+2. Log the contact in `cape-able-heroes/CHANNEL-TESTING-TRACKER.md`.
+3. Open `FOUNDER-MORNING-RUNBOOK.md` and complete the first unchecked human-only item.
 
 ## If You Have 1–2 Hours
 
@@ -134,7 +134,7 @@ Have you completed this week's founder reflection?
 
 | Date | What moved |
 |------|-----------|
-| | |
+| 2026-06-28 | Updated overnight: Session 1 evidence is now the active proof package; next action is permission confirmation and next booking ask. |
 
 ---
 

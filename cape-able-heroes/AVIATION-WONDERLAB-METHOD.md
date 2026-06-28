@@ -5,6 +5,7 @@
 **Primary source card:** `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/linkedin-source-card.md`  
 **Photo evidence log:** `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/photo-evidence-log.md`
 **Universal principle:** `cape-able-heroes/WONDERLAB-UNIVERSAL-PRINCIPLES.md`
+**Next-session build pack:** `cape-able-heroes/AVIATION-WONDERLAB-BUILD-PACK.md`
 **Core offer:** Aviation WonderLab: First Fold to First Flight
 
 ---
@@ -225,7 +226,7 @@ Kit sections:
 
 ## Next Build
 
-Create:
+Created in `AVIATION-WONDERLAB-BUILD-PACK.md`:
 
 - role cards derived from the Cape-Able Heroes of Flight board
 - optional payload/cargo station
@@ -234,4 +235,6 @@ Create:
 - mechanic entry point tool protocol
 - flight test observation sheet
 - take-home airline kit
+
+Next step: run this pack in Session 2 and update the evidence status table based on what actually happens.
 

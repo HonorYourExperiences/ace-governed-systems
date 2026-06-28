@@ -176,7 +176,7 @@ def priority_label(rpn: int, config: dict) -> str:
 def cmd_scan(args):
     rows = get_open_rows(SOP_PATH)
     if not rows:
-        print("No open FMEA rows found.")
+        print("No non-closed FMEA rows found.")
         return 2
 
     config = load_config()
@@ -189,7 +189,7 @@ def cmd_scan(args):
             f"{label} {r['table'].upper():<6} {r['rpn']:<5} {status_display:<20} "
             f"{r['step_or_element'][:30]} / {r['failure_mode'][:35]}"
         )
-    print(f"\nTotal open rows: {len(rows)}")
+    print(f"\nTotal non-closed rows: {len(rows)}")
     return 0
 
 
@@ -222,7 +222,7 @@ def cmd_queue(args):
     print_bucket(f"CRITICAL — RPN ≥ {critical_floor} (requires active work)", critical)
     print_bucket(f"HIGH — RPN {high_floor}–{critical_floor - 1} (SAGA trigger threshold)", high)
     print_bucket("MONITOR — RPN < 100", medium)
-    print(f"\nTotal: {len(rows)} open | {len(critical)} Critical | {len(high)} High | {len(medium)} Monitor")
+    print(f"\nTotal: {len(rows)} non-closed | {len(critical)} Critical | {len(high)} High | {len(medium)} Monitor")
     return 0 if rows else 2
 
 
@@ -389,12 +389,12 @@ def cmd_report(args):
 
     lines = [
         "# AGE Workbench",
-        f"**Last Updated:** {now}  ",
-        "**AGE Status:** Active  ",
+        f"**Last Updated:** {now}",
+        "**AGE Status:** Active",
         "",
         "---",
         "",
-        "## RPN Heat Map — All Open Items",
+        "## RPN Heat Map — Non-Closed Items",
         "",
         "| Priority | Table | RPN | Status | Process Step / Design Element | Failure Mode |",
         "|----------|-------|-----|--------|-------------------------------|--------------|",
@@ -410,7 +410,7 @@ def cmd_report(args):
 
     lines += [
         "",
-        f"**Total Open:** {len(rows)} | "
+        f"**Total Non-Closed:** {len(rows)} | "
         f"**Critical:** {len(critical)} | "
         f"**High:** {len(high)} | "
         f"**Monitor:** {len(medium)}",
@@ -492,7 +492,7 @@ def cmd_report(args):
         "",
         "## System Health Pulse",
         "",
-        f"- **Open rows:** {len(rows)}",
+        f"- **Non-closed rows:** {len(rows)}",
         f"- **Critical unaddressed (Open/Triaged):** "
         f"{len([r for r in critical if r['status'] in ('Open', 'Triaged')])}",
         f"- **Refusal rate (AUDIT-LOG.md):** {refusal_rate}%",
@@ -523,7 +523,7 @@ def cmd_report(args):
         print(report)
     else:
         WORKBENCH_PATH.write_text(report, encoding="utf-8")
-        print(f"AGE-WORKBENCH.md updated: {len(rows)} open rows.")
+        print(f"AGE-WORKBENCH.md updated: {len(rows)} non-closed rows.")
 
     return 0
 

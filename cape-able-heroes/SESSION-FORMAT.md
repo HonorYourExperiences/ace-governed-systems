@@ -3,7 +3,7 @@
 **Session Length:** 60–75 minutes  
 **Group Size:** 6–20 children (optimal: 8–14)  
 **Age Range:** 5–12 years (activities can be adjusted by theme and challenge difficulty)  
-**Status:** v1 — ready to run and refine through pilot sessions
+**Status:** v1 — field-tested once; use with theme-specific build packs for the next sessions
 
 ---
 
@@ -180,4 +180,4 @@ Store each theme as a separate section in the CHALLENGE-CARDS file or as a stand
 
 ---
 
-*Document Status: v1 — in use for Phase 0 pilots. Update after each session via SAGA proposal.*
+*Document Status: v1 — in use for Phase 1 validation. Update after each session via SAGA proposal or field-evidence review.*

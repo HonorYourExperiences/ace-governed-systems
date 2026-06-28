@@ -60,6 +60,7 @@ These are documented and ready but may not have been fully field-tested across m
 | Educator / Facilitator Toolkit | Packaged delivery kit for external facilitators | **Ready (Phase 2)** | First Tier 1 certification run |
 | Cape-Able Hero Kit (take-home) | Entry-level product for at-home use by parents | **Ready (Phase 2)** | First direct parent sales |
 | Post-Session Follow-Up System | Structured parent follow-up messaging to extend impact | **Ready** | Track 30-day parent re-engagement rates |
+| Aviation WonderLab Build Pack | Role cards, crew staffing, payload station, first-fold script, mechanic entry protocol, observation sheet, and take-home airline kit | **Ready to test in Session 2** | Run in at least 1 more Aviation WonderLab and compare participation evidence |
 
 ---
 
@@ -100,7 +101,7 @@ Use this to track the moment when a Hypothesized product has accumulated enough 
 | Product | Evidence Needed | Current Signal | Ready to Evaluate? |
 |---------|----------------|---------------|-------------------|
 | Storybook Series | Parent surveys + prototype test | None yet | No |
-| At-Home Challenge Kit | Post-session demand signal from real parents | Partial (parents ask about "what next") | Partial — needs structured test |
+| At-Home Challenge Kit | Post-session demand signal from real parents | Session 1 debrief supports a take-home bridge; parent demand not yet tested | Partial — test with take-home airline kit after Session 2 |
 | Digital Mission Cards | >30% expressed interest from surveyed WonderLab families | None yet | No |
 | Audio Experience | Pilot test results | None yet | No |
 | Parent Coaching Add-On | Post-session uptake from real offer | None yet | No — offer it first |

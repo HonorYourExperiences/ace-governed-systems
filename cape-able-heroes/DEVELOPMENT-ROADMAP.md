@@ -10,12 +10,13 @@
 4. ~~**Create feedback and outreach tools**~~ — **Done.** See `FEEDBACK-FORM.md`, `OUTREACH-TEMPLATES.md`, `SESSION-LOG.md`
 
 **Now — immediate actions:**
-- [ ] Open `FOUNDER-COCKPIT.md` (repo root) — start here each session
-- [ ] Send outreach to 3–5 contacts using `OUTREACH-TEMPLATES.md` — log each send in `PRE-SESSION-SIGNALS.md`
-- [ ] Book the first session (pilot or paid)
-- [ ] Run the session using `SESSION-FORMAT.md` + `CHALLENGE-CARDS.md`
-- [ ] Complete `OBSERVATION-TOOL.md` and `FEEDBACK-FORM.md` during/after
-- [ ] Log the session in `SESSION-LOG.md`
+- [x] Open `FOUNDER-COCKPIT.md` (repo root) — start here each session
+- [x] Run and log Session 1 — Aviation WonderLab evidence package captured in `SESSION-LOG.md`
+- [x] File Session 1 source card, founder debrief, photo log, and evidence manifest
+- [ ] Confirm exact Session 1 details and permission status with host/partner
+- [ ] Send the next booking ask using source-backed Aviation WonderLab language
+- [ ] Run Session 2 using `SESSION-FORMAT.md`, `AVIATION-WONDERLAB-METHOD.md`, and `AVIATION-WONDERLAB-BUILD-PACK.md`
+- [ ] Complete `OBSERVATION-TOOL.md` and `FEEDBACK-FORM.md` during/after the next session
 - [ ] Repeat until 3 sessions are done, then run the Phase 1 Evidence Review
 
 **Phase 1 is complete when:** 3+ sessions run, 10+ parent feedback forms collected, 1+ paid session done, evidence review filed.
@@ -26,9 +27,9 @@
 
 This document serves as the living development loop for Cape-Able Heroes. It follows the SAGA model (Sense → Analyze → Generate → Act) so progress can continue in a governed, trackable way.
 
-## Current Phase: Phase 0 – Foundation (June 2026)
+## Current Phase: Phase 1 – Validation (June 2026)
 
-**Goal:** Build the core repeatable offer and supporting tools so we can begin real-world testing.
+**Goal:** Convert the first field signal into repeatable, permission-cleared evidence and the next booked session.
 
 ### Priority Tasks
 
@@ -37,7 +38,7 @@ This document serves as the living development loop for Cape-Able Heroes. It fol
 | 1 | Finalize WonderLab Format | Complete 60–75 minute session outline with themeable challenges | Rian | **Complete** | See `SESSION-FORMAT.md` |
 | 2 | Design Printable Challenge Cards | Create clean, printable cards that connect hero identity to action + reflection | Rian | **Complete** | See `CHALLENGE-CARDS.md` — 5 themes ready |
 | 3 | Create Observation Tools | Simple, non-clinical tools to capture participation, language use, and observed shifts during sessions | Rian | **Complete** | See `OBSERVATION-TOOL.md` |
-| 4 | Define Take-Home Kit Contents | Decide what goes into the basic Hero Kit (badge, certificate, mission card, parent guide) | Rian | Not Started | Supports at-home continuation |
+| 4 | Define Take-Home Kit Contents | Decide what goes into the basic Hero Kit (badge, certificate, mission card, parent guide) | Rian | In Progress | Aviation take-home airline kit is drafted as a next-session bridge |
 
 ## Phase 1 – Validation 🟢 ACTIVE (Target: Next 4–8 weeks)
 
@@ -53,9 +54,9 @@ This document serves as the living development loop for Cape-Able Heroes. It fol
 
 | # | Task | Description | Owner | Status | Notes |
 |---|------|-------------|-------|--------|-------|
-| 1 | Send Outreach | Use `OUTREACH-TEMPLATES.md` to contact 3–5 venues or families | Rian | Not Started | Start here |
-| 2 | Run 3–5 Pilot/Paid WonderLab Sessions | Test the format with real children (mix of paid and pilot) | Rian | Not Started | Primary source of validation |
-| 3 | Capture Field Evidence | Use `OBSERVATION-TOOL.md` during sessions; log in `SESSION-LOG.md` | Rian | Not Started | Feeds into positioning and future materials |
+| 1 | Send Outreach | Use `OUTREACH-TEMPLATES.md` to contact 3–5 venues or families | Rian | In Progress | Next send is host/partner permission + next booking ask |
+| 2 | Run 3–5 Pilot/Paid WonderLab Sessions | Test the format with real children (mix of paid and pilot) | Rian | In Progress | Session 1 logged; 2+ sessions remain before evidence review |
+| 3 | Capture Field Evidence | Use `OBSERVATION-TOOL.md` during sessions; log in `SESSION-LOG.md` | Rian | In Progress | Session 1 source/photo/debrief package captured; structured observation still needed next time |
 | 4 | Collect Parent & Facilitator Feedback | Use `FEEDBACK-FORM.md` after each session | Rian | Not Started | Improves offer quality |
 | 5 | Run Phase 1 Evidence Review | Complete the review section in `SESSION-LOG.md` after 3 sessions | Rian | Not Started | SAGA Analyze trigger |
 

@@ -106,9 +106,9 @@ Unlike traditional dress-up, generic confidence activities, or standard enrichme
 
 ## Next Steps (Current Phase)
 
-1. Finalize the Cape-Able Heroes WonderLab session format.
-2. Design and create printable Challenge Cards.
-3. Develop basic observation tools to capture field evidence.
-4. Run 3–5 pilot or paid WonderLab sessions.
-5. Develop the take-home Hero Kit as a complementary product.
-6. Begin outreach to schools, camps, and parent groups.
+1. Confirm Aviation WonderLab Session 1 details: exact date, venue, child count, age range, and permission status.
+2. Send the source-backed follow-up / next-booking ask to the host or nearest warm youth-program contact.
+3. Run Session 2 with the Aviation WonderLab build pack: role cards, crew staffing, payload station, first-fold script, mechanic entry protocol, and observation sheet.
+4. Collect structured observation and feedback data during/after Session 2.
+5. Test the take-home airline kit as the first at-home continuation bridge.
+6. Continue until 3 sessions are complete, then run the Phase 1 Evidence Review in `SESSION-LOG.md`.

@@ -1,7 +1,7 @@
 # Cape-Able Heroes – Pre-Session Signals (v1)
 
 **Purpose:** Track the gap between zero and Session 1. This is the signal layer that lives *before* `SESSION-LOG.md` begins.  
-**Status:** Active — update in real time.
+**Status:** Closed for Session 1 — preserve as the pre-session audit trail. New contacts now belong in `CHANNEL-TESTING-TRACKER.md`.
 
 The session log starts at Session 1. This document starts the moment you send the first outreach message. It makes the pre-session period visible, auditable, and governed.
 
@@ -17,7 +17,7 @@ The session log starts at Session 1. This document starts the moment you send th
 | Responses received | ≥1 | 0 |
 | Conversations started (verbal or written) | ≥1 | 0 |
 | Verbal or written interest ("I'd want that") | ≥1 | 0 |
-| Sessions confirmed / booked | ≥1 | 0 |
+| Sessions confirmed / booked | ≥1 | 1 public-source logged |
 | Days since first outreach sent | — | — |
 
 *Session 1 clock starts the moment the first outreach message is sent. Log that date here:*  
@@ -48,13 +48,28 @@ Log each meaningful signal below the moment it happens. Newest at top.
 
 ### Entries
 
-*(Begin logging here — most recent at top.)*
+---
+**Date:** 2026-06-27
+**Signal type:** [ ] Message sent  [ ] Response received  [ ] Conversation  [ ] Interest expressed  [x] Session booked/ran  [x] Other
+**Contact / context:** Aviation WonderLab with Kidcam Camp Programs / Alabama State Parks context; TigerWings public repost.
+**Exact words (if spoken or written):**
+
+See `field-evidence/session-2026-06-27-aviation-wonderlab/linkedin-source-card.md`. Do not reuse partner language publicly until permission is confirmed.
+
+**What this tells me:**
+
+The gap between zero and Session 1 is closed. Future learning should move from pre-session signal tracking into `SESSION-LOG.md`, `CHANNEL-TESTING-TRACKER.md`, and the field-evidence folder.
+
+**Next action:**
+
+Confirm exact details and permission status with the host/partner, then send the next booking ask.
+---
 
 ---
 
 ## First Session Trigger
 
-When both of these are true, Session 1 is imminent:
+Session 1 has now been logged in `SESSION-LOG.md`. For future first-session-style launches in a new offer, this trigger remains:
 
 - [ ] At least one person has said "yes" in some form (verbal, written, confirmed booking)
 - [ ] A date and location are confirmed

@@ -2,7 +2,7 @@
 
 **Use:** During Phase 3 (Challenge Activity) and Phase 4 (Reflection)  
 **Purpose:** Capture real field evidence — not scores, not assessments. Evidence of what happened.  
-**Status:** v1 — use as-is for pilot sessions. Refine based on what you actually notice.
+**Status:** v1 — use as-is for Phase 1 validation sessions. Refine based on what you actually notice.
 
 ---
 
@@ -178,4 +178,4 @@ _______________________________________________
 
 ---
 
-*Document Status: v1 — use for Phase 0 pilots. Update the tool itself based on what you find useful to track.*
+*Document Status: v1 — use for Phase 1 validation. Update the tool itself based on what you find useful to track.*

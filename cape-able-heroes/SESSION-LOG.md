@@ -120,6 +120,7 @@ No child or parent quote captured yet. Public partner excerpt is stored in the s
 - Confirm exact child count, date, venue, and partner permission status.
 - Capture observation sheet data during the next Aviation WonderLab.
 - Add a facilitator debrief within 24 hours of the next session.
+- Run the next Aviation WonderLab using `AVIATION-WONDERLAB-BUILD-PACK.md` so role cards, crew staffing, payload design, and mechanic entry can be tested intentionally.
 
 **Supporting files location:**
 `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/`
@@ -127,6 +128,7 @@ No child or parent quote captured yet. Public partner excerpt is stored in the s
 **Founder debrief additions:**
 - `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/founder-debrief-design-observations.md`
 - `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/photo-evidence-log.md`
+- `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/MANIFEST.md`
 
 ---
 

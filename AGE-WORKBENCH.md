@@ -1,10 +1,10 @@
 # AGE Workbench
-**Last Updated:** 2026-06-27T19:55:44Z  
-**AGE Status:** Active  
+**Last Updated:** 2026-06-28T08:20:53Z
+**AGE Status:** Active
 
 ---
 
-## RPN Heat Map — All Open Items
+## RPN Heat Map — Non-Closed Items
 
 | Priority | Table | RPN | Status | Process Step / Design Element | Failure Mode |
 |----------|-------|-----|--------|-------------------------------|--------------|
@@ -18,7 +18,7 @@
 | [MONITOR]  | PFMEA | 96 | Open | Audit System | Incomplete or missing audit trail on refusal |
 | [MONITOR]  | PFMEA | 60 | Open | Runtime Monitor | Core axiom check skipped or mis-keyed |
 
-**Total Open:** 9 | **Critical:** 5 | **High:** 2 | **Monitor:** 2
+**Total Non-Closed:** 9 | **Critical:** 5 | **High:** 2 | **Monitor:** 2
 
 ---
 
@@ -66,12 +66,12 @@
 
 ## System Health Pulse
 
-- **Open rows:** 9
+- **Non-closed rows:** 9
 - **Critical unaddressed (Open/Triaged):** 2
 - **Refusal rate (AUDIT-LOG.md):** 0.0%
 - **Last SAGA cycle:** see `saga-analyze.yml` run history
-- **Workbench last updated:** 2026-06-27T19:55:44Z
-- **Git branch:** `main` @ `5380d7e`
+- **Workbench last updated:** 2026-06-28T08:20:53Z
+- **Git branch:** `main` @ `47ad93c`
 - **Proposal pipeline:** 2 Solution Designed | 0 In Progress | 0 Triaged
 
 ---

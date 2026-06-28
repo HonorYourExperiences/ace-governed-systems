@@ -15,12 +15,17 @@ Cape-Able Heroes helps children feel capable, recognized, and brave enough to st
 
 ## Key Documents
 
-- `proposals/` — SAGA gap-closing proposals related to Cape-Able Heroes development
 - `WONDERLAB-UNIVERSAL-PRINCIPLES.md` — portable design doctrine for all WonderLab themes
+- `SESSION-FORMAT.md` — core WonderLab session structure and flow
 - `AVIATION-WONDERLAB-METHOD.md` — field-derived method for the flagship aviation offer
-- `WONDERLAB-FORMAT.md` — Session structure and flow (to be created)
-- `CHALLENGE-CARDS.md` — Printable challenge card designs (to be created)
-- `BUSINESS-MODEL.md` — Business model and offer ladder (to be created)
+- `CHALLENGE-CARDS.md` — printable challenge card designs
+- `OBSERVATION-TOOL.md` — non-clinical field observation structure
+- `FEEDBACK-FORM.md` — participant and partner feedback capture
+- `SESSION-LOG.md` — session record and evidence index
+- `field-evidence/` — source cards, debrief notes, photo logs, and governed field artifacts
+- `BUSINESS-MODEL.md` — business model and offer ladder
+- `PRODUCT-ECOSYSTEM.md` — product architecture across tools, sessions, and partner offers
+- `proposals/` — Cape-Able Heroes offer-development proposals, separate from root-level governance proposals
 
 ## Status
 

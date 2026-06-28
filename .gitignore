@@ -21,8 +21,10 @@ env/
 *.swp
 *.swo
 *~
+.claude/
 
 # Temp / generated
 /tmp/
 *.tmp
 *.log
+.codex-remote-attachments/

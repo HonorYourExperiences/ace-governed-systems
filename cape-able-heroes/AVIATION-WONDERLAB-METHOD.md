@@ -4,6 +4,7 @@
 **Evidence base:** Founder debrief from first Aviation WonderLab + public LinkedIn source card + photo evidence log
 **Primary source card:** `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/linkedin-source-card.md`  
 **Photo evidence log:** `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/photo-evidence-log.md`
+**Universal principle:** `cape-able-heroes/WONDERLAB-UNIVERSAL-PRINCIPLES.md`
 **Core offer:** Aviation WonderLab: First Fold to First Flight
 
 ---
@@ -100,8 +101,6 @@ Observed example:
 Why it matters:
 
 The child is not watching an adult do the work for them. The child is participating as a mechanic. The aircraft carries evidence of their contribution.
-
-### 5. Engineering Feedback Loop
 
 ### 5. Payload and Mission Design
 

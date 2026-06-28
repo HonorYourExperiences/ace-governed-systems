@@ -16,6 +16,8 @@ Cape-Able Heroes helps children feel capable, recognized, and brave enough to st
 ## Key Documents
 
 - `proposals/` — SAGA gap-closing proposals related to Cape-Able Heroes development
+- `WONDERLAB-UNIVERSAL-PRINCIPLES.md` — portable design doctrine for all WonderLab themes
+- `AVIATION-WONDERLAB-METHOD.md` — field-derived method for the flagship aviation offer
 - `WONDERLAB-FORMAT.md` — Session structure and flow (to be created)
 - `CHALLENGE-CARDS.md` — Printable challenge card designs (to be created)
 - `BUSINESS-MODEL.md` — Business model and offer ladder (to be created)

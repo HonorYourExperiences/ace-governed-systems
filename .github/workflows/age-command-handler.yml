@@ -1,0 +1,58 @@
+name: AGE — Issue Comment Command Handler
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  handle-command:
+    # Only run when an AGE command is present in the comment
+    if: contains(github.event.comment.body, 'age:') || contains(github.event.comment.body, 'age :')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run AGE command handler
+        id: handler
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENTER: ${{ github.event.comment.user.login }}
+        run: |
+          python3 scripts/age_command_handler.py
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Commit FMEA changes
+        if: steps.handler.outputs.exit_code == '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add governed_systems_SOP_PFMEA_DFMEA.md
+          git diff --staged --quiet && echo "No FMEA changes to commit" && exit 0
+          COMMENTER="${{ github.event.comment.user.login }}"
+          ISSUE_NUM="${{ github.event.issue.number }}"
+          COMMENT_PREVIEW=$(echo "${{ github.event.comment.body }}" | head -c 60 | tr '\n' ' ')
+          git commit -m "chore(age): FMEA update via issue #${ISSUE_NUM} comment by @${COMMENTER}
+
+Command: ${COMMENT_PREVIEW}
+Triggered by: https://github.com/${{ github.repository }}/issues/${ISSUE_NUM}#issuecomment-${{ github.event.comment.id }}"
+          git pull --rebase origin main
+          git push origin main

@@ -248,6 +248,8 @@ python3 scripts/pfmea_append.py --table pfmea \                # Append new FMEA
   --action "..." --status "Closed" --issue "#N"
 python3 scripts/saga_analyze.py                                # On-demand SAGA analysis
 python3 scripts/generate_dashboard.py                          # Regenerate AUDIT-DASHBOARD.md
+python3 scripts/age_autonomous_execute.py --dry-run             # Plan highest supported High AP row
+python3 scripts/age_autonomous_execute.py                       # Execute highest supported High AP row up to Verified
 ```
 
 ### Live Data Files

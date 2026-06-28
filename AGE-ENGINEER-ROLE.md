@@ -49,6 +49,7 @@ The AGE does **not** replace existing automation. It owns the layer between auto
 | `generate-audit-dashboard.yml` | Refreshes AUDIT-DASHBOARD.md daily | AGE reads output; does not own it |
 | `age-pr-analysis.yml` | Posts PR FMEA comments | AGE reviews high-severity findings at session start |
 | `age-prd-scan.yml` | Creates SPOF issues on markdown changes | AGE triages resulting issues into FMEA rows if warranted |
+| `age-autonomous-execute.yml` | Runs the bounded high-AP executor | AGE completes the highest supported non-verified RPN >= 100 row using registered deterministic handlers |
 
 ---
 
@@ -96,6 +97,25 @@ Reviewed by founder during weekly reflection.
 | Closed rows without verification artifact | 0 | `age-engineer.yml` scan |
 | AGE proposals in 7-section format | 100% | `lint-proposal` check |
 | Escalation issues per session | ≤ 2 (genuine cases only) | GitHub issues labeled `age-escalation` |
+
+---
+
+## Autonomous Execution Boundary
+
+The autonomous executor is intentionally bounded. It may:
+
+- Select the highest non-verified FMEA row with RPN >= the configured `high_rpn_floor`
+- Execute only a registered deterministic handler in `scripts/age_autonomous_execute.py`
+- Run AGE preflight, handler-specific validation, `verify-closure`, and `report`
+- Transition rows up to `Verified` with evidence notes
+
+It may not:
+
+- Invent a handler for an unknown failure mode
+- Modify immutable axiom files
+- Transition any row to `Closed`
+- Ignore failing validation
+- Apply a broad code change without a handler and verification artifact
 
 ---
 

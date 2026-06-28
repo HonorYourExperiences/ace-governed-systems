@@ -1,0 +1,75 @@
+name: AGE — Autonomous High AP Executor
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Plan only; do not mutate files"
+        required: false
+        default: "false"
+  schedule:
+    - cron: '30 8 * * 1,4'
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  execute-high-ap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: AGE preflight runtime monitor
+        run: python3 scripts/age_engineer.py preflight
+
+      - name: Validate this workflow governance gate
+        run: python3 scripts/validate_governance_change.py .github/workflows/age-autonomous-execute.yml
+
+      - name: Execute highest supported High AP row
+        id: execute
+        env:
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: |
+          ARGS="--output /tmp/age-autonomous-result.json"
+          if [ "$DRY_RUN" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          python3 scripts/age_autonomous_execute.py $ARGS
+          cat /tmp/age-autonomous-result.json
+
+      - name: Verify AGE state after execution
+        run: |
+          python3 scripts/age_engineer.py preflight
+          python3 scripts/age_engineer.py queue
+          python3 -m unittest tests.test_age_autonomous_execute tests.test_generate_dashboard
+
+      - name: Commit autonomous AGE changes
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add governed_systems_SOP_PFMEA_DFMEA.md AGE-WORKBENCH.md AUDIT-DASHBOARD.md docs/dashboard-data.json
+          git diff --staged --quiet && echo "No AGE execution changes to commit" && exit 0
+          git commit -m "chore(age): autonomous high AP execution"
+          git pull --rebase origin main
+          git push origin main
+
+      - name: Post execution summary
+        if: always()
+        run: |
+          echo "## AGE Autonomous High AP Executor" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f /tmp/age-autonomous-result.json ]; then
+            cat /tmp/age-autonomous-result.json >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No execution result file was produced." >> "$GITHUB_STEP_SUMMARY"
+          fi

@@ -32,6 +32,7 @@ These are not positioned as generic crafts. They are Cape-Able identity objects:
 - `PRODUCT-BRIEF.md` - product family definition and offer hypothesis
 - `VALIDATION-PLAN.md` - buyer and field validation plan
 - `RISK-REVIEW.md` - FMEA-style risk review before building
+- `SOURCING-RESOURCES.md` - prototype materials, vendor paths, and safety/compliance resources
 
 ## Current Governance Position
 

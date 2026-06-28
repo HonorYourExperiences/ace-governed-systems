@@ -77,3 +77,5 @@ Will real buyers pay for Cape-Able Color Your Own products as a continuation of 
 ## Next Action
 
 Add a one-question product-interest prompt to the next parent or host follow-up after the Aviation WonderLab proof package is permission-cleared.
+
+Use `SOURCING-RESOURCES.md` only after the interest prompt is sent, unless a prototype is needed for the follow-up conversation.

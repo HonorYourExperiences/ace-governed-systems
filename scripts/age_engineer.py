@@ -587,6 +587,21 @@ def cmd_preflight(args):
                     f"[proposal-lint] {pf.name} missing: {', '.join(missing)}"
                 )
 
+    # Check 5: runtime monitor coverage on state-mutating workflow entrypoints
+    runtime_validator = SOP_PATH.parent / "scripts" / "validate_runtime_monitor_entrypoints.py"
+    if runtime_validator.exists():
+        result = subprocess.run(
+            [sys.executable, str(runtime_validator)],
+            capture_output=True,
+            text=True,
+            timeout=20,
+        )
+        if result.returncode != 0:
+            detail = (result.stdout + "\n" + result.stderr).strip()
+            failures.append(f"[runtime-monitor-entrypoints] {detail}")
+    else:
+        failures.append("[runtime-monitor-entrypoints] validator missing at scripts/validate_runtime_monitor_entrypoints.py")
+
     for w in warnings:
         print(f"WARN {w}")
     for f in failures:

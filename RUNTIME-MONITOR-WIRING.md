@@ -54,6 +54,7 @@ return { allowed: true, action: "proceed" };
 2. **Python / SiteForge**: Add as the first function call in any governance or update endpoint.
 3. **Trigger Condition**: Run on any `update_policy`, `update_content`, or `site_change` action.
 4. **GitHub workflow changes**: Pull requests that change `.github/workflows/*.yml` are checked by `scripts/validate_governance_change.py` through `age-pr-analysis.yml`. Any state-mutating workflow must include a runtime monitor, verified-SAGA gate, `needs-verification` / `verified` label gate, or AGE preflight control before it can pass.
+5. **Entrypoint inventory**: `scripts/validate_runtime_monitor_entrypoints.py` enumerates every GitHub workflow and fails if any state-mutating workflow lacks a runtime monitor / verified-SAGA gate marker. `scripts/age_engineer.py preflight` runs this validator automatically.
 
 ## What This Achieves
 - Enforces the immutable core (five axioms) at runtime.

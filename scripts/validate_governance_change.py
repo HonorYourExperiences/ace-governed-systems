@@ -38,6 +38,7 @@ STATE_MUTATION_MARKERS = [
     "contents: write",
     "issues: write",
     "pull-requests: write",
+    "actions: write",
     "git push",
     "git commit",
     "issues.create",

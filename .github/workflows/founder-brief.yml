@@ -23,6 +23,9 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: AGE preflight runtime monitor
+        run: python3 scripts/age_engineer.py preflight
+
       - name: Generate and post Founder Decision Brief
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -26,6 +26,9 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: AGE preflight runtime monitor
+        run: python3 scripts/age_engineer.py preflight
+
       - name: Run AGE command handler
         id: handler
         env:

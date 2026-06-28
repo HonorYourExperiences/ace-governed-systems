@@ -1,5 +1,5 @@
 # AGE Workbench
-**Last Updated:** 2026-06-28T11:28:51Z
+**Last Updated:** 2026-06-28T17:21:36Z
 **AGE Status:** Active
 
 ---
@@ -15,8 +15,8 @@
 | [CRITICAL] | DFMEA | 160 | Verified | Verification Pipeline | No automated gate preventing un-verified prop |
 | [HIGH]     | DFMEA | 144 | Verified | Audit Log Parser | Regex-based parser fragile to format variatio |
 | [HIGH]     | PFMEA | 108 | Verified | SAGA Loop Operation | Proposal bypasses verification pipeline |
-| [MONITOR]  | PFMEA | 96 | Open | Audit System | Incomplete or missing audit trail on refusal |
-| [MONITOR]  | PFMEA | 60 | Open | Runtime Monitor | Core axiom check skipped or mis-keyed |
+| [MONITOR]  | PFMEA | 96 | Verified | Audit System | Incomplete or missing audit trail on refusal |
+| [MONITOR]  | PFMEA | 60 | Verified | Runtime Monitor | Core axiom check skipped or mis-keyed |
 
 **Total Non-Closed:** 9 | **Critical:** 5 | **High:** 2 | **Monitor:** 2
 
@@ -49,9 +49,9 @@
 
 ### Monitor (RPN < 100) — Track, No Immediate Action
 - **RPN 96** [PFMEA] Audit System / Incomplete or missing audit trail on refusal
-  - Status: Open
+  - Status: Verified
 - **RPN 60** [PFMEA] Runtime Monitor / Core axiom check skipped or mis-keyed
-  - Status: Open
+  - Status: Verified
 
 ---
 
@@ -67,7 +67,7 @@
 - **Critical unaddressed (Open/Triaged):** 0
 - **Refusal rate (AUDIT-LOG.md):** 0.0%
 - **Last SAGA cycle:** see `saga-analyze.yml` run history
-- **Workbench last updated:** 2026-06-28T11:28:51Z
+- **Workbench last updated:** 2026-06-28T17:21:36Z
 - **Git branch:** `main`
 - **Proposal pipeline:** 0 Solution Designed | 0 In Progress | 0 Triaged
 

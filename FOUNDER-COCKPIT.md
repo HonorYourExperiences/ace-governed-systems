@@ -31,7 +31,7 @@ Most protected window (day + time): ___________________________
 | Workstream | Current Phase | Status |
 |------------|--------------|--------|
 | Cape-Able Heroes | Phase 1 — Validation | Active — Session 1 evidence captured; next move is permission + next booking |
-| bydt.org Governance | AGE queue | Operational with 2 preflight warnings |
+| bydt.org Governance | AGE queue | Operational; all current FMEA rows Verified pending human Closed review |
 | bydt.org Content | Way Through / evidence-first gates | Active for Cape-Able content scans |
 
 ---
@@ -49,10 +49,10 @@ The AGE (Axiomatic Governance Engineer) is active. Live state is in [`AGE-WORKBE
 | CRITICAL | DFMEA | 160 | Verified | No automated gate preventing un-verified proposals |
 | HIGH | DFMEA | 144 | Verified | Regex-based audit log parser fragile to format variations |
 | HIGH | PFMEA | 108 | Verified | Proposal bypasses verification pipeline |
-| MONITOR | PFMEA | 96 | Open | Incomplete audit trail on refusal |
-| MONITOR | PFMEA | 60 | Open | Core axiom check skipped or mis-keyed |
+| MONITOR | PFMEA | 96 | Verified | Incomplete audit trail on refusal |
+| MONITOR | PFMEA | 60 | Verified | Core axiom check skipped or mis-keyed |
 
-**AGE preflight status:** all checks PASS. RPN 210 and RPN 180 are now Verified with evidence notes.
+**AGE preflight status:** all checks PASS. All current Critical, High, and Monitor rows are Verified with evidence notes.
 See `AGE-WORKBENCH.md` for the full queue.
 
 ---
@@ -134,6 +134,7 @@ Have you completed this week's founder reflection?
 
 | Date | What moved |
 |------|-----------|
+| 2026-06-28 | Resolved remaining AGE Monitor rows: audit processor failure logging and runtime entrypoint inventory are now verified. |
 | 2026-06-28 | Updated overnight: Session 1 evidence is now the active proof package; next action is permission confirmation and next booking ask. |
 
 ---

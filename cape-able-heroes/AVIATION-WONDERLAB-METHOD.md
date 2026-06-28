@@ -24,6 +24,7 @@ The core transformation:
 | Planned worksheet was too heavy for the live opening | A child reacted with overwhelm when shown the technical-looking airline/FAA-style form | Technical forms belong later, as a take-home or advanced station, not the first entry point |
 | First fold was a real threshold | Some children hesitated or became discouraged by the first precise fold | The first fold needs its own protocol |
 | Mechanic entry point worked | A child could participate by using a rubber mallet to secure folds, framed as mechanic/riveting work | Not every child has to enter as the folder; legitimate build roles lower the barrier |
+| Payload creativity emerged | A child built a plane carrying torn colored-paper "cargo" that released behind the aircraft during flight | Aircraft design should support mission, payload, visual identity, and air-show effects, not only distance |
 | Flight testing created recognition | Children saw changes in flight path after small adjustments | The engineering feedback loop is the backbone |
 | Open mic surfaced meaning | A child named the lesson: there is always an opportunity for a second chance | Reflection must be a required closeout, not optional |
 
@@ -60,6 +61,7 @@ Initial role set:
 | Aircraft Mechanic | Helps secure folds, check structure, and make repairs | Hands-on support |
 | Test Pilot | Throws the plane and reports what happened | Courage and observation |
 | Flight Engineer | Suggests one adjustment after each test | Pattern recognition |
+| Payload Designer | Chooses what the aircraft carries, releases, delivers, or represents | Mission imagination |
 
 ### 3. Crew Staffing Moment
 
@@ -96,6 +98,30 @@ The child is not watching an adult do the work for them. The child is participat
 
 ### 5. Engineering Feedback Loop
 
+### 5. Payload and Mission Design
+
+Children may invent meaning through what the aircraft carries or releases, not only how far it flies.
+
+Observed example:
+
+- A child colored paper, tore it into small pieces, placed the pieces inside the fuselage, and created a fireworks/cargo effect when the aircraft flew.
+
+Design implication:
+
+- Offer an optional payload/cargo station.
+- Ask what the aircraft carries, delivers, releases, or represents.
+- Treat visual identity and mission as part of the engineering experience.
+- Preserve material freedom so unplanned invention can happen.
+
+Prompts:
+
+- "What is your aircraft carrying?"
+- "Is your aircraft a passenger plane, cargo plane, rescue plane, celebration plane, or something else?"
+- "What do you want people to notice when it flies?"
+- "Did your payload change the way it flew?"
+
+### 6. Engineering Feedback Loop
+
 Each flight cycle follows the same structure:
 
 1. Fly it.
@@ -111,7 +137,7 @@ Prompts:
 - "What did the second flight teach you?"
 - "Did it fail the same way twice?"
 
-### 6. Open Mic Reflection
+### 7. Open Mic Reflection
 
 The closeout is where the experience becomes identity.
 
@@ -134,12 +160,13 @@ Use this as a model of the kind of meaning the session is designed to surface, n
 3. Crew staffing check.
 4. First Fold Protocol.
 5. Build aircraft with role-specific contributions.
-6. First flight test.
-7. Crew debrief: what happened?
-8. One adjustment.
-9. Second flight test.
-10. Open mic reflection.
-11. Take-home airline kit.
+6. Optional payload/mission design.
+7. First flight test.
+8. Crew debrief: what happened?
+9. One adjustment.
+10. Second flight test.
+11. Open mic reflection.
+12. Take-home airline kit.
 
 ---
 
@@ -172,6 +199,7 @@ Kit sections:
 |----------------|--------|---------------------|
 | First Fold Protocol | Observed need | Test in next session with planned language |
 | Mechanic Entry Point | Observed working | Include mechanic role card and observe participation rate |
+| Payload and Mission Design | Observed emerging | Add optional payload station and capture at least 3 design examples |
 | Flight Crew Role Cards | Hypothesis from debrief | Test with at least 3 crews |
 | Crew Staffing Moment | Hypothesis from debrief | Track whether missing-role prompts increase participation |
 | Engineering Feedback Loop | Observed working | Capture before/after adjustment examples |
@@ -194,7 +222,8 @@ Kit sections:
 
 Create:
 
-- five role cards
+- six role cards
+- optional payload/cargo station
 - crew staffing worksheet
 - first fold facilitator script
 - mechanic entry point tool protocol

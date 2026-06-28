@@ -105,7 +105,8 @@ Keep all supporting documents (Observation Tool sheet, Feedback Forms) in:
 
 1. Children practiced aviation through a build-test-learn paper airplane challenge.
 2. The session used design feedback language: flight behavior became information, not failure.
-3. External partner/public repost signals that the session was memorable and visible beyond BYDT.
+3. One child invented a fireworks/cargo-style aircraft by placing torn colored paper inside the fuselage so the payload released during flight.
+4. External partner/public repost signals that the session was memorable and visible beyond BYDT.
 
 **Hesitation → engagement moments logged:** Qualitative only. Public post notes that some children needed support with the first fold; exact count not yet recorded.
 
@@ -121,6 +122,9 @@ No child or parent quote captured yet. Public partner excerpt is stored in the s
 
 **Supporting files location:**
 `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/`
+
+**Founder debrief additions:**
+- `cape-able-heroes/field-evidence/session-2026-06-27-aviation-wonderlab/founder-debrief-design-observations.md`
 
 ---
 

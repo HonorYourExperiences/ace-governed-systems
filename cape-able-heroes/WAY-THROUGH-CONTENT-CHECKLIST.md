@@ -10,11 +10,11 @@
 
 Apply to: hero copy, H1/H2 headings, navigation labels, CTA buttons, parent-facing sections, testimonial framing, and any promotional or outreach text.
 
-For each piece of content, work through all 10 items. A single **FAIL** blocks publication until copy is revised. Mark each item ✅ PASS or ❌ FAIL with a brief note.
+For each piece of content, work through all 11 items. A single **FAIL** blocks publication until copy is revised. Mark each item ✅ PASS or ❌ FAIL with a brief note.
 
 ---
 
-## The 10 Checklist Items
+## The 11 Checklist Items
 
 ### 1. Agency Test — Who Is the Actor?
 **Check:** Does every sentence that describes a transformation or improvement name the *child* (or parent) as the agent, not BYDT or the program?  
@@ -75,6 +75,11 @@ For each piece of content, work through all 10 items. A single **FAIL** blocks p
 **PASS:** "Facilitators ask questions. They do not solve problems."  
 **FAIL:** Any framing that places the adult as rescuer, problem-solver, or provider of what the child lacks.
 
+### 11. WonderLab Design Constraint — Protected Mastery Space
+**Check:** If the content describes a WonderLab, does it preserve the design constraint: "A WonderLab creates a protected space where children can practice capability, gather evidence, and leave with a stronger sense of 'I can'"?
+**PASS:** "Children practice capability, gather evidence, and name what the experience showed them about themselves."
+**FAIL:** Copy reduces the WonderLab to an activity, entertainment event, or confidence-giving service without protected space, evidence, and child-owned reflection.
+
 ---
 
 ## Rescue Signal → Way Through Alternative Reference
@@ -115,7 +120,7 @@ These phrases actively model Way Through. Their presence is a positive indicator
 When completing this checklist before a commit, add to the commit message:
 
 ```
-content-gate: WAY-THROUGH-CHECKLIST PASS — [filename] — all 10 items passed — [date]
+content-gate: WAY-THROUGH-CHECKLIST PASS — [filename] — all 11 items passed — [date]
 ```
 
 If any item fails, do not commit. Revise copy, re-run `scripts/scan_content_antipatterns.py`, and re-complete the checklist.

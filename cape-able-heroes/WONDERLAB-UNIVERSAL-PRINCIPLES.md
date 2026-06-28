@@ -8,9 +8,11 @@
 
 ## Core Principle
 
+> A WonderLab creates a protected space where children can practice capability, gather evidence, and leave with a stronger sense of "I can."
+
 > Capability shows up in different roles.
 
-This is the portable moral of the WonderLab format.
+These are the portable design constraints of the WonderLab format.
 
 A WonderLab is not a test of whether every child can perform the same task in the same way. It is a structured environment where children can discover where their capability enters the system.
 
@@ -25,6 +27,41 @@ Children are often mislabeled when one narrow task becomes the definition of cap
 WonderLab design must make those entry points visible.
 
 The facilitator's job is not to force every child through one doorway. The facilitator's job is to build enough legitimate doorways that children can enter the work without losing dignity.
+
+---
+
+## Theory Backbone
+
+WonderLabs are designed as mastery experiences inside a protected imaginative space.
+
+- **Mastery experience:** Children do something real, observe the result, adjust, and gather evidence that their own actions matter.
+- **Protected space:** The session creates a bounded environment where experimentation, identity, and growth can happen without the child's worth being placed on trial.
+
+Internal operating sentence:
+
+> BYDT creates the protected conditions where children practice capability and generate their own evidence.
+
+This keeps the child as the actor and BYDT as the condition-builder.
+
+---
+
+## Non-Negotiable Design Constraint
+
+Every WonderLab must include all four of these elements:
+
+1. **Protected space**
+   - The child can try without humiliation, exclusion, or worth-conditional framing.
+
+2. **Capability practice**
+   - The child has a real role and a real action inside the mission.
+
+3. **Evidence gathering**
+   - The child can point to something observable: a build, test, adjustment, role contribution, artifact, or spoken insight.
+
+4. **I-can reflection**
+   - The child has a structured chance to name what the experience showed them about their own capability.
+
+If any one of these is missing, the activity may still be fun, but it is not yet a WonderLab.
 
 ---
 
@@ -55,6 +92,9 @@ Every WonderLab theme should answer these questions:
 
 5. **How does the child name the meaning?**
    - What open reflection prompt helps the child connect the activity to their own capability?
+
+6. **How is the protected space maintained?**
+   - What prevents shame, comparison, rushing, or adult rescue from taking over?
 
 ---
 
@@ -113,6 +153,7 @@ and:
 
 | Principle | Status | Next verification |
 |-----------|--------|-------------------|
+| WonderLabs create protected spaces for capability practice, evidence, and "I can" reflection | Locked design constraint | Audit next WonderLab plan against the four required elements |
 | Capability shows up in different roles | Field-derived doctrine | Test with role cards in the next Aviation WonderLab |
 | First thresholds need designed entry points | Observed in Aviation WonderLab | Track first-entry hesitation and role uptake |
 | Simple activities can carry premium meaning when role architecture is explicit | Hypothesis from field signal | Test in Aviation WonderLab v2 and one non-aviation WonderLab |

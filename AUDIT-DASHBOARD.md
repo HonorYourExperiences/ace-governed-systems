@@ -1,6 +1,6 @@
 # Audit Dashboard
 
-**Last Updated:** 2026-06-27 13:00 UTC
+**Last Updated:** 2026-06-28 11:31 UTC
 
 ## Summary
 
@@ -8,7 +8,7 @@
 |-------------------|------------|
 | Total Audits      | 1    |
 | Refusals          | 0  |
-| Approvals         | 0 |
+| Approvals         | 1 |
 | Refusal Rate      | 0.0% |
 
 ## Top Refusal Reasons

@@ -75,16 +75,16 @@ The machine is not working if the founder spends the first 30 minutes rereading 
 
 ---
 
-## Known Governance Warnings
+## Governance Status
 
-AGE preflight is operational with 0 FAIL and 2 WARN:
+AGE preflight is clear. The previous RPN 210 and RPN 180 warnings have been resolved and moved to Verified.
 
 | RPN | Area | Morning meaning |
 |-----|------|-----------------|
-| 210 | SAGA Proposal Structure | Proposal template/enforcement still needs a dedicated governance pass. Do not let this interrupt the host follow-up. |
-| 180 | Runtime Monitor Wiring | Monitor wiring coverage still needs a dedicated governance pass. Do not let this interrupt the host follow-up. |
+| 210 | SAGA Proposal Structure | Proposal structure is now enforced by validator + PR gate + audit-generated proposal template. |
+| 180 | Runtime Monitor Wiring | State-mutating workflow changes are now gated for runtime monitor / verified-SAGA controls. |
 
-These are important system-hardening items, but they are not the first Cape-Able revenue/evidence move.
+All Critical and High AP rows are now Verified. The remaining non-closed rows are Monitor-level rows that can be handled in a later governance-hardening pass.
 
 ---
 

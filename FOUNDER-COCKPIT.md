@@ -43,16 +43,16 @@ The AGE (Axiomatic Governance Engineer) is active. Live state is in [`AGE-WORKBE
 | Priority | Table | RPN | Status | Failure Mode |
 |----------|-------|-----|--------|--------------|
 | CRITICAL | PFMEA | 240 | Verified | Rescue modeling in hero / parent copy |
-| CRITICAL | DFMEA | 210 | Open | Proposals missing Current→Target→Delta→Gap-Closing structure |
-| CRITICAL | DFMEA | 180 | Open | Monitor not wired to all policy/content modification points |
-| CRITICAL | PFMEA | 175 | Solution Designed | Aspiration theater framing |
-| CRITICAL | DFMEA | 160 | Solution Designed | No automated gate preventing un-verified proposals |
-| HIGH | DFMEA | 144 | Open | Regex-based audit log parser fragile to format variations |
-| HIGH | PFMEA | 108 | Open | Proposal bypasses verification pipeline |
+| CRITICAL | DFMEA | 210 | Verified | Proposals missing Current→Target→Delta→Gap-Closing structure |
+| CRITICAL | DFMEA | 180 | Verified | Monitor not wired to all policy/content modification points |
+| CRITICAL | PFMEA | 175 | Verified | Aspiration theater framing |
+| CRITICAL | DFMEA | 160 | Verified | No automated gate preventing un-verified proposals |
+| HIGH | DFMEA | 144 | Verified | Regex-based audit log parser fragile to format variations |
+| HIGH | PFMEA | 108 | Verified | Proposal bypasses verification pipeline |
 | MONITOR | PFMEA | 96 | Open | Incomplete audit trail on refusal |
 | MONITOR | PFMEA | 60 | Open | Core axiom check skipped or mis-keyed |
 
-**AGE preflight status:** 0 FAIL, 2 WARN. The active warnings are RPN 210 and RPN 180.
+**AGE preflight status:** all checks PASS. RPN 210 and RPN 180 are now Verified with evidence notes.
 See `AGE-WORKBENCH.md` for the full queue.
 
 ---

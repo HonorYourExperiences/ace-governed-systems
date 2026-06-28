@@ -53,11 +53,13 @@ return { allowed: true, action: "proceed" };
 1. **Zapier / Make.com**: Add as the very first Code step in any workflow that can modify policies, content guidelines, or site decisions.
 2. **Python / SiteForge**: Add as the first function call in any governance or update endpoint.
 3. **Trigger Condition**: Run on any `update_policy`, `update_content`, or `site_change` action.
+4. **GitHub workflow changes**: Pull requests that change `.github/workflows/*.yml` are checked by `scripts/validate_governance_change.py` through `age-pr-analysis.yml`. Any state-mutating workflow must include a runtime monitor, verified-SAGA gate, `needs-verification` / `verified` label gate, or AGE preflight control before it can pass.
 
 ## What This Achieves
 - Enforces the immutable core (five axioms) at runtime.
 - Ensures all changes to the mutable layer come through verified SAGA.
 - Creates the foundation for automatic FMEA population and gap-closing loops.
+- Prevents new repository-mutating workflows from entering without an explicit governance gate.
 
 ## Next
 Once wired, every refusal or blocked change will automatically feed the PFMEA and trigger SAGA Analyze for gap-closing proposals.

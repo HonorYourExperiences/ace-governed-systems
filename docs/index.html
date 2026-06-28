@@ -455,12 +455,13 @@
 
         // === Interactive FMEA Explorer + One-Click Proposal + Upgrade ===
         const fmeaData = [
-            { priority: "CRITICAL", rpn: 240, table: "PFMEA", failure_mode: "Rescue modeling in hero / parent copy", status: "Triaged", action: "Enforce Way Through checklist before publish; run anti-pattern scan on key pages" },
-            { priority: "CRITICAL", rpn: 210, table: "DFMEA", failure_mode: "Proposals missing explicit Current State → Target State → Delta → Gap-Closing structure", status: "Open", action: "Update proposal template; validate structure in audit-processor before accepting" },
-            { priority: "CRITICAL", rpn: 180, table: "DFMEA", failure_mode: "Monitor not wired to all policy/content modification points", status: "Open", action: "Enforce monitor wiring check in all new workflow PRs" },
-            { priority: "CRITICAL", rpn: 175, table: "PFMEA", failure_mode: "Aspiration theater framing", status: "Open", action: "Add evidence-first framing rules to operational policies" },
-            { priority: "HIGH", rpn: 144, table: "DFMEA", failure_mode: "Regex-based parser fragile to format variations", status: "Open", action: "Add schema validation to generate_dashboard.py; write unit tests" },
-            { priority: "HIGH", rpn: 108, table: "PFMEA", failure_mode: "Proposal bypasses verification pipeline", status: "Open", action: "Wire runtime monitor as mandatory first step in all update workflows" }
+            { priority: "CRITICAL", rpn: 240, table: "PFMEA", failure_mode: "Rescue modeling in hero / parent copy", status: "Verified", action: "Enforce Way Through checklist before publish; run anti-pattern scan on key pages" },
+            { priority: "CRITICAL", rpn: 210, table: "DFMEA", failure_mode: "Proposals missing explicit Current State → Target State → Delta → Gap-Closing structure", status: "Verified", action: "Update proposal template; validate structure in audit-processor before accepting" },
+            { priority: "CRITICAL", rpn: 180, table: "DFMEA", failure_mode: "Monitor not wired to all policy/content modification points", status: "Verified", action: "Enforce monitor wiring check in all new workflow PRs" },
+            { priority: "CRITICAL", rpn: 175, table: "PFMEA", failure_mode: "Aspiration theater framing", status: "Verified", action: "Add evidence-first framing rules to operational policies" },
+            { priority: "CRITICAL", rpn: 160, table: "DFMEA", failure_mode: "No automated gate preventing un-verified proposals", status: "Verified", action: "Implement needs-verification → verified label gate" },
+            { priority: "HIGH", rpn: 144, table: "DFMEA", failure_mode: "Regex-based parser fragile to format variations", status: "Verified", action: "Add schema validation to generate_dashboard.py; write unit tests" },
+            { priority: "HIGH", rpn: 108, table: "PFMEA", failure_mode: "Proposal bypasses verification pipeline", status: "Verified", action: "Wire runtime monitor as mandatory first step in all update workflows" }
         ];
 
         let currentFMEAData = [...fmeaData];

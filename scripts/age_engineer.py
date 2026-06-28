@@ -21,6 +21,11 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+try:
+    from validate_governance_change import proposal_failures
+except ImportError:
+    proposal_failures = None
+
 SOP_PATH = Path(__file__).parent.parent / "governed_systems_SOP_PFMEA_DFMEA.md"
 WORKBENCH_PATH = Path(__file__).parent.parent / "AGE-WORKBENCH.md"
 CONFIG_PATH = Path(__file__).parent.parent / "fmea-agent.config.json"
@@ -628,6 +633,11 @@ def cmd_lint_proposal(args):
     for section in REQUIRED_PROPOSAL_SECTIONS:
         if section not in text:
             missing.append(section)
+
+    if proposal_failures is not None:
+        for failure in proposal_failures(path, text):
+            if failure not in missing:
+                missing.append(failure)
 
     # Check Section 4 contains a concrete action (not just prose)
     section4_start = text.find("## 4. Gap-Closing Proposals")

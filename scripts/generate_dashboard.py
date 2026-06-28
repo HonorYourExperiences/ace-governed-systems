@@ -1,42 +1,115 @@
+import json
 import re
+from collections import Counter
+from datetime import datetime, timezone
+from pathlib import Path
 
 
-def generate_dashboard():
-    try:
-        with open('AUDIT-LOG.md', 'r') as f:
-            content = f.read()
-    except FileNotFoundError:
-        content = ''
+REPO_ROOT = Path(__file__).resolve().parent.parent
+AUDIT_LOG_PATH = REPO_ROOT / "AUDIT-LOG.md"
+AUDIT_DASHBOARD_PATH = REPO_ROOT / "AUDIT-DASHBOARD.md"
+DASHBOARD_JSON_PATH = REPO_ROOT / "docs" / "dashboard-data.json"
 
-    # Basic stats
-    total = len(re.findall(r'^## Audit:', content, re.MULTILINE))
-    refused = content.count('Allowed: false')
-    approved = content.count('Allowed: true')
+REQUIRED_DASHBOARD_SCHEMA = {
+    "last_updated": str,
+    "total_audits": int,
+    "refusals": int,
+    "approvals": int,
+    "refusal_rate": (int, float),
+    "top_reasons": list,
+}
+
+
+def parse_audit_log(content: str) -> list[dict]:
+    entries = []
+    chunks = re.split(r"(?=^## Audit:)", content, flags=re.MULTILINE)
+
+    for chunk in chunks:
+        chunk = chunk.strip()
+        if not chunk.startswith("## Audit:"):
+            continue
+
+        title = chunk.splitlines()[0].strip()
+        allowed_match = re.search(r"\*\*Allowed:\*\*\s*(true|false)", chunk, re.IGNORECASE)
+        reason_match = re.search(r"\*\*Reason:\*\*\s*(.+)", chunk, re.IGNORECASE)
+
+        allowed = None
+        if allowed_match:
+            allowed = allowed_match.group(1).lower() == "true"
+
+        entries.append(
+            {
+                "title": title,
+                "allowed": allowed,
+                "reason": reason_match.group(1).strip() if reason_match else "",
+            }
+        )
+
+    return entries
+
+
+def build_dashboard_data(entries: list[dict], now: datetime | None = None) -> dict:
+    timestamp = now or datetime.now(timezone.utc).replace(tzinfo=None)
+    total = len(entries)
+    refused = sum(1 for entry in entries if entry.get("allowed") is False)
+    approved = sum(1 for entry in entries if entry.get("allowed") is True)
     refusal_rate = round((refused / total * 100), 1) if total > 0 else 0
 
-    # Top reasons
-    reasons = re.findall(r'Reason: (.+)', content)
-    from collections import Counter
+    reasons = [
+        entry["reason"]
+        for entry in entries
+        if entry.get("allowed") is False and entry.get("reason")
+    ]
     top_reasons = Counter(reasons).most_common(8)
 
-    # Recent activity (last 10 entries)
-    recent = re.findall(r'^## Audit:.*', content, re.MULTILINE)[-10:][::-1]
+    return {
+        "last_updated": timestamp.isoformat() + "Z",
+        "total_audits": total,
+        "refusals": refused,
+        "approvals": approved,
+        "refusal_rate": refusal_rate,
+        "top_reasons": [{"reason": reason, "count": count} for reason, count in top_reasons],
+    }
 
-    from datetime import datetime
 
-    # Build dashboard markdown
+def validate_dashboard_data(data: dict) -> None:
+    for key, expected_type in REQUIRED_DASHBOARD_SCHEMA.items():
+        if key not in data:
+            raise ValueError(f"dashboard-data missing required key: {key}")
+        if not isinstance(data[key], expected_type):
+            raise TypeError(f"dashboard-data key {key} has invalid type: {type(data[key]).__name__}")
+
+    if data["total_audits"] < 0 or data["refusals"] < 0 or data["approvals"] < 0:
+        raise ValueError("dashboard counts must be non-negative")
+
+    if data["refusals"] + data["approvals"] > data["total_audits"]:
+        raise ValueError("refusals + approvals cannot exceed total audits")
+
+    if not 0 <= data["refusal_rate"] <= 100:
+        raise ValueError("refusal_rate must be between 0 and 100")
+
+    for item in data["top_reasons"]:
+        if not isinstance(item, dict):
+            raise TypeError("top_reasons entries must be objects")
+        if not isinstance(item.get("reason"), str):
+            raise TypeError("top_reasons reason must be a string")
+        if not isinstance(item.get("count"), int) or item["count"] < 0:
+            raise ValueError("top_reasons count must be a non-negative integer")
+
+
+def render_markdown_dashboard(data: dict, recent_entries: list[dict]) -> str:
     dashboard = f"""# Audit Dashboard
 
-**Last Updated:** {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}
+**Last Updated:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}
 
 ## Summary
 
 | Metric            | Value      |
 |-------------------|------------|
-| Total Audits      | {total}    |
-| Refusals          | {refused}  |
-| Approvals         | {approved} |
-| Refusal Rate      | {refusal_rate}% |
+| Total Audits      | {data['total_audits']}    |
+| Refusals          | {data['refusals']}  |
+| Approvals         | {data['approvals']} |
+| Refusal Rate      | {data['refusal_rate']}% |
 
 ## Top Refusal Reasons
 
@@ -44,32 +117,33 @@ def generate_dashboard():
 |--------|-------|
 """
 
-    for reason, count in top_reasons:
-        dashboard += f"| {reason} | {count} |\n"
+    for item in data["top_reasons"]:
+        dashboard += f"| {item['reason']} | {item['count']} |\n"
 
     dashboard += "\n## Recent Activity\n\n"
-    for entry in recent:
-        dashboard += f"- {entry}\n"
+    for entry in recent_entries[-10:][::-1]:
+        dashboard += f"- {entry['title']}\n"
 
     dashboard += "\n---\n*This dashboard is automatically generated by GitHub Actions.*\n"
+    return dashboard
 
-    with open('AUDIT-DASHBOARD.md', 'w') as f:
-        f.write(dashboard)
 
-    # Also generate JSON for the web dashboard
-    import json
-    data = {
-        "last_updated": datetime.utcnow().isoformat() + "Z",
-        "total_audits": total,
-        "refusals": refused,
-        "approvals": approved,
-        "refusal_rate": refusal_rate,
-        "top_reasons": [{"reason": r[0], "count": r[1]} for r in top_reasons]
-    }
-    with open('docs/dashboard-data.json', 'w') as f:
-        json.dump(data, f, indent=2)
+def generate_dashboard() -> dict:
+    try:
+        content = AUDIT_LOG_PATH.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        content = ""
+
+    entries = parse_audit_log(content)
+    data = build_dashboard_data(entries)
+    validate_dashboard_data(data)
+
+    AUDIT_DASHBOARD_PATH.write_text(render_markdown_dashboard(data, entries), encoding="utf-8")
+    DASHBOARD_JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
+    DASHBOARD_JSON_PATH.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
     print("Dashboard files generated successfully")
+    return data
 
 
 if __name__ == "__main__":

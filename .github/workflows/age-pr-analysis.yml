@@ -23,6 +23,16 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Get changed files
+        run: |
+          git diff --name-only origin/${{ github.base_ref }}...HEAD > /tmp/changed_files.txt
+          echo "Changed files:"
+          cat /tmp/changed_files.txt
+
+      - name: Validate governance-sensitive changes
+        run: |
+          python3 scripts/validate_governance_change.py --files /tmp/changed_files.txt
+
       - name: Enforce verified label gate for policy changes
         uses: actions/github-script@v7
         with:

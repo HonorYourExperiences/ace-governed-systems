@@ -86,6 +86,10 @@ graph TD
 
 Shows real-time(ish) audit metrics including refusal rates and top reasons.
 
+**Executive Decision Report:** https://honoryourexperiences.github.io/ace-governed-systems/executive-report.html
+
+Plain-language GREEN/YELLOW/RED decision view for AGE governance rows, with evidence links.
+
 ## Key Files & Folders
 
 - `FOUNDER-COCKPIT.md` — **Start here.** Daily entry point: current status, one next action, time budget.

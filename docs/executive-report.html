@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BYDT Executive Decision Report</title>
+    <style>
+        :root {
+            --cream: #F5F1E9;
+            --navy: #0A162F;
+            --gold: #BFA16B;
+            --green: #166534;
+            --yellow: #8a5a00;
+            --red: #b91c1c;
+            --white: #ffffff;
+        }
+        body {
+            margin: 0;
+            background: var(--cream);
+            color: var(--navy);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        a {
+            color: var(--navy);
+            font-weight: 700;
+        }
+        .home-link {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        h1 {
+            margin: 0 0 8px;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            letter-spacing: 0;
+        }
+        h2 {
+            margin-top: 32px;
+            font-size: 1.4rem;
+        }
+        .signal {
+            background: var(--white);
+            border-left: 10px solid var(--green);
+            padding: 22px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(10, 22, 47, 0.08);
+        }
+        .signal strong {
+            color: var(--green);
+            font-size: 1.4rem;
+        }
+        .decision-box {
+            margin-top: 18px;
+            background: var(--navy);
+            color: var(--cream);
+            padding: 22px;
+            border-radius: 8px;
+        }
+        .decision-box strong {
+            color: var(--gold);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 18px;
+        }
+        .card {
+            background: var(--white);
+            border: 1px solid rgba(191, 161, 107, 0.7);
+            border-radius: 8px;
+            padding: 18px;
+        }
+        .symbol {
+            display: inline-block;
+            min-width: 76px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        .green { background: var(--green); }
+        .yellow { background: var(--yellow); }
+        .red { background: var(--red); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #e8dfce;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: var(--navy);
+            color: var(--cream);
+        }
+        .sources {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 14px;
+        }
+        .source-link {
+            background: var(--white);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            padding: 10px 12px;
+            text-decoration: none;
+        }
+        @media (max-width: 720px) {
+            .topbar {
+                display: block;
+            }
+            table {
+                font-size: 0.92rem;
+            }
+            th, td {
+                padding: 10px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="topbar">
+            <a class="home-link" href="./index.html">Back to Audit Dashboard</a>
+            <span>Last updated: 2026-06-28</span>
+        </div>
+
+        <h1>Executive Decision Report</h1>
+        <p>This page translates AGE governance status into plain decision language.</p>
+
+        <section class="signal">
+            <strong>GREEN: All current AGE rows are Verified.</strong>
+            <p>AGE has corrected the identified risks enough to produce evidence. The remaining decision is human-only: whether to accept the evidence and move rows from <code>Verified</code> to <code>Closed</code>.</p>
+        </section>
+
+        <section class="decision-box">
+            <h2>Decision In Front Of You</h2>
+            <p><strong>Do you accept the verified controls as good enough to close the current governance risks?</strong></p>
+            <p>Recommended read: accept that engineering correction is complete, then review evidence before marking rows <code>Closed</code>.</p>
+        </section>
+
+        <section>
+            <h2>Symbol Key</h2>
+            <div class="grid">
+                <div class="card"><span class="symbol green">GREEN</span><p>Corrected and verified by AGE. Founder can review for closure.</p></div>
+                <div class="card"><span class="symbol yellow">YELLOW</span><p>Needs founder judgment. Evidence exists, but acceptance is a human decision.</p></div>
+                <div class="card"><span class="symbol red">RED</span><p>Blocked or unsafe. Do not proceed until corrected.</p></div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Executive Read</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Area</th>
+                        <th>Signal</th>
+                        <th>Plain Language</th>
+                        <th>Decision</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Critical risks</td>
+                        <td><span class="symbol green">GREEN</span></td>
+                        <td>The highest-risk governance failures have implemented controls and evidence notes.</td>
+                        <td>Review for closure.</td>
+                    </tr>
+                    <tr>
+                        <td>High risks</td>
+                        <td><span class="symbol green">GREEN</span></td>
+                        <td>Automation now blocks the major bypass paths.</td>
+                        <td>Review for closure.</td>
+                    </tr>
+                    <tr>
+                        <td>Monitor risks</td>
+                        <td><span class="symbol green">GREEN</span></td>
+                        <td>The last two open rows were corrected: audit failure logging and runtime entrypoint coverage.</td>
+                        <td>Review for closure.</td>
+                    </tr>
+                    <tr>
+                        <td>Human governance</td>
+                        <td><span class="symbol yellow">YELLOW</span></td>
+                        <td>AGE cannot mark rows Closed. That protects founder authority.</td>
+                        <td>You decide when to accept closure.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Evidence Map</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Risk</th>
+                        <th>What Changed</th>
+                        <th>What It Means</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Audit trail could disappear on refusal failure</td>
+                        <td>Added processor-error audit logging and fallback issue comments.</td>
+                        <td>Failures now leave a trail instead of silently vanishing.</td>
+                    </tr>
+                    <tr>
+                        <td>Runtime monitor could be skipped</td>
+                        <td>Added workflow entrypoint inventory and wired it into AGE preflight.</td>
+                        <td>State-mutating workflows must show a governance gate.</td>
+                    </tr>
+                    <tr>
+                        <td>Proposal or policy changes could bypass verification</td>
+                        <td>Verification gates check proposal structure, labels, and state-mutating workflow markers.</td>
+                        <td>Changes must move through evidence-backed governance.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Source Links</h2>
+            <div class="sources">
+                <a class="source-link" href="https://github.com/HonorYourExperiences/ace-governed-systems/blob/main/AGE-WORKBENCH.md">AGE Workbench</a>
+                <a class="source-link" href="https://github.com/HonorYourExperiences/ace-governed-systems/blob/main/FOUNDER-COCKPIT.md">Founder Cockpit</a>
+                <a class="source-link" href="https://github.com/HonorYourExperiences/ace-governed-systems/blob/main/governed_systems_SOP_PFMEA_DFMEA.md">Full FMEA Source</a>
+                <a class="source-link" href="https://github.com/HonorYourExperiences/ace-governed-systems/blob/main/RUNTIME-MONITOR-WIRING.md">Runtime Monitor Wiring</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

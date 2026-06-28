@@ -7,6 +7,12 @@ title: Audit Dashboard
 
 This dashboard shows key metrics from the governed self-improving system audit logs.
 
+## Executive Decision Report
+
+[Open the Executive Decision Report](docs/executive-report.html)
+
+Plain-language GREEN/YELLOW/RED decision signals, closure guidance, and evidence links for AGE governance rows.
+
 <div id="dashboard">
   <p>Loading dashboard data...</p>
 </div>

@@ -240,6 +240,42 @@
         .upgrade-step {
             margin-bottom: 12px;
         }
+        .executive-link-panel {
+            background: white;
+            border: 2px solid var(--color-gold);
+            border-radius: 8px;
+            padding: 18px;
+            margin: 18px 0 26px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 16px;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(10, 22, 47, 0.08);
+        }
+        .executive-link-panel h2 {
+            margin: 0 0 6px;
+        }
+        .executive-link-panel p {
+            margin: 0;
+            color: #444;
+        }
+        .executive-link {
+            background: var(--color-navy);
+            color: var(--color-cream);
+            text-decoration: none;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        @media (max-width: 720px) {
+            .executive-link-panel {
+                grid-template-columns: 1fr;
+            }
+            .executive-link {
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -247,6 +283,14 @@
         <h1>BYDT Audit Dashboard</h1>
         <p id="last-updated"></p>
         <p id="data-source"></p>
+
+        <section class="executive-link-panel">
+            <div>
+                <h2>Executive Decision Report</h2>
+                <p>Plain-language status, GREEN/YELLOW/RED decision signals, and direct evidence links for AGE governance rows.</p>
+            </div>
+            <a class="executive-link" href="./executive-report.html">Open Decision Report</a>
+        </section>
 
         <div class="stats">
             <div class="stat-card">
@@ -271,7 +315,7 @@
         <!-- Interactive FMEA Explorer -->
         <h2>Interactive FMEA Explorer</h2>
         <p style="color: #555; max-width: 720px; margin-bottom: 15px;">
-            Sortable and filterable view of open critical &amp; high RPN rows. 
+            Sortable and filterable view of current AGE-tracked FMEA rows.
             Click <strong>Draft Proposal</strong> to generate a SAGA draft, then <strong>Initiate Upgrade</strong> to hand off to the AGE for execution and effectiveness tracking.
         </p>
 
@@ -280,6 +324,7 @@
             <button class="filter-btn active" data-filter="all" onclick="filterByPriority('all', this)">All</button>
             <button class="filter-btn" data-filter="critical" onclick="filterByPriority('critical', this)">Critical (RPN ≥ 150)</button>
             <button class="filter-btn" data-filter="high" onclick="filterByPriority('high', this)">High (RPN 100-149)</button>
+            <button class="filter-btn" data-filter="monitor" onclick="filterByPriority('monitor', this)">Monitor (RPN &lt; 100)</button>
             <button class="filter-btn" data-filter="triaged" onclick="filterByPriority('triaged', this)">Triaged</button>
         </div>
 
@@ -461,7 +506,9 @@
             { priority: "CRITICAL", rpn: 175, table: "PFMEA", failure_mode: "Aspiration theater framing", status: "Verified", action: "Add evidence-first framing rules to operational policies" },
             { priority: "CRITICAL", rpn: 160, table: "DFMEA", failure_mode: "No automated gate preventing un-verified proposals", status: "Verified", action: "Implement needs-verification → verified label gate" },
             { priority: "HIGH", rpn: 144, table: "DFMEA", failure_mode: "Regex-based parser fragile to format variations", status: "Verified", action: "Add schema validation to generate_dashboard.py; write unit tests" },
-            { priority: "HIGH", rpn: 108, table: "PFMEA", failure_mode: "Proposal bypasses verification pipeline", status: "Verified", action: "Wire runtime monitor as mandatory first step in all update workflows" }
+            { priority: "HIGH", rpn: 108, table: "PFMEA", failure_mode: "Proposal bypasses verification pipeline", status: "Verified", action: "Wire runtime monitor as mandatory first step in all update workflows" },
+            { priority: "MONITOR", rpn: 96, table: "PFMEA", failure_mode: "Incomplete or missing audit trail on refusal", status: "Verified", action: "Add explicit error-path audit logging; test refusal path end-to-end" },
+            { priority: "MONITOR", rpn: 60, table: "PFMEA", failure_mode: "Core axiom check skipped or mis-keyed", status: "Verified", action: "Enumerate all entry points; verify monitor is called at each" }
         ];
 
         let currentFMEAData = [...fmeaData];
@@ -511,6 +558,8 @@
                 filtered = filtered.filter(r => r.priority === 'CRITICAL');
             } else if (currentFilter === 'high') {
                 filtered = filtered.filter(r => r.priority === 'HIGH');
+            } else if (currentFilter === 'monitor') {
+                filtered = filtered.filter(r => r.priority === 'MONITOR');
             } else if (currentFilter === 'triaged') {
                 filtered = filtered.filter(r => r.status.toLowerCase() === 'triaged');
             }
